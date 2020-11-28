@@ -48,6 +48,36 @@ modules.
 
 
 
+### Modules
+
+
+<img align="right" alt="mandatory" src="https://img.shields.io/badge/-mandatory-red?style=flat-square">
+
+- **[nano-theme-light.el](./nano-theme-light.el)** This module defines a
+  light theme and the different faces that will be used by other modules.
+  It is thus mandatory (one of dark or light version).
+
+
+<img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
+
+- **[nano.el](./nano.el)** This module is only used to test nano emacs
+  locally. Its content is supposed ot be merged into an existing emacs
+  configuration.
+
+<img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
+
+- **[nano-help.el](./nano-help.el)** This module provides a function to
+  display a small message in the echo area.
+
+
+<img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
+
+- **[nano-layout.el](./nano-layout.el)** This module define the overall layout of an emacs frame, defining default font, fringes, margins, etc.
+	
+<img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
+
+- **[nano-splash.el](./nano-splash.el)** This module provides a splash
+  screen when emacs is started.
 
 
 
