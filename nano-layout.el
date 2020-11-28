@@ -18,7 +18,7 @@
 
 (setq default-frame-alist
       (append (list
-	       '(font . "Roboto Mono Emacs Regular 14")
+	       '(font . "Roboto Mono Light 14")
 	       '(min-height . 1)  '(height     . 45)
 	       '(min-width  . 40) '(width      . 81)
                '(vertical-scroll-bars . nil)
@@ -64,6 +64,6 @@
 (setq widget-image-enable nil)
 
 ;; Hide org markup for README
-;; (setq org-hide-emphasis-markers t)
+(setq org-hide-emphasis-markers t)
 
 (provide 'nano-layout)
