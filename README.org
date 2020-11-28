@@ -1,1 +1,41 @@
-*GNU Emacs / N Λ N O* — Nicolas P. Rougier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     *GNU Emacs / N Λ N O* /- Emacs made simple/
+                     /Copyright (c) 2020 - Nicolas P. Rougier/
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
