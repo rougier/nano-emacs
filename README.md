@@ -53,10 +53,11 @@ modules.
 
 <img align="right" alt="mandatory" src="https://img.shields.io/badge/-mandatory-red?style=flat-square">
 
-- **[nano-theme-light.el](./nano-theme-light.el)** This module defines a
-  light theme and the different faces that will be used by other modules.
-  It is thus mandatory (one of dark or light version).
-
+- **[nano-theme-light.el](./nano-theme-light.el)** or
+  **[nano-theme-dark.el](./nano-theme-dark.el)** Theses modules define a
+  light and dark themes respectively through the defnition of the different
+  faces that will be used by other modules.  It is thus mandatory (one of
+  dark or light version).
 
 <img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
 
@@ -68,6 +69,13 @@ modules.
 
 - **[nano-help.el](./nano-help.el)** This module provides a function to
   display a small message in the echo area.
+
+
+<img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
+
+- **[nano-modeline.el](./nano-modeline.el)** This module define a
+  header line that is mode dependent and take care of hiding the
+  modeline when necessary.
 
 
 <img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
