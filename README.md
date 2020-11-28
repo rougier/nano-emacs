@@ -4,13 +4,12 @@
 ## GNU Emacs / N Λ N O 
 
 **GNU Emacs / N Λ N O** is a set of configuration files for GNU Emacs
-such as to provide a nice and consistent look and feel as show below.
+such as to provide a nice and consistent look and feel as shown below.
 
 <div>
 <img src="./images/nano-emacs-light.png" width=47.5%>
 <img src="./images/nano-emacs-dark.png"  width=47.5%>
 </div>
-
 
 ### Requirements
 
@@ -22,13 +21,19 @@ installed on your system. There are no other dependencies.
 
 ### Quick test
 
-The easiest way to test nano emacs if to clone the directory on your
-desktop and to type (from inside the cloned reository):
+The easiest way to test nano emacs is to clone the directory on your
+desktop and to type (from inside the cloned repository):
 
 ```
 $ emacs -q -l nano.el
 ```
 
+### Installation
+
+If you like the result, you can merge the content of
+[nano.el](nano.el) into your emacs configuration file. To do so,
+you'll need to modify the `load-path` to include the nano emacs
+repository and then call for the different modules.
 
 
 
