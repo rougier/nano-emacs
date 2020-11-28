@@ -5,6 +5,11 @@
 
 **GNU Emacs / N Λ N O** is a set of configuration files for GNU Emacs
 such as to provide a nice and consistent look and feel as shown below.
+It is based on design principles I described in the article [On the
+design of text Editors](https://arxiv.org/abs/2008.06030) that is
+available on arXiv. The light theme is based on [material
+colors](https://material.io/) and the dakr theme is based on [Nord
+theme](https://www.nordtheme.com/).
 
 <div>
 <img src="./images/nano-emacs-light.png" width=47.5%>
