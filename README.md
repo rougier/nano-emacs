@@ -1,6 +1,4 @@
 
-
-
 ## GNU Emacs / N Λ N O 
 
 **GNU Emacs / N Λ N O** is a set of configuration files for GNU Emacs
@@ -10,6 +8,12 @@ design of text Editors](https://arxiv.org/abs/2008.06030)" that is
 available on arXiv. The light theme is based on [Material
 colors](https://material.io/) and the dark theme is based on [Nord
 colors](https://www.nordtheme.com/).
+
+The philosophy of nano emacs is to stick as much as possible to
+vanilla emacs without introducing too much dependencies (or none if
+possible) and to keep it modular enough. The idea is for users to copy
+the part they are interested in such as to include them in their own
+configuration.
 
 <div>
 <img src="./images/nano-emacs-light.png" width=47.5%>
@@ -38,7 +42,9 @@ $ emacs -q -l nano.el
 If you like the result, you can merge the content of
 [nano.el](nano.el) into your emacs configuration file. To do so,
 you'll need to modify the `load-path` to include the nano emacs
-repository and then call for the different modules.
+repository and then call for the different modules. The only mandatory
+module is the theme that defines 6 faces that are used in other
+modules.
 
 
 
