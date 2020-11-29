@@ -62,7 +62,7 @@ modules.
 <img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
 
 - **[nano.el](./nano.el)** This module is only used to test nano emacs
-  locally. Its content is supposed ot be merged into an existing emacs
+  locally. Its content is supposed to be merged into an existing emacs
   configuration.
 
 <img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
