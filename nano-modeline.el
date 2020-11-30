@@ -256,11 +256,22 @@
                              org-mode-line-string)))
 
 ;; ---------------------------------------------------------------------
+(defun nano-modeline-pdf-p ()
+  (derived-mode-p 'pdf-view-mode))
+
+(defun nano-modeline-pdf-pages ()
+  (concat " P" (number-to-string (pdf-view-current-page)) "/" (or (ignore-errors (number-to-string (pdf-cache-number-of-pages))) "???")))
+
+(defun nano-modeline-default-position ()
+  (if (nano-modeline-pdf-p)
+      (nano-modeline-pdf-pages)
+      (format-mode-line "%l:%c")))
+
 (defun nano-modeline-default-mode ()
     (let ((buffer-name (format-mode-line "%b"))
           (mode-name   (format-mode-line "%m"))
           (branch      (vc-branch))
-          (position    (format-mode-line "%l:%c")))
+          (position    (nano-modeline-default-position)))
       (nano-modeline-compose (nano-modeline-status)
                              buffer-name
                              (concat "(" mode-name
