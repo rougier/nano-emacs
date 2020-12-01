@@ -88,6 +88,11 @@ modules.
   screen when emacs is started.
 
 
+<img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
+
+- **[nano-colors.el](./nano-colors.el)** This module provides a collection of colors palettes with function for easily accessing them.
+
+
 
 
 
