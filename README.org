@@ -17,8 +17,9 @@
 
 
 
+
                      *GNU Emacs / N Λ N O* /- Emacs made simple/
-                     /Copyright (c) 2020 - Nicolas P. Rougier/
+                     /Copyright (c) 2020 - N Λ N O developers/
 
  
 
