@@ -1,6 +1,6 @@
 ;; -------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
-;; Copyright (C) 2020 - Nicolas .P Rougier
+;; Copyright (C) 2020 - N Λ N O developers 
 ;;
 ;; This file is not part of GNU Emacs.
 ;;

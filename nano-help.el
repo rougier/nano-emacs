@@ -1,6 +1,6 @@
 ;; ---------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
-;; Copyright (C) 2020 - Nicolas .P Rougier
+;; Copyright (C) 2020 - N Λ N O developers 
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

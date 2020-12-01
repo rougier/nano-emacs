@@ -1,6 +1,6 @@
 ;; ---------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
-;; Copyright (C) 2020 - Nicolas .P Rougier
+;; Copyright (C) 2020 - N Λ N O developers 
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 (add-to-list 'load-path ".")
 
 (require 'nano-layout)
-(require 'nano-theme-dark)
-;; (require 'nano-theme-light)
+;; (require 'nano-theme-dark)
+(require 'nano-theme-light)
 (require 'nano-modeline)
 (require 'nano-help)
 (require 'nano-splash)
