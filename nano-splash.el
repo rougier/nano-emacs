@@ -79,7 +79,9 @@
           (display-buffer-same-window splash-buffer nil)
           (run-with-idle-timer 0.05 nil (lambda() (message nil)))
           (run-with-idle-timer 0.50 nil 'nano-splash-fade-out-slow)
-          (run-with-idle-timer 0.55 nil 'nano-splash-help-message)))))
+	  (if (fboundp 'nano-splash-help-message)
+              (run-with-idle-timer 0.55 nil 'nano-splash-help-message))
+	  ))))
 
 
 (defun center-string (string)
@@ -129,9 +131,6 @@
              (cancel-function-timers 'nano-splash-fade-out-slow)
              (cancel-function-timers 'nano-spash-help-message)
              (kill-buffer "*splash*"))))
-
-(defun nano-splash-help-message ()
-  (message "Type ⌘-H for help"))
 
 
 ;; Install hook after frame parameters have been applied and only if

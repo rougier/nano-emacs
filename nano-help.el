@@ -42,6 +42,9 @@
 (setq mac-pass-command-to-system nil)
 (global-set-key (kbd "M-h") 'nano-help)
 
+(defun nano-splash-help-message ()
+  (message "Type M-h for help (M is for \"Meta\" such as \"Alt\" or \"Command\")"))
+
 (provide 'nano-help)
 
 
