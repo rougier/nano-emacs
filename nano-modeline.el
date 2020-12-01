@@ -58,25 +58,51 @@
                            :background ,(face-foreground 'nano-face-popout)))
          (status-face-** `(:foreground ,(face-background 'nano-face-default)
                            :background ,(face-background 'nano-face-critical)))
+	 (header-face    `(:foreground 'unspecified
+                           :background ,(face-background 'nano-face-subtle)
+                           :overline nil
+                           :underline nil
+                           :box (:line-width 1
+                                 :color ,(face-background 'nano-face-subtle)
+                                 :style nil)
+	                   :inherit nil))
+	 (separator-face  `(:foreground 'unspecified
+			    :background ,(face-background 'nano-face-default)
+                           :overline nil
+                           :underline nil
+			   :height 0.1
+                           :box (:line-width 1
+                                 :color ,(face-background 'nano-face-default)
+                                 :style nil)
+	                   :inherit nil))
+	 
          (pad            (or pad 1))
          (space-up       +0.15)
          (space-down     -0.20)
+	 (prefix (cond ((string= status "RO")
+			(propertize " RO " 'face status-face-ro))
+                       ((string= status "**")
+			(propertize " ** " 'face status-face-**))
+                       ((string= status "RW")
+			(propertize " RW " 'face status-face-rw))
+                       (t (propertize status 'face status-face-ro))))
          (left (concat
-                (cond ((string= status "RO")
-                       (propertize " RO " 'face status-face-ro))
-                      ((string= status "**")
-                       (propertize " ** " 'face status-face-**))
-                      ((string= status "RW")
-                       (propertize " RW " 'face status-face-rw))
-                      (t (propertize status 'face status-face-ro))
-                      )
                 (propertize " " 'display `(raise ,space-up))
                 (propertize name 'face 'nano-face-strong)
-                (propertize " " 'display `(raise ,space-down)) primary))
+                (propertize " " 'display `(raise ,space-down))
+		primary))
          (right secondary)
-;;         (available-width (- (window-total-width nil 'floor) (length left) 1)))
-         (available-width (- (window-body-width) (length left) pad)))
-    (format (format "%%s%%%ds" available-width) left right)))
+         (available-width (- (- (window-body-width) 0) (length left) (length right) (length prefix) pad)))
+    (concat prefix
+    	    (propertize left 'face header-face)
+	    (propertize (make-string available-width ?\ ) 'face header-face)
+	    (propertize (concat right (make-string pad ?\ )) 'face header-face))))
+
+;;    (format (format "%%s%%s%%%ds" available-width)
+;;	    prefix
+;;	    (propertize left 'face header-face)
+;;	    (propertize right 'face header-face))))
+;; (format "%%s%%s%%%ds" 3)
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-dashboard-mode-p ()
