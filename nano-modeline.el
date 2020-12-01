@@ -256,6 +256,23 @@
                              org-mode-line-string)))
 
 ;; ---------------------------------------------------------------------
+(defun nano-modeline-pdf-view-mode-p ()
+  (derived-mode-p 'pdf-view-mode))
+
+(defun nano-modeline-pdf-pages ()
+  (concat " P" (number-to-string (eval '(pdf-view-current-page))) "/" (or (ignore-errors (number-to-string (eval '(pdf-cache-number-of-pages)))) "???")))
+
+(defun nano-modeline-pdf-view-mode ()
+  (let ((buffer-name (format-mode-line "%b"))
+        (mode-name   (format-mode-line "%m"))
+        (position    (nano-modeline-pdf-pages)))
+    (nano-modeline-compose (nano-modeline-status)
+                           buffer-name
+                           (concat "(" mode-name ")")
+                           position)))
+
+;; ---------------------------------------------------------------------
+
 (defun nano-modeline-default-mode ()
     (let ((buffer-name (format-mode-line "%b"))
           (mode-name   (format-mode-line "%m"))
@@ -322,6 +339,7 @@
            ((nano-modeline-mu4e-dashboard-mode-p)  (nano-modeline-mu4e-dashboard-mode))
            ((nano-modeline-mu4e-main-mode-p)       (nano-modeline-mu4e-main-mode))
            ((nano-modeline-mu4e-headers-mode-p)    (nano-modeline-mu4e-headers-mode))
+           ((nano-modeline-pdf-view-mode-p)        (nano-modeline-pdf-view-mode))
 ;;           ((nano-modeline-mu4e-view-mode-p)       (nano-modeline-mu4e-view-mode))
            (t                                      (nano-modeline-default-mode)))))))
 
