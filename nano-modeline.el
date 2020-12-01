@@ -260,22 +260,22 @@
   (derived-mode-p 'pdf-view-mode))
 
 (defun nano-modeline-pdf-view-mode ()
-      (let ((buffer-name (format-mode-line "%b"))
-	    (mode-name   (format-mode-line "%m"))
-	    (branch      (vc-branch))
-	    (page-number (concat
-			  (number-to-string (pdf-view-current-page)) "/"
-			  (or (ignore-errors
-				(number-to-string (pdf-cache-number-of-pages)))
-			      "???"))))
-	(nano-modeline-compose
-	 "RW"
-	 buffer-name
-	 (concat "(" mode-name
-		 (if branch (concat ", "
-				    (propertize branch 'face 'italic)))
-		 ")" )
-	 page-number)))
+  (let ((buffer-name (format-mode-line "%b"))
+	(mode-name   (format-mode-line "%m"))
+	(branch      (vc-branch))
+	(page-number (concat
+		      (number-to-string (pdf-view-current-page)) "/"
+		      (or (ignore-errors
+			    (number-to-string (pdf-cache-number-of-pages)))
+			  "???"))))
+    (nano-modeline-compose
+     "RW"
+     buffer-name
+     (concat "(" mode-name
+	     (if branch (concat ", "
+				(propertize branch 'face 'italic)))
+	     ")" )
+     page-number)))
 
 ;; ---------------------------------------------------------------------
 
