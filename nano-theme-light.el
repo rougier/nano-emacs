@@ -17,15 +17,16 @@
 ;; ---------------------------------------------------------------------
 (setq frame-background-mode   'light)
 
-(defvar nano-color-foreground "#37474F")
-(defvar nano-color-background "#FFFFFF")
-(defvar nano-color-highlight  "#FAFAFA")
-(defvar nano-color-critical   "#FF6F00")
-(defvar nano-color-salient    "#673AB7")
-(defvar nano-color-strong     "#000000")
-(defvar nano-color-popout     "#FFAB91")
-(defvar nano-color-subtle     "#ECEFF1")
-(defvar nano-color-faded      "#B0BEC5")
+;; Colors from Material design at https://material.io/
+(defvar nano-color-foreground "#37474F") ;; Blue Grey / L800 
+(defvar nano-color-background "#FFFFFF") ;; White
+(defvar nano-color-highlight  "#FAFAFA") ;; Very Light Grey
+(defvar nano-color-critical   "#FF6F00") ;; Amber / L900
+(defvar nano-color-salient    "#673AB7") ;; Deep Purple / L500
+(defvar nano-color-strong     "#000000") ;; Black
+(defvar nano-color-popout     "#FFAB91") ;; Deep Orange / L200
+(defvar nano-color-subtle     "#ECEFF1") ;; Blue Grey / L50
+(defvar nano-color-faded      "#B0BEC5") ;; Blue Grey / L200
 
 (require 'nano-theme)
 (provide 'nano-theme-light)
