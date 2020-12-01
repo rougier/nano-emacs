@@ -256,6 +256,28 @@
                              org-mode-line-string)))
 
 ;; ---------------------------------------------------------------------
+(defun nano-modeline-docview-mode-p ()
+  (derived-mode-p 'doc-view-mode))
+
+(defun nano-modeline-docview-mode ()
+  (let ((buffer-name (format-mode-line "%b"))
+	(mode-name   (format-mode-line "%m"))
+	(branch      (vc-branch))
+	(page-number (concat
+		      (number-to-string (doc-view-current-page)) "/"
+		      (or (ignore-errors
+			    (number-to-string (doc-view-last-page-number)))
+			  "???"))))
+    (nano-modeline-compose
+     (nano-modeline-status)
+     buffer-name
+     (concat "(" mode-name
+	     (if branch (concat ", "
+				(propertize branch 'face 'italic)))
+	     ")" )
+     page-number)))
+
+;; ---------------------------------------------------------------------
 (defun nano-modeline-pdf-view-mode-p ()
   (derived-mode-p 'pdf-view-mode))
 
@@ -346,6 +368,7 @@
            ((nano-modeline-mu4e-main-mode-p)       (nano-modeline-mu4e-main-mode))
            ((nano-modeline-mu4e-headers-mode-p)    (nano-modeline-mu4e-headers-mode))
            ((nano-modeline-pdf-view-mode-p)        (nano-modeline-pdf-view-mode))
+	   ((nano-modeline-docview-mode-p)        (nano-modeline-docview-mode))
 ;;           ((nano-modeline-mu4e-view-mode-p)       (nano-modeline-mu4e-view-mode))
            (t                                      (nano-modeline-default-mode)))))))
 
