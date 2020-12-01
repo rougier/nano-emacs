@@ -291,11 +291,12 @@ background color that is barely perceptible."
 
 ;; Message
 (with-eval-after-load 'message
+  (unless (version< emacs-version "27.0")
+    (set-face 'message-cited-text-1                  'nano-face-faded)
+    (set-face 'message-cited-text-2                  'nano-face-faded)
+    (set-face 'message-cited-text-3                  'nano-face-faded)
+    (set-face 'message-cited-text-4                 'nano-face-faded))
   (set-face 'message-cited-text                      'nano-face-faded)
-  (set-face 'message-cited-text-1                    'nano-face-faded)
-  (set-face 'message-cited-text-2                    'nano-face-faded)
-  (set-face 'message-cited-text-3                    'nano-face-faded)
-  (set-face 'message-cited-text-4                    'nano-face-faded)
   (set-face 'message-header-cc                     'nano-face-default)
   (set-face 'message-header-name                    'nano-face-strong)
   (set-face 'message-header-newsgroups             'nano-face-default)
