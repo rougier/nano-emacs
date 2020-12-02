@@ -79,6 +79,12 @@
                             :box (:line-width 1
                                   :color ,(face-background 'nano-face-default)
                                   :style nil)))
+	 (filler-face  `(:background ,(face-background 'nano-face-subtle)
+		         :height 0.1
+                         :box (:line-width 1
+			       :color ,(face-background 'nano-face-default)
+                               :style nil)))
+	 
 	 (pad            (or pad 1))
          (space-up       +0.15)
          (space-down     -0.20)
@@ -101,11 +107,13 @@
 	    (propertize " " 'face separator-face)
     	    (propertize left 'face header-face)
 	    (propertize (make-string available-width ?\ ) 'face header-face)
+	    (propertize "   " 'face filler-face)
 	    (propertize (concat right (make-string pad ?\ )) 'face header-face)
 	    (propertize " " 'face separator-face)
 	    (propertize " < " 'face header-face)
 	    (propertize " " 'face separator-face)
-	    (propertize " > " 'face header-face))))
+	    (propertize " > " 'face header-face)
+	    )))
 
 ;;    (format (format "%%s%%s%%%ds" available-width)
 ;;	    prefix
