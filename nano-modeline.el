@@ -107,8 +107,6 @@
 	    (propertize " " 'face separator-face)
 	    (propertize " > " 'face header-face))))
 
-
-
 ;;    (format (format "%%s%%s%%%ds" available-width)
 ;;	    prefix
 ;;	    (propertize left 'face header-face)

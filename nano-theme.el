@@ -145,8 +145,7 @@ background color that is barely perceptible."
   (set-face-attribute 'header-line nil
 		      :weight 'light
                       :foreground (face-foreground 'nano-face-default)
-                      :background (face-background 'nano-face-subtle)
-
+                      :background (face-background 'nano-face-default)
                       :overline nil
                       :underline nil
                       :box nil
