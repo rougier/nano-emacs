@@ -53,30 +53,33 @@
 (defun nano-modeline-compose (status name primary secondary &optional pad)
   "Compose a string with provided information"
   (let* ((status-face-rw `(:foreground ,(face-background 'nano-face-default)
-                           :background ,(face-foreground 'nano-face-faded)))
+			   :background ,(face-foreground 'nano-face-faded)
+			   :box (:line-width 1
+                                 :color ,(face-background 'nano-face-default))))
+	       
          (status-face-ro `(:foreground ,(face-background 'nano-face-default)
-                           :background ,(face-foreground 'nano-face-popout)))
+			   :background ,(face-foreground 'nano-face-popout)
+			   :box (:line-width 1
+                                 :color ,(face-background 'nano-face-default))))
+
          (status-face-** `(:foreground ,(face-background 'nano-face-default)
-                           :background ,(face-background 'nano-face-critical)))
+		           :background ,(face-background 'nano-face-critical)
+                           :box (:line-width 1
+                                 :color ,(face-background 'nano-face-default))))
 	 (header-face    `(:foreground 'unspecified
                            :background ,(face-background 'nano-face-subtle)
                            :overline nil
                            :underline nil
                            :box (:line-width 1
-                                 :color ,(face-background 'nano-face-subtle)
-                                 :style nil)
-	                   :inherit nil))
-	 (separator-face  `(:foreground 'unspecified
-			    :background ,(face-background 'nano-face-default)
-                           :overline nil
-                           :underline nil
-			   :height 0.1
-                           :box (:line-width 1
                                  :color ,(face-background 'nano-face-default)
                                  :style nil)
 	                   :inherit nil))
-	 
-         (pad            (or pad 1))
+	 (separator-face  `(:background ,(face-background 'nano-face-default)
+			    :height 0.1
+                            :box (:line-width 1
+                                  :color ,(face-background 'nano-face-default)
+                                  :style nil)))
+	 (pad            (or pad 1))
          (space-up       +0.15)
          (space-down     -0.20)
 	 (prefix (cond ((string= status "RO")
@@ -92,11 +95,19 @@
                 (propertize " " 'display `(raise ,space-down))
 		primary))
          (right secondary)
-         (available-width (- (- (window-body-width) 0) (length left) (length right) (length prefix) pad)))
+         (available-width (- (- (window-body-width) 7)
+			     (length left) (length right) (length prefix) pad)))
     (concat prefix
+	    (propertize " " 'face separator-face)
     	    (propertize left 'face header-face)
 	    (propertize (make-string available-width ?\ ) 'face header-face)
-	    (propertize (concat right (make-string pad ?\ )) 'face header-face))))
+	    (propertize (concat right (make-string pad ?\ )) 'face header-face)
+	    (propertize " " 'face separator-face)
+	    (propertize " < " 'face header-face)
+	    (propertize " " 'face separator-face)
+	    (propertize " > " 'face header-face))))
+
+
 
 ;;    (format (format "%%s%%s%%%ds" available-width)
 ;;	    prefix
