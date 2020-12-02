@@ -43,7 +43,7 @@
 (global-set-key (kbd "M-h") 'nano-help)
 
 (defun nano-splash-help-message ()
-  (message "Type M-h for help (M is for \"Meta\" such as \"Alt\" or \"Command\")"))
+  (message "Type M-h for help. M stands for Alt, Command or (Esc)ape."))
 
 (provide 'nano-help)
 
