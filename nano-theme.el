@@ -47,12 +47,21 @@
   "Default face is used for regular information."
 :group 'nano)
 
+(defface nano-face-header-default nil
+  "Default face for ther header line."
+  :group 'nano)
+
 (defface nano-face-critical nil
   "Critical face is for information that requires immediate action.
 It should be of high constrast when compared to other faces. This
 can be realized (for example) by setting an intense background
 color, typically a shade of red. It must be used scarcely."
-:group 'nano)
+  :group 'nano)
+
+(defface nano-face-header-critical nil
+  "Critical face for ther header line."
+  :group 'nano)
+
 
 (defface nano-face-popout nil
 "Popout face is used for information that needs attention.
@@ -60,6 +69,10 @@ To achieve such effect, the hue of the face has to be
 sufficiently different from other faces such that it attracts
 attention through the popout effect."
 :group 'nano)
+
+(defface nano-face-header-popout nil
+  "Popout face for ther header line."
+  :group 'nano)
 
 (defface nano-face-strong nil
 "Strong face is used for information of a structural nature.
@@ -69,12 +82,21 @@ regular/bold). IT is generally used for titles, keywords,
 directory, etc."
 :group 'nano)
 
+(defface nano-face-header-strong nil
+  "Strong face for ther header line."
+  :group 'nano)
+
 (defface nano-face-salient nil
 "Salient face is used for information that are important.
 To suggest the information is of the same nature but important,
 the face uses a different hue with approximately the same
 intensity as the default face. This is typically used for links."
 :group 'nano)
+
+(defface nano-face-header-salient nil
+  "Salient face for ther header line."
+  :group 'nano)
+
 
 (defface nano-face-faded nil
 "Faded face is for information that are less important.
@@ -84,13 +106,32 @@ secondary information and also replace italic (which is generally
 abused anyway)."
 :group 'nano)
 
+(defface nano-face-header-faded nil
+  "Faded face for ther header line."
+  :group 'nano)
+
 (defface nano-face-subtle nil
 "Subtle face is used to suggest a physical area on the screen.
 It is important to not disturb too strongly the reading of
 information and this can be made by setting a very light
 background color that is barely perceptible."
 :group 'nano)
-              
+
+(defface nano-face-header-subtle nil
+  "Subtle face for ther header line."
+  :group 'nano)
+
+
+(defface nano-face-header-separator nil
+  "Face for separating item in the header line (internal use)"
+  :group 'nano)
+
+(defface nano-face-header-filler nil
+  "Face compsenting spaces in the header line (internal use) "
+  :group 'nano)
+
+
+
 (set-foreground-color nano-color-foreground)
 (set-background-color nano-color-background)
 
@@ -122,6 +163,52 @@ background color that is barely perceptible."
 (set-face-attribute 'nano-face-subtle nil
                     :background nano-color-subtle)
 
+(set-face-attribute 'nano-face-header-default nil
+		    :foreground nano-color-foreground
+		    :background nano-color-subtle
+		    :box `(:line-width 1
+		          :color ,nano-color-background
+  		          :style nil))
+(set-face-attribute 'nano-face-header-strong nil
+		    :foreground nano-color-strong
+		    :background nano-color-subtle
+		    :family "Roboto Mono"
+                    :weight 'medium
+		    :box `(:line-width 1
+		           :color ,nano-color-background
+  		           :style nil))
+(set-face-attribute 'nano-face-header-salient nil
+		    :foreground nano-color-background
+		    :background nano-color-salient
+		    :box `(:line-width 1
+		          :color ,nano-color-background
+  		          :style nil))
+(set-face-attribute 'nano-face-header-popout nil
+		    :foreground nano-color-background
+		    :background nano-color-popout
+		    :box `(:line-width 1
+		          :color ,nano-color-background
+  		          :style nil))
+(set-face-attribute 'nano-face-header-faded nil
+		    :foreground nano-color-background
+		    :background nano-color-faded
+		    :box `(:line-width 1
+		          :color ,nano-color-background
+  		          :style nil))
+(set-face-attribute 'nano-face-header-subtle nil)
+(set-face-attribute 'nano-face-header-critical nil
+		    :foreground nano-color-background
+		    :background nano-color-critical
+		    :box `(:line-width 1
+		           :color ,nano-color-background
+  		           :style nil))
+(set-face-attribute 'nano-face-header-separator nil
+		    :inherit 'nano-face-default
+		    :height 0.1)
+(set-face-attribute 'nano-face-header-filler nil
+		    :inherit 'nano-face-header-default
+		    :height 0.1)
+
 
 
 ;; mode-line / header-line
@@ -139,7 +226,7 @@ background color that is barely perceptible."
                     :background (face-background 'nano-face-default)
                     :overline nil 
                     :underline nil
-		            :inherit nil
+		    :inherit nil
                     :box nil)
 ;;(when (display-graphic-p)
   (set-face-attribute 'header-line nil
