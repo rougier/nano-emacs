@@ -659,6 +659,6 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--elfeed)
   (nano-theme--rst)
   (nano-theme--markdown)
-  (nano-theme--ivy))
-
+  (nano-theme--ivy)
+  (nano-theme--hl-line))
 (provide 'nano-theme)
