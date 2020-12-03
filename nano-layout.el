@@ -1,6 +1,6 @@
 ;; ---------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
-;; Copyright (C) 2020 - N Λ N O developers 
+;; Copyright (C) 2020 - N Λ N O developers
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 (setq default-frame-alist
       (append (list
-	       '(font . "Roboto Mono:style=Light:size=14")
+	       '(font . "Roboto Mono:style=Light")
 ;;	       '(font . "Roboto Mono Emacs Regular 14")
 	       '(min-height . 1)  '(height     . 45)
 	       '(min-width  . 40) '(width      . 81)
@@ -53,6 +53,7 @@
       initial-scratch-message nil)
 (tool-bar-mode 0)
 (tooltip-mode 0)
+(menu-bar-mode 0)
 (global-hl-line-mode 1)
 (setq x-underline-at-descent-line t)
 

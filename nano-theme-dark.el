@@ -1,6 +1,6 @@
 ;; ---------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
-;; Copyright (C) 2020 - N Λ N O developers 
+;; Copyright (C) 2020 - N Λ N O developers
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -26,7 +26,12 @@
 (defvar nano-color-strong     "#ECEFF4") ;; Snow Storm 3  / nord  6
 (defvar nano-color-popout     "#D08770") ;; Aurora        / nord 12
 (defvar nano-color-subtle     "#434C5E") ;; Polar Night 2 / nord  2
-(defvar nano-color-faded      "#616E87") ;; 
+(defvar nano-color-faded      "#616E87") ;;
+
+(require 'nano-faces)
+(nano-faces)
 
 (require 'nano-theme)
+(nano-theme)
+
 (provide 'nano-theme-dark)

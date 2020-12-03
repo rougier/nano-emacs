@@ -1,6 +1,6 @@
 ;; ---------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
-;; Copyright (C) 2020 - N Λ N O developers 
+;; Copyright (C) 2020 - N Λ N O developers
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
   (message "Welcome to GNU Emacs / N Λ N O edition")
   (message (format "Initialization time: %s" (emacs-init-time))))
 
-;; Window layout 
+;; Window layout
 (require 'nano-layout)
 
 ;; Command line options (this will cancel warning messages)
