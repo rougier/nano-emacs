@@ -81,7 +81,8 @@
           (run-with-idle-timer 0.50 nil 'nano-splash-fade-out-slow)
 	  (if (fboundp 'nano-splash-help-message)
               (run-with-idle-timer 0.55 nil 'nano-splash-help-message))
-	  ))))
+	  )
+      (nano-splash-kill))))
 
 
 (defun center-string (string)
