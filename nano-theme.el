@@ -110,6 +110,11 @@ abused anyway)."
   "Faded face for ther header line."
   :group 'nano)
 
+(defface nano-face-header-highlight nil
+  "Highlight face for ther header line."
+  :group 'nano)
+
+
 (defface nano-face-subtle nil
 "Subtle face is used to suggest a physical area on the screen.
 It is important to not disturb too strongly the reading of
@@ -129,7 +134,6 @@ background color that is barely perceptible."
 (defface nano-face-header-filler nil
   "Face compsenting spaces in the header line (internal use) "
   :group 'nano)
-
 
 
 (set-foreground-color nano-color-foreground)
@@ -195,6 +199,10 @@ background color that is barely perceptible."
 		    :box `(:line-width 1
 		          :color ,nano-color-background
   		          :style nil))
+(set-face-attribute 'nano-face-header-highlight nil
+		    :inherit 'nano-face-header-faded
+		    :box nil)
+
 (set-face-attribute 'nano-face-header-subtle nil)
 (set-face-attribute 'nano-face-header-critical nil
 		    :foreground nano-color-background

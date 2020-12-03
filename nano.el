@@ -40,4 +40,5 @@
 (unless (member "-no-splash" command-line-args)
   (require 'nano-help) (require 'nano-splash))
 
+
 (provide 'nano)

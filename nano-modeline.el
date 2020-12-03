@@ -25,7 +25,6 @@
 ;;
 ;; -------------------------------------------------------------------
 (require 'subr-x)
-;; (require 'all-the-icons)
 
 
 ;; -------------------------------------------------------------------
@@ -57,8 +56,12 @@
     (define-key map [header-line mouse-1] function)
     (propertize (format " %s " symbol)
 		'keymap map
-		'face 'nano-face-header-default
-		'mouse-face 'nano-face-header-faded)))
+		'face       'nano-face-header-default
+		'pointer 'hand
+		;; Bug on OSX when mouse-face is defined
+		;; -> Unable to load color "#FFFFFF"
+		;; 'mouse-face 'nano-face-header-highlight
+		)))
 
 (defun nano-modeline-compose (status name primary secondary &optional actions)
   "Compose a string with provided information"
@@ -104,7 +107,6 @@
   
 (defun nano-modeline-mu4e-dashboard-mode ()
   (nano-modeline-compose (nano-modeline-status)
-			 ;; (nano-modeline-status-icon "envelope")
                          "Mail"
                          (nano-modeline-mu4e-context)
                          ""))
@@ -115,7 +117,6 @@
 
 (defun nano-modeline-elfeed-search-mode ()
   (nano-modeline-compose (nano-modeline-status)
-                         ;; (nano-modeline-status-icon "newspaper-o")
                          "Elfeed"
                          (concat "(" (elfeed-search--header)  ")")
                          ""))
@@ -139,7 +140,6 @@
          (feed-title   (plist-get (elfeed-feed-meta feed) :title))
          (entry-author (elfeed-meta elfeed-show-entry :author)))
     (nano-modeline-compose status
-			   ;; (nano-modeline-status-icon "newspaper-o")
                            (s-truncate 40 title "…")
                            (concat "(" tags-str ")")
                            feed-title)))
@@ -190,7 +190,6 @@
 
 (defun nano-modeline-org-agenda-mode ()
   (nano-modeline-compose (nano-modeline-status)
-			 ;; (nano-modeline-status-icon "calendar")
                          "Agenda"
                          ""
                          (format-time-string "%H:%M")
@@ -202,7 +201,6 @@
 
 (defun nano-modeline-term-mode ()
   (nano-modeline-compose " >_ "
-			 ;; (nano-modeline-status-icon "terminal")
                          "Terminal"
                          (concat "(" shell-file-name ")")
                          (shorten-directory default-directory 32)))
@@ -223,7 +221,6 @@
 
 (defun nano-modeline-mu4e-headers-mode ()
   (nano-modeline-compose (nano-modeline-status)
-			 ;;(nano-modeline-status-icon "envelope-o")
                          (mu4e~quote-for-modeline mu4e~headers-last-query)
                          ""
                          ""))
@@ -333,26 +330,6 @@
                                             (propertize branch 'face 'italic)))
                                      ")" )
                              position)))
-
-;; ---------------------------------------------------------------------
-(defun nano-modeline-status-icon (name &optional fmt fg-color bg-color)
-  "Return a propertized string containing icon NAME from the font
-   awesome family using the provided FMT to format the string (%s
-   is replaced with icon, default is ' %s  '). Foreground (FG-COLOR)
-   and background (BG-COLOR) can be specified. If not, foreground
-   color is the default background (white) and background is the
-   foreground of the 'nano-face-popout face."
-
-  (let ((fg-color (or fg-color (face-background 'nano-face-default)))
-        (bg-color (or bg-color (face-foreground 'nano-face-popout)))
-        (fmt      (or fmt "  %s  ")))
-         
-    (propertize (format fmt (all-the-icons-faicon name))
-                'face `(:family ,(all-the-icons-faicon-family)
-                                :height 1.1
-                                :foreground ,fg-color
-                                :background ,bg-color)
-                'display '(raise 0.0))))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-status ()
