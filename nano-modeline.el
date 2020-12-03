@@ -267,7 +267,7 @@
 
 (defun nano-modeline-mssage-mode ()
   (nano-modeline-compose (nano-modeline-status)
-                         "Draft message" "" ""
+                         "Message" "(draft)" ""
 			 '(( "SEND" . message-send))))
 
 
