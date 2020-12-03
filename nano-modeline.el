@@ -68,6 +68,7 @@
   (let* ((char-width    (window-font-width nil 'default))
 	 (actions       (or actions '( ("<" . previous-buffer)
 				       (">" . next-buffer))))
+	 (actions-length (apply '+ (mapcar 'length (mapcar 'car actions))))
 	 (filler        (make-string
 			 (max 0 (- char-width 1 (length actions))) ?\ ))
          (space-up       +0.15)
@@ -89,7 +90,7 @@
 		(propertize primary 'face 'nano-face-header-default)))
          (right (concat secondary " "))
          (available-width (- (window-body-width) 1
-			     (* 3 (length actions))
+			     (* 2 (length actions)) actions-length
 			     (length prefix) (length left) (length right)))
 	 (available-width (max 1 available-width)))
     (concat prefix
@@ -259,6 +260,17 @@
                      (face-remap-add-relative 'header-line
                                               '(:background "#ffffff" :height 1.0))))
 
+
+;; ---------------------------------------------------------------------
+(defun nano-modeline-message-mode-p ()
+  (derived-mode-p 'message-mode))
+
+(defun nano-modeline-mssage-mode ()
+  (nano-modeline-compose (nano-modeline-status)
+                         "Draft message" "" ""
+			 '(( "SEND" . message-send))))
+
+
 ;; ---------------------------------------------------------------------
 (setq org-mode-line-string nil)
 (with-eval-after-load 'org-clock
@@ -395,6 +407,7 @@
            ((nano-modeline-pdf-view-mode-p)        (nano-modeline-pdf-view-mode))
 	   ((nano-modeline-docview-mode-p)         (nano-modeline-docview-mode))
 	   ((nano-modeline-completion-list-mode-p) (nano-modeline-completion-list-mode))
+	   ((nano-modeline-message-mode-p)          (nano-modeline-mssage-mode))
 ;;           ((nano-modeline-mu4e-view-mode-p)       (nano-modeline-mu4e-view-mode))
            (t                                      (nano-modeline-default-mode)))))))
 
