@@ -183,7 +183,8 @@
   (nano-modeline-compose (nano-modeline-status)
                          "Capture"
                          "(org)"
-                         "[C-c C-c] Finish [C-c C-w] Refile [C-c C-k] Abort"))
+                         ""
+			 '(("CAPTURE" . org-capture-finalize))))
 
 (with-eval-after-load 'org-capture
   (defun org-capture-turn-off-header-line ()
