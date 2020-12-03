@@ -101,16 +101,15 @@
 	    (if gui
 		(propertize filler 'face 'nano-face-header-filler)
 	      (propertize " " 'face 'nano-face-header-filler))
-	      
 	    (propertize right 'face 'nano-face-header-default)
 	    (if gui 
 		(propertize " "   'face 'nano-face-header-separator))
 	    (mapconcat (lambda (action)
 			 (nano-modeline-make-action (car action) (cdr action)))
 		       actions
-		       (if gui (propertize " " 'face 'nano-face-header-separator)
-			 "")
-		       ))))
+		       (if gui
+			   (propertize " " 'face 'nano-face-header-separator)
+			 "")))))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-dashboard-mode-p ()
