@@ -68,9 +68,11 @@
   (let* ((char-width    (window-font-width nil 'default))
 	 (actions       (or actions '( ("<" . previous-buffer)
 				       (">" . next-buffer))))
-	 (filler        (make-string (max 0 (- char-width 1 (length actions))) ?\ ))
+	 (filler        (make-string
+			 (max 0 (- char-width 1 (length actions))) ?\ ))
          (space-up       +0.15)
          (space-down     -0.20)
+	 (gui            (display-graphic-p))
 	 (prefix (cond ((string= status "RO")
 			(propertize " RO " 'face 'nano-face-header-popout))
                        ((string= status "**")
@@ -91,15 +93,23 @@
 			     (length prefix) (length left) (length right)))
 	 (available-width (max 1 available-width)))
     (concat prefix
-	    (propertize " " 'face 'nano-face-header-separator)
+	    (if gui
+		(propertize " " 'face 'nano-face-header-separator))
 	    left
 	    (propertize (make-string available-width ?\ ) 'face 'nano-face-header-default)
-	    (propertize filler 'face 'nano-face-header-filler)
+	    (if gui
+		(propertize filler 'face 'nano-face-header-filler)
+	      (propertize " " 'face 'nano-face-header-filler))
+	      
 	    (propertize right 'face 'nano-face-header-default)
-	    (propertize " "   'face 'nano-face-header-separator)
+	    (if gui 
+		(propertize " "   'face 'nano-face-header-separator))
 	    (mapconcat (lambda (action)
 			 (nano-modeline-make-action (car action) (cdr action)))
-		       actions (propertize " " 'face 'nano-face-header-separator)))))
+		       actions
+		       (if gui (propertize " " 'face 'nano-face-header-separator)
+			 "")
+		       ))))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-dashboard-mode-p ()
@@ -317,6 +327,24 @@
      page-number)))
 
 ;; ---------------------------------------------------------------------
+(defun buffer-menu-mode-header-line ()
+  (face-remap-add-relative
+   'header-line `(:background ,(face-background 'nano-face-subtle))))
+(add-hook 'Buffer-menu-mode-hook
+          #'buffer-menu-mode-header-line)
+
+;; ---------------------------------------------------------------------
+(defun nano-modeline-completion-list-mode-p ()
+  (derived-mode-p 'completion-list-mode))
+
+(defun nano-modeline-completion-list-mode ()
+    (let ((buffer-name (format-mode-line "%b"))
+          (mode-name   (format-mode-line "%m"))
+          (position    (format-mode-line "%l:%c")))
+      (nano-modeline-compose (nano-modeline-status)
+                             buffer-name "" position)))
+
+;; ---------------------------------------------------------------------
 
 (defun nano-modeline-default-mode ()
     (let ((buffer-name (format-mode-line "%b"))
@@ -365,7 +393,8 @@
            ((nano-modeline-mu4e-main-mode-p)       (nano-modeline-mu4e-main-mode))
            ((nano-modeline-mu4e-headers-mode-p)    (nano-modeline-mu4e-headers-mode))
            ((nano-modeline-pdf-view-mode-p)        (nano-modeline-pdf-view-mode))
-	   ((nano-modeline-docview-mode-p)        (nano-modeline-docview-mode))
+	   ((nano-modeline-docview-mode-p)         (nano-modeline-docview-mode))
+	   ((nano-modeline-completion-list-mode-p) (nano-modeline-completion-list-mode))
 ;;           ((nano-modeline-mu4e-view-mode-p)       (nano-modeline-mu4e-view-mode))
            (t                                      (nano-modeline-default-mode)))))))
 
