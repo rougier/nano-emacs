@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;; -------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
 ;; Copyright (C) 2020 - N Λ N O developers 
@@ -20,13 +21,14 @@
 ;;
 ;; Nano mode line format:
 ;;
-;; [ status | name | primary                               secondary ]
+;; [ status | name (primary)               secondary | item1 | item2 ]
 ;;
 ;; -------------------------------------------------------------------
 (require 'subr-x)
 ;; (require 'all-the-icons)
 
-;; ---------------------------------------------------------------------
+
+;; -------------------------------------------------------------------
 (defun vc-branch ()
   (if vc-mode
       (let ((backend (vc-backend buffer-file-name)))
@@ -50,76 +52,51 @@
     output))
 
 ;; ---------------------------------------------------------------------
-(defun nano-modeline-compose (status name primary secondary &optional pad)
-  "Compose a string with provided information"
-  (let* ((status-face-rw `(:foreground ,(face-background 'nano-face-default)
-			   :background ,(face-foreground 'nano-face-faded)
-			   :box (:line-width 1
-                                 :color ,(face-background 'nano-face-default))))
-	       
-         (status-face-ro `(:foreground ,(face-background 'nano-face-default)
-			   :background ,(face-foreground 'nano-face-popout)
-			   :box (:line-width 1
-                                 :color ,(face-background 'nano-face-default))))
+(defun nano-modeline-make-action (symbol function)
+  (let ((map (make-sparse-keymap)))
+    (define-key map [header-line mouse-1] function)
+    (propertize (format " %s " symbol)
+		'keymap map
+		'face 'nano-face-header-default
+		'mouse-face 'nano-face-header-faded)))
 
-         (status-face-** `(:foreground ,(face-background 'nano-face-default)
-		           :background ,(face-background 'nano-face-critical)
-                           :box (:line-width 1
-                                 :color ,(face-background 'nano-face-default))))
-	 (header-face    `(:foreground 'unspecified
-                           :background ,(face-background 'nano-face-subtle)
-                           :overline nil
-                           :underline nil
-                           :box (:line-width 1
-                                 :color ,(face-background 'nano-face-default)
-                                 :style nil)
-	                   :inherit nil))
-	 (separator-face  `(:background ,(face-background 'nano-face-default)
-			    :height 0.1
-                            :box (:line-width 1
-                                  :color ,(face-background 'nano-face-default)
-                                  :style nil)))
-	 (filler-face  `(:background ,(face-background 'nano-face-subtle)
-		         :height 0.1
-                         :box (:line-width 1
-			       :color ,(face-background 'nano-face-default)
-                               :style nil)))
-	 
-	 (pad            (or pad 1))
+(defun nano-modeline-compose (status name primary secondary &optional actions)
+  "Compose a string with provided information"
+  (let* ((char-width    (window-font-width nil 'default))
+	 (actions       (or actions '( ("<" . previous-buffer)
+				       (">" . next-buffer))))
+	 (filler        (make-string (max 0 (- char-width 1 (length actions))) ?\ ))
          (space-up       +0.15)
          (space-down     -0.20)
 	 (prefix (cond ((string= status "RO")
-			(propertize " RO " 'face status-face-ro))
+			(propertize " RO " 'face 'nano-face-header-popout))
                        ((string= status "**")
-			(propertize " ** " 'face status-face-**))
+			(propertize " ** " 'face 'nano-face-header-critical))
                        ((string= status "RW")
-			(propertize " RW " 'face status-face-rw))
-                       (t (propertize status 'face status-face-ro))))
+			(propertize " RW " 'face 'nano-face-header-faded))
+                       (t (propertize status 'face 'nano-face-header-popout))))
          (left (concat
-                (propertize " " 'display `(raise ,space-up))
-                (propertize name 'face 'nano-face-strong)
-                (propertize " " 'display `(raise ,space-down))
-		primary))
-         (right secondary)
-         (available-width (- (- (window-body-width) 7)
-			     (length left) (length right) (length prefix) pad)))
+                (propertize " "  'face 'nano-face-header-default
+			         'display `(raise ,space-up))
+                (propertize name 'face 'nano-face-header-strong)
+                (propertize " "  'face 'nano-face-header-default
+			         'display `(raise ,space-down))
+		(propertize primary 'face 'nano-face-header-default)))
+         (right (concat secondary " "))
+         (available-width (- (window-body-width) 1
+			     (* 3 (length actions))
+			     (length prefix) (length left) (length right)))
+	 (available-width (max 1 available-width)))
     (concat prefix
-	    (propertize " " 'face separator-face)
-    	    (propertize left 'face header-face)
-	    (propertize (make-string available-width ?\ ) 'face header-face)
-	    (propertize "   " 'face filler-face)
-	    (propertize (concat right (make-string pad ?\ )) 'face header-face)
-	    (propertize " " 'face separator-face)
-	    (propertize " < " 'face header-face)
-	    (propertize " " 'face separator-face)
-	    (propertize " > " 'face header-face)
-	    )))
-
-;;    (format (format "%%s%%s%%%ds" available-width)
-;;	    prefix
-;;	    (propertize left 'face header-face)
-;;	    (propertize right 'face header-face))))
-;; (format "%%s%%s%%%ds" 3)
+	    (propertize " " 'face 'nano-face-header-separator)
+	    left
+	    (propertize (make-string available-width ?\ ) 'face 'nano-face-header-default)
+	    (propertize filler 'face 'nano-face-header-filler)
+	    (propertize right 'face 'nano-face-header-default)
+	    (propertize " "   'face 'nano-face-header-separator)
+	    (mapconcat (lambda (action)
+			 (nano-modeline-make-action (car action) (cdr action)))
+		       actions (propertize " " 'face 'nano-face-header-separator)))))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-dashboard-mode-p ()
