@@ -70,7 +70,7 @@
 				       (">" . next-buffer))))
 	 (actions-length (apply '+ (mapcar 'length (mapcar 'car actions))))
 	 (filler        (make-string
-			 (max 0 (- char-width 1 (length actions))) ?\ ))
+			 (max 0 (- char-width 2 (length actions))) ?\ ))
          (space-up       +0.15)
          (space-down     -0.20)
 	 (gui            (display-graphic-p))
