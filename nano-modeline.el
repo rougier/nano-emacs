@@ -65,7 +65,7 @@
 
 (defun nano-modeline-compose (status name primary secondary &optional actions)
   "Compose a string with provided information"
-  (let* ((char-width    (window-font-width nil 'default))
+  (let* ((char-width    (window-font-width nil 'header-line))
 	 (actions       (or actions '( ("<" . previous-buffer)
 				       (">" . next-buffer))))
 	 (actions-length (apply '+ (mapcar 'length (mapcar 'car actions))))
@@ -89,9 +89,10 @@
 			         'display `(raise ,space-down))
 		(propertize primary 'face 'nano-face-header-default)))
          (right (concat secondary " "))
-         (available-width (- (window-body-width) 1
+         (available-width (- (window-total-width) 1
 			     (* 2 (length actions)) actions-length
-			     (length prefix) (length left) (length right)))
+			     (length prefix) (length left) (length right)
+			     (/ (window-right-divider-width) char-width)))
 	 (available-width (max 1 available-width)))
     (concat prefix
 	    (if gui
