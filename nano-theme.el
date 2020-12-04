@@ -30,6 +30,8 @@
 ;; ---------------------------------------------------------------------
 ;;; Code:
 
+(require 'nano-faces)
+
 ;; When we set a face, we take care of removing any previous settings
 (defun set-face (face style)
   "Reset FACE and make it inherit STYLE."

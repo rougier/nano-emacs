@@ -29,6 +29,8 @@
 ;; ---------------------------------------------------------------------
 ;;; Code:
 
+(require 'nano-base-colors)
+
 ;; A theme is fully defined by these six faces
 
 (defface nano-face-default nil
@@ -143,149 +145,155 @@ background color that is barely perceptible."
   "Critical face for tags"
   :group 'nano)
 
-
-
-
+(defun nano-what-faces (pos)
+  "Get the font faces at POS."
+  (interactive "d")
+  (let ((faces (remq nil
+                     (list
+                      (get-char-property pos 'read-face-name)
+                      (get-char-property pos 'face)
+                      (plist-get (text-properties-at pos) 'face)))))
+    (message "Faces: %s" faces)))
 
 (defun nano-faces ()
   "Derive face attributes for nano-faces using nano-theme values."
   (set-face-attribute 'nano-face-default nil
-                       :foreground nano-color-foreground
-                       :background nano-color-background)
+                      :foreground nano-color-foreground
+                      :background nano-color-background)
   (set-face-attribute 'nano-face-critical nil
-                       :foreground nano-color-foreground
-                       :background nano-color-critical)
+                      :foreground nano-color-foreground
+                      :background nano-color-critical)
   (set-face-attribute 'nano-face-popout nil
-                       :foreground nano-color-popout)
+                      :foreground nano-color-popout)
 
   (if (display-graphic-p)
       (set-face-attribute 'nano-face-strong nil
-                           :foreground (face-foreground 'nano-face-default)
-                           :family "Roboto Mono"
-                           :weight 'medium)
+                          :foreground (face-foreground 'nano-face-default)
+                          :family "Roboto Mono"
+                          :weight 'medium)
     (set-face-attribute 'nano-face-strong nil
-                         :foreground (face-foreground 'nano-face-default)
-                         :weight 'bold))
+                        :foreground (face-foreground 'nano-face-default)
+                        :weight 'bold))
 
   (set-face-attribute 'nano-face-salient nil
-                       :foreground nano-color-salient
-                       :weight 'light)
+                      :foreground nano-color-salient
+                      :weight 'light)
 
   (set-face-attribute 'nano-face-faded nil
-                       :foreground nano-color-faded
-                       :weight 'light)
+                      :foreground nano-color-faded
+                      :weight 'light)
 
   (set-face-attribute 'nano-face-subtle nil
                       :background nano-color-subtle)
 
   (set-face-attribute 'nano-face-header-default nil
-          :foreground nano-color-foreground
-          :background nano-color-subtle
-          :box `(:line-width 1
-                 :color ,nano-color-background
-                 :style nil))
+                      :foreground nano-color-foreground
+                      :background nano-color-subtle
+                      :box `(:line-width 1
+                                         :color ,nano-color-background
+                                         :style nil))
 
   (set-face-attribute 'nano-face-tag-default nil
-          :foreground nano-color-foreground
-          :background nano-color-background
-          :family "Roboto Mono" :weight 'regular
-          :height (if (display-graphic-p) 120 1)
-          :box `(:line-width 1
-                 :color ,nano-color-foreground
-                 :style nil))
-  
+                      :foreground nano-color-foreground
+                      :background nano-color-background
+                      :family "Roboto Mono" :weight 'regular
+                      :height (if (display-graphic-p) 120 1)
+                      :box `(:line-width 1
+                                         :color ,nano-color-foreground
+                                         :style nil))
+
   (set-face-attribute 'nano-face-header-strong nil
-          :foreground nano-color-strong
-          :background nano-color-subtle
-          :family "Roboto Mono"
-          :weight 'medium
-          :box `(:line-width 1
-                 :color ,nano-color-background
-                 :style nil))
+                      :foreground nano-color-strong
+                      :background nano-color-subtle
+                      :family "Roboto Mono"
+                      :weight 'medium
+                      :box `(:line-width 1
+                                         :color ,nano-color-background
+                                         :style nil))
 
   (set-face-attribute 'nano-face-tag-strong nil
-          :foreground nano-color-strong
-          :background nano-color-subtle
-          :family "Roboto Mono" :weight 'regular
-          :height (if (display-graphic-p) 120 1)
-          :box `(:line-width 1
-                 :color ,nano-color-strong
-                 :style nil))
-  
-  (set-face-attribute 'nano-face-header-salient nil
-          :foreground nano-color-background
-          :background nano-color-salient
-          :box `(:line-width 1
-                 :color ,nano-color-background
-                 :style nil))
+                      :foreground nano-color-strong
+                      :background nano-color-subtle
+                      :family "Roboto Mono" :weight 'regular
+                      :height (if (display-graphic-p) 120 1)
+                      :box `(:line-width 1
+                                         :color ,nano-color-strong
+                                         :style nil))
 
-    (set-face-attribute 'nano-face-tag-salient nil
-          :foreground nano-color-background
-          :background nano-color-salient
-          :family "Roboto Mono" :weight 'regular
-          :height (if (display-graphic-p) 120 1)
-          :box `(:line-width 1
-                 :color ,nano-color-salient
-                 :style nil))
+  (set-face-attribute 'nano-face-header-salient nil
+                      :foreground nano-color-background
+                      :background nano-color-salient
+                      :box `(:line-width 1
+                                         :color ,nano-color-background
+                                         :style nil))
+
+  (set-face-attribute 'nano-face-tag-salient nil
+                      :foreground nano-color-background
+                      :background nano-color-salient
+                      :family "Roboto Mono" :weight 'regular
+                      :height (if (display-graphic-p) 120 1)
+                      :box `(:line-width 1
+                                         :color ,nano-color-salient
+                                         :style nil))
 
   (set-face-attribute 'nano-face-header-popout nil
-          :foreground nano-color-background
-          :background nano-color-popout
-          :box `(:line-width 1
-                 :color ,nano-color-background
-                 :style nil))
+                      :foreground nano-color-background
+                      :background nano-color-popout
+                      :box `(:line-width 1
+                                         :color ,nano-color-background
+                                         :style nil))
 
   (set-face-attribute 'nano-face-tag-popout nil
-          :foreground nano-color-background
-          :background nano-color-popout
-          :family "Roboto Mono" :weight 'regular
-          :height (if (display-graphic-p) 120 1)
-          :box `(:line-width 1
-                 :color ,nano-color-popout
-                 :style nil))
-  
+                      :foreground nano-color-background
+                      :background nano-color-popout
+                      :family "Roboto Mono" :weight 'regular
+                      :height (if (display-graphic-p) 120 1)
+                      :box `(:line-width 1
+                                         :color ,nano-color-popout
+                                         :style nil))
+
   (set-face-attribute 'nano-face-header-faded nil
-          :foreground nano-color-background
-          :background nano-color-faded
-          :box `(:line-width 1
-                 :color ,nano-color-background
-                 :style nil))
+                      :foreground nano-color-background
+                      :background nano-color-faded
+                      :box `(:line-width 1
+                                         :color ,nano-color-background
+                                         :style nil))
 
   (set-face-attribute 'nano-face-tag-faded nil
-          :foreground nano-color-background
-          :background nano-color-faded
-          :family "Roboto Mono" :weight 'regular
-          :height (if (display-graphic-p) 120 1)
-          :box `(:line-width 1
-                 :color ,nano-color-faded
-                 :style nil))
-  
+                      :foreground nano-color-background
+                      :background nano-color-faded
+                      :family "Roboto Mono" :weight 'regular
+                      :height (if (display-graphic-p) 120 1)
+                      :box `(:line-width 1
+                                         :color ,nano-color-faded
+                                         :style nil))
+
   (set-face-attribute 'nano-face-header-subtle nil)
 
   (set-face-attribute 'nano-face-header-critical nil
-          :foreground nano-color-background
-          :background nano-color-critical
-          :box `(:line-width 1
-                 :color ,nano-color-background
-                 :style nil))
+                      :foreground nano-color-background
+                      :background nano-color-critical
+                      :box `(:line-width 1
+                                         :color ,nano-color-background
+                                         :style nil))
   (set-face-attribute 'nano-face-tag-critical nil
-          :foreground nano-color-background
-          :background nano-color-critical
-          :family "Roboto Mono" :weight 'regular
-          :height (if (display-graphic-p) 120 1)
-          :box `(:line-width 1
-                 :color ,nano-color-critical
-                 :style nil))
-  
+                      :foreground nano-color-background
+                      :background nano-color-critical
+                      :family "Roboto Mono" :weight 'regular
+                      :height (if (display-graphic-p) 120 1)
+                      :box `(:line-width 1
+                                         :color ,nano-color-critical
+                                         :style nil))
+
   (set-face-attribute 'nano-face-header-separator nil
-          :inherit 'nano-face-default
-          :height 0.1)
+                      :inherit 'nano-face-default
+                      :height 0.1)
   (set-face-attribute 'nano-face-header-filler nil
-          :inherit 'nano-face-header-default
-          :height 0.1)
+                      :inherit 'nano-face-header-default
+                      :height 0.1)
   (set-face-attribute 'nano-face-header-highlight nil
-          :inherit 'nano-face-header-faded
-          :box nil))
+                      :inherit 'nano-face-header-faded
+                      :box nil))
 
 (provide 'nano-faces)
 ;;; nano-faces.el ends here
