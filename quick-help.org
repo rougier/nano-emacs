@@ -1,0 +1,47 @@
+
+*GNU Emacs / N Λ N O*                                         /Quick help/
+
+  Learn basic keystroke commands ............................[[elisp:help-with-tutorial][ Tutorial ]]
+  See an overview of Emacs features at[[https://gnu.org][ gnu.org ]] ..........[[https://www.gnu.org/software/emacs/tour][ Guided Tour ]]
+  Get help from Emacs users .............................[[https://lists.gnu.org/mailman/listinfo/help-gnu-emacs][ Mailing list ]]
+  Read the extensive documentation .....................[[info:emacs][ Documentation ]]
+ 
+*Quick commands*                   /C: Control, M: alt, command or escape/
+
+  Save ................... =C-x C-s=    Help ....................... =C-h=
+  Save as ................ =C-x C-w=    Cancel ..................... =C-g=
+  Open a new file ........ =C-x C-f=    Undo ....................... =C-/=
+  Open recent ............ =C-x C-r=    Close buffer ............. =C-x k=
+  Browse directory ......... =C-x d=    Quit ................... =C-x C-c=
+
+*Other commands*                                     /[[info:emacs#Key Bindings][ Other key bindings ]]/
+
+  Search ..................... =C-s=    Go to line ............. =M-g M-g=
+  Replace .................... =M-%=    Execute .................... =M-x=
+  
+  Start of buffer ............ =M-<=    End of buffer .............. =M->=
+  Start of line .............. =C-a=    End of line ................ =C-e=
+
+  Mark ..................... =C-spc=    Copy from mark.............. =M-w=
+  Kill from mark.............. =C-w=    Kill from cursor............ =C-k=
+  Paste ...................... =C-y=    Paste older ............ =C-y M-y=
+
+*Quick preferences*                                    /[[elisp:(customize-group 'emacs)][ Full preferences ]]/
+
+ [[elisp:menu-set-font][ Select ]]default font                [[elisp:display-line-numbers-mode][ Toggle ]]line numbers
+ [[elisp:tool-bar-mode][ Toggle ]]tool bar                    [[elisp:toggle-truncate-lines][ Toggle ]]line wrap
+ [[elisp:scroll-bar-mode][ Toggle ]]scroll bar                  [[elisp:blink-cursor-mode][ Toggle ]]blinking cursor
+ [[elisp:menu-bar-mode][ Toggle ]]menu bar                     Select cursor:[[elisp:(set-default 'cursor-type '(hbar . 2))][ HBar ]]|[[elisp:(set-default 'cursor-type '(bar . 2))][ VBar ]]|[[elisp:(set-default 'cursor-type 'box)][ Box ]]
+  
+*Install some packages*                                   /[[elisp:(package-list-packages)][ Packages list ]]/
+
+ [[elisp:(package-install 'magit)][ magit ]]................................. A Git porcelain inside Emacs
+ [[elisp:(package-install 'projectile)][ projectile ]] ........... Manage and navigate projects in Emacs easily
+ [[elisp:(package install 'helm)][ helm ]].................. An Emacs incremental and narrowing framework
+ [[elisp:(package install 'flycheck)][ flychek ]]................................. On-the-fly syntax checking
+ [[elisp:(package-install 'company)][ company ]] ......................... Modular text completion framework
+ [[elisp:(package-install 'markdown-mode)][ markdown-mode ]] .............. Major mode for Markdown-formatted text
+ [[elisp:(package-install 'popup)][ popup ]].................................. Visual popup user interface
+
+  *Note*: Packages can be installed from the official[[https://elpa.gnu.org/][ GNU Elpa ]]
+        repository or from the non-official[[https://melpa.org][ MELPA ]]repository.
