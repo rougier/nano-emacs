@@ -43,5 +43,6 @@
  [[elisp:(package-install 'markdown-mode)][ markdown-mode ]] .............. Major mode for Markdown-formatted text
  [[elisp:(package-install 'popup)][ popup ]].................................. Visual popup user interface
 
-  *Note*: Packages can be installed from the official[[https://elpa.gnu.org/][ GNU Elpa ]]
-        repository or from the non-official[[https://melpa.org][ MELPA ]]repository.
+            /----------------------------------------------------------/
+            *Note*: Packages can be installed from the official[[https://elpa.gnu.org/][ GNU Elpa ]]
+                  repository or from the non-official[[https://melpa.org][ MELPA ]]repository.
