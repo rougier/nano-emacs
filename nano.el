@@ -15,30 +15,36 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
+
+;; Path to nano emacs modules (mandatory)
 (add-to-list 'load-path "/Users/rougier/Documents/GitHub/nano-emacs")
 (add-to-list 'load-path ".")
 
-;; Welcome message
+;; Welcome message (optional)
 (let ((inhibit-message t))
   (message "Welcome to GNU Emacs / N Λ N O edition")
   (message (format "Initialization time: %s" (emacs-init-time))))
 
-;; Window layout
+;; Window layout (optional)
 (require 'nano-layout)
 
-;; Command line options (this will cancel warning messages)
+;; Theme (mandatory)
 (add-to-list 'command-switch-alist '("-dark"   . (lambda (args))))
 (add-to-list 'command-switch-alist '("-light"  . (lambda (args))))
 (if (member "-dark" command-line-args)
-    (require 'nano-theme-dark) (require 'nano-theme-light))
+    (require 'nano-theme-dark)
+  (require 'nano-theme-light))
 
-;; Nano modeline
+;; Nano defaults (optional)
+(require 'nano-defaults)
+
+;; Nano modeline (optional)
 (require 'nano-modeline)
 
-;; Splash and help (if not disabled by -no-splash option)
+;; Splash and help (optional)
 (add-to-list 'command-switch-alist '("-no-splash" . (lambda (args))))
 (unless (member "-no-splash" command-line-args)
-  (require 'nano-help) (require 'nano-splash))
-
+  (require 'nano-help)
+  (require 'nano-splash))
 
 (provide 'nano)
