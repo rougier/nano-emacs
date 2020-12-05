@@ -16,13 +16,12 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
 ;; 
-;; This file defines the help message and bind it to M-h
-;; [C-x C-f] Open  [M-w] Copy   [C-w] Cut   [C-s] Search  [C-g]   Cancel
-;; [C-x C-s] Save  [C-y] Paste  [C-/] Undo  [M-x] Command [C-x C-c] Quit
+;; This file defines a help message (M-p) and a help scren (M-h)
 ;;
 ;; Usage:
 ;;
 ;;  (require 'nano-help)
+;;  M-: (nano-quick-help) or M-p
 ;;  M-: (nano-help) or M-h
 ;;
 ;; ---------------------------------------------------------------------
