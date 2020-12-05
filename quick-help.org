@@ -1,5 +1,5 @@
 
-*GNU Emacs / N Λ N O*                                         /Quick help/
+*GNU Emacs / N Λ N O*                                    /Press q to quit/
 
   Learn basic keystroke commands ............................[[elisp:help-with-tutorial][ Tutorial ]]
   See an overview of Emacs features at[[https://gnu.org][ gnu.org ]] ..........[[https://www.gnu.org/software/emacs/tour][ Guided Tour ]]
