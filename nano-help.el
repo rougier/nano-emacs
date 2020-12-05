@@ -41,10 +41,10 @@
     (sit-for 30)))
 
 ;; Help screen
+(define-derived-mode nano-help-mode org-mode "Nano help mode")
+(define-key nano-help-mode-map (kbd "q") #'kill-current-buffer)
 (defun nano-help ()
   (interactive)
-  (define-derived-mode nano-help-mode org-mode "Nano help mode")
-  (define-key nano-help-mode-map (kbd "q") #'kill-current-buffer)
   (find-file-read-only (locate-file "quick-help.org" load-path))
   (nano-help-mode))
 
