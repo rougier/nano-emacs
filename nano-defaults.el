@@ -117,4 +117,11 @@
 (set-language-environment   'utf-8)
 (set-language-environment   'utf-8)
 
+;; Unique buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse
+      uniquify-separator " • "
+      uniquify-after-kill-buffer-p t
+      uniquify-ignore-buffers-re "^\\*")
+
 (provide 'nano-defaults)
