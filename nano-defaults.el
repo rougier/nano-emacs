@@ -124,4 +124,23 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
+;; Save minibufer / kill ring & file names history
+(setq savehist-additional-variables '(kill-ring))
+(setq history-length 100)
+(put 'minibuffer-history 'history-length 50)
+(put 'file-name-history  'history-length 25)
+(put 'kill-ring          'history-length 25)
+(setq savehist-file "~/.nano-emacs-history")
+(savehist-mode 1)
+
+;; Remove text properties for kill ring entries
+;; See https://emacs.stackexchange.com/questions/4187
+(defun unpropertize-kill-ring ()
+  (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
+(add-hook 'kill-emacs-hook 'unpropertize-kill-ring)
+
+;; Recentf files 
+(setq recentf-max-menu-items 25)
+(recentf-mode 1)
+
 (provide 'nano-defaults)

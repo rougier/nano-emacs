@@ -34,6 +34,8 @@
     (save-buffers-kill-terminal)))
 (global-set-key (kbd "C-x C-c") 'nano--delete-frame-or-kill-emacs)
 
+;; Open recent files 
+(global-set-key (kbd "C-c r") 'recentf-open-files)
 
 (provide 'nano-bindings)
 
