@@ -197,6 +197,47 @@
             #'org-capture-turn-off-header-line))
 
 ;; ---------------------------------------------------------------------
+(setq Info-use-header-line nil)
+(defun nano-modeline-info-breadcrumbs ()
+  (let ((nodes (Info-toc-nodes Info-current-file))
+        (cnode Info-current-node)
+	(node Info-current-node)
+        (crumbs ())
+        (depth Info-breadcrumbs-depth)
+	line)
+    (while  (> depth 0)
+      (setq node (nth 1 (assoc node nodes)))
+      (if node (push node crumbs))
+      (setq depth (1- depth)))
+    (setq crumbs (cons "Top" (if (member (pop crumbs) '(nil "Top"))
+			         crumbs (cons nil crumbs))))
+    (forward-line 1)
+    (dolist (node crumbs)
+      (let ((text
+	     (if (not (equal node "Top")) node
+	       (format "%s"
+		       (if (stringp Info-current-file)
+			   (file-name-sans-extension
+			    (file-name-nondirectory Info-current-file))
+			 Info-current-file)))))
+	(setq line (concat line (if (null line) "" " > ")
+                                (if (null node) "..." text)))))
+    (if (and cnode (not (equal cnode "Top")))
+        (setq line (concat line (if (null line) "" " > ") cnode)))
+    line))
+
+(defun nano-modeline-info-mode-p ()
+  (derived-mode-p 'Info-mode))
+
+(defun nano-modeline-info-mode ()
+  (nano-modeline-compose (nano-modeline-status)
+                         "Info"
+                         (concat "("
+                                 (nano-modeline-info-breadcrumbs)
+                                 ")")
+                         ""))
+
+;; ---------------------------------------------------------------------
 (defun nano-modeline-org-agenda-mode-p ()
   (derived-mode-p 'org-agenda-mode))
 
@@ -204,8 +245,7 @@
   (nano-modeline-compose (nano-modeline-status)
                          "Agenda"
                          ""
-                         (format-time-string "%H:%M")
-                         ))
+                         (format-time-string "%H:%M")))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-term-mode-p ()
@@ -397,6 +437,7 @@
   '((:eval
      (cond ((nano-modeline-elfeed-search-mode-p)   (nano-modeline-elfeed-search-mode))
            ((nano-modeline-elfeed-show-mode-p)     (nano-modeline-elfeed-show-mode))
+           ((nano-modeline-info-mode-p)            (nano-modeline-info-mode))
            ((nano-modeline-calendar-mode-p)        (nano-modeline-calendar-mode))
            ((nano-modeline-org-capture-mode-p)     (nano-modeline-org-capture-mode))
            ((nano-modeline-org-agenda-mode-p)      (nano-modeline-org-agenda-mode))
@@ -408,7 +449,7 @@
            ((nano-modeline-pdf-view-mode-p)        (nano-modeline-pdf-view-mode))
 	   ((nano-modeline-docview-mode-p)         (nano-modeline-docview-mode))
 	   ((nano-modeline-completion-list-mode-p) (nano-modeline-completion-list-mode))
-	   ((nano-modeline-message-mode-p)          (nano-modeline-mssage-mode))
+	   ((nano-modeline-message-mode-p)         (nano-modeline-message-mode))
 ;;           ((nano-modeline-mu4e-view-mode-p)       (nano-modeline-mu4e-view-mode))
            (t                                      (nano-modeline-default-mode)))))))
 
