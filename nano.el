@@ -41,6 +41,9 @@
 ;; Nano modeline (optional)
 (require 'nano-modeline)
 
+;; Nano bindings (optional)
+(require 'nano-bindings)
+
 ;; Splash and help (optional)
 (add-to-list 'command-switch-alist '("-no-splash" . (lambda (args))))
 (unless (member "-no-splash" command-line-args)
