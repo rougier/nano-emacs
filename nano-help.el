@@ -46,8 +46,10 @@
 (defun nano-help ()
   (interactive)
   (find-file-read-only (locate-file "quick-help.org" load-path))
+  (setq-local org-confirm-elisp-link-function nil)
   (nano-help-mode))
 
+;; Bindings for quick help and help
 (setq mac-pass-command-to-system nil)
 (global-set-key (kbd "M-p") 'nano-quick-help)
 (global-set-key (kbd "M-h") 'nano-help)
