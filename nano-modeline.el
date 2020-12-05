@@ -303,6 +303,16 @@
 
 
 ;; ---------------------------------------------------------------------
+(defun nano-modeline-nano-help-mode-p ()
+  (derived-mode-p 'nano-help-mode))
+
+(defun nano-modeline-nano-help-mode ()
+  (nano-modeline-compose (nano-modeline-status)
+                         "N Λ N O"
+                         "(help)"
+                         ""))
+
+;; ---------------------------------------------------------------------
 (defun nano-modeline-message-mode-p ()
   (derived-mode-p 'message-mode))
 
@@ -446,11 +456,12 @@
            ((nano-modeline-mu4e-dashboard-mode-p)  (nano-modeline-mu4e-dashboard-mode))
            ((nano-modeline-mu4e-main-mode-p)       (nano-modeline-mu4e-main-mode))
            ((nano-modeline-mu4e-headers-mode-p)    (nano-modeline-mu4e-headers-mode))
+;;         ((nano-modeline-mu4e-view-mode-p)       (nano-modeline-mu4e-view-mode))
            ((nano-modeline-pdf-view-mode-p)        (nano-modeline-pdf-view-mode))
 	   ((nano-modeline-docview-mode-p)         (nano-modeline-docview-mode))
 	   ((nano-modeline-completion-list-mode-p) (nano-modeline-completion-list-mode))
 	   ((nano-modeline-message-mode-p)         (nano-modeline-message-mode))
-;;           ((nano-modeline-mu4e-view-mode-p)       (nano-modeline-mu4e-view-mode))
+           ((nano-modeline-nano-help-mode-p)       (nano-modeline-nano-help-mode))
            (t                                      (nano-modeline-default-mode)))))))
 
 ;; ---------------------------------------------------------------------
