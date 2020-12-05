@@ -101,7 +101,7 @@
   (set-face 'show-paren-mismatch                           'face-normal)
   (set-face-attribute 'tooltip nil                         :height 0.85)
   (set-face 'secondary-selection                      'nano-face-subtle)
-  (set-face 'completions-common-part                  'nano-face-faded)
+  (set-face 'completions-common-part                 'nano-face-salient)
   (set-face 'completions-first-difference             'nano-face-popout))
 
 
