@@ -25,7 +25,7 @@
 ;; M-return for frame maximization toggle
 (global-set-key (kbd "<M-return>") 'toggle-frame-maximized)
 
-;; Close frame if not the last, kill emcs else
+;; Close frame if not the last, kill emacs else
 (defun nano--delete-frame-or-kill-emacs ()
   "Delete frame or kill Emacs if there is only one frame."
   (interactive)
