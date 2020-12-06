@@ -67,10 +67,10 @@
 
           ;; Vertical padding to center
           (insert-char ?\n padding-center)
-          (insert (propertize "GNU Emacs / N Λ N O" 'face 'nano-face-faded))
+          (insert (propertize "GNU Emacs / N Λ N O" 'face 'nano-face-strong))
           (center-line)
           (insert "\n")
-          (insert (propertize "www.gnu.org" 'face 'nano-face-faded))
+          (insert (propertize "Emacs made simple" 'face 'nano-face-faded))
           (center-line)
 
           (goto-char 0)
