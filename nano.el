@@ -15,15 +15,11 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
+(package-initialize)
 
 ;; Path to nano emacs modules (mandatory)
 (add-to-list 'load-path "/Users/rougier/Documents/GitHub/nano-emacs")
 (add-to-list 'load-path ".")
-
-;; Welcome message (optional)
-(let ((inhibit-message t))
-  (message "Welcome to GNU Emacs / N Λ N O edition")
-  (message (format "Initialization time: %s" (emacs-init-time))))
 
 ;; Window layout (optional)
 (require 'nano-layout)
@@ -35,14 +31,25 @@
     (require 'nano-theme-dark)
   (require 'nano-theme-light))
 
-;; Nano defaults (optional)
+;; Nano default settings (optional)
 (require 'nano-defaults)
 
-;; Nano modeline (optional)
+;; Nano session saving (optional
+(require 'nano-session)
+
+;; Nano header & mode lines (optional)
 (require 'nano-modeline)
 
-;; Nano bindings (optional)
+;; Nano key bindings modification (optional)
 (require 'nano-bindings)
+
+;; Nano counsel configuration (optional, needs counsel package)
+(require 'nano-counsel)
+
+;; Welcome message (optional)
+(let ((inhibit-message t))
+  (message "Welcome to GNU Emacs / N Λ N O edition")
+  (message (format "Initialization time: %s" (emacs-init-time))))
 
 ;; Splash and help (optional)
 (add-to-list 'command-switch-alist '("-no-splash" . (lambda (args))))
