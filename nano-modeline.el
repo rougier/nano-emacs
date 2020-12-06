@@ -150,7 +150,7 @@
          (feed         (elfeed-entry-feed elfeed-show-entry))
          (feed-title   (plist-get (elfeed-feed-meta feed) :title))
          (entry-author (elfeed-meta elfeed-show-entry :author)))
-    (nano-modeline-compose status
+    (nano-modeline-compose (nano-modeline-status)
                            (s-truncate 40 title "…")
                            (concat "(" tags-str ")")
                            feed-title)))
