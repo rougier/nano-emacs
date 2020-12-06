@@ -34,7 +34,7 @@
 ;; Nano default settings (optional)
 (require 'nano-defaults)
 
-;; Nano session saving (optional
+;; Nano session saving (optional)
 (require 'nano-session)
 
 ;; Nano header & mode lines (optional)
@@ -43,7 +43,8 @@
 ;; Nano key bindings modification (optional)
 (require 'nano-bindings)
 
-;; Nano counsel configuration (optional, needs counsel package)
+;; Nano counsel configuration (optional)
+;; Needs "counsel" package to be installed (M-x: package-install)
 (require 'nano-counsel)
 
 ;; Welcome message (optional)
