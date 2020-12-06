@@ -76,7 +76,9 @@
 
 ;; Completion style, see
 ;; gnu.org/software/emacs/manual/html_node/emacs/Completion-Styles.html
-(setq completion-styles '(substring substring))
+(setq completion-styles '(basic substring))
+
+
 
 ;; No scroll bars
 (scroll-bar-mode 0)
@@ -89,6 +91,12 @@
     (menu-bar-mode t) ;; When nil, focus problem on OSX
   (menu-bar-mode -1))
 
+;; Tab behavior
+;; (setq tab-always-indent 'complete)
+;; (global-company-mode)
+;; (define-key company-mode-map [remap indent-for-tab-command]
+;;   #'company-indent-or-complete-common)
+
 ;; Pixel scroll (as opposed to char scrool)
 (pixel-scroll-mode t)
 
@@ -99,6 +107,18 @@
       mac-command-modifier 'meta
       mac-option-modifier nil
       mac-use-title-bar nil)
+
+;; Make sure clipboard works properly in tty mode on OSX
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+(if (not (display-graphic-p))
+    (progn (setq interprogram-cut-function 'paste-to-osx)
+           (setq interprogram-paste-function 'copy-from-osx)))
 
 ;; y/n for  answering yes/no questions
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -124,23 +144,13 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
-;; Save minibufer / kill ring & file names history
-(setq savehist-additional-variables '(kill-ring))
-(setq history-length 100)
-(put 'minibuffer-history 'history-length 50)
-(put 'file-name-history  'history-length 25)
-(put 'kill-ring          'history-length 25)
-(setq savehist-file "~/.nano-emacs-history")
-(savehist-mode 1)
-
-;; Remove text properties for kill ring entries
-;; See https://emacs.stackexchange.com/questions/4187
-(defun unpropertize-kill-ring ()
-  (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
-(add-hook 'kill-emacs-hook 'unpropertize-kill-ring)
-
-;; Recentf files 
-(setq recentf-max-menu-items 25)
-(recentf-mode 1)
+;; Kill term buffer when exiting
+(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  (if (memq (process-status proc) '(signal exit))
+      (let ((buffer (process-buffer proc)))
+        ad-do-it
+        (kill-buffer buffer))
+    ad-do-it))
+(ad-activate 'term-sentinel)
 
 (provide 'nano-defaults)
