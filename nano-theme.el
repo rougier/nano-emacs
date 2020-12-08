@@ -30,6 +30,8 @@
 ;; ---------------------------------------------------------------------
 ;;; Code:
 
+(require 'nano-faces)
+
 ;; When we set a face, we take care of removing any previous settings
 (defun set-face (face style)
   "Reset FACE and make it inherit STYLE."
@@ -49,8 +51,8 @@
 
   ;; XXX the following seems to be a no-op, should it be removed?
   (set-face-attribute 'default nil
-                       :foreground (face-foreground 'default)
-                       :background (face-background 'default))
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default))
 
   (if (display-graphic-p)
       (set-face-attribute 'bold nil :weight 'regular)
@@ -68,14 +70,14 @@
   (set-face 'cursor                                  'nano-face-default)
 
   (set-face-attribute 'cursor nil
-                       :background (face-foreground 'nano-face-default))
+                      :background (face-foreground 'nano-face-default))
   (set-face-attribute 'window-divider nil
-                       :foreground (face-background 'nano-face-default))
+                      :foreground (face-background 'nano-face-default))
   (set-face-attribute 'window-divider-first-pixel nil
-                       :foreground nano-color-highlight)
+                      :foreground nano-color-highlight)
   ;;                  :foreground (face-background 'nano-face-subtle))
   (set-face-attribute 'window-divider-last-pixel nil
-                       :foreground nano-color-highlight)
+                      :foreground nano-color-highlight)
   ;;                  :foreground (face-background 'nano-face-subtle)))
 
   ;; Semantic
@@ -91,8 +93,8 @@
   (set-face 'link                                    'nano-face-salient)
   (set-face 'fringe                                    'nano-face-faded)
   (set-face-attribute 'fringe nil
-                       :foreground (face-background 'nano-face-subtle)
-                       :background (face-background 'default))
+                      :foreground (face-background 'nano-face-subtle)
+                      :background (face-background 'default))
   (set-face 'isearch                                  'nano-face-strong)
   (set-face 'isearch-fail                              'nano-face-faded)
   (set-face 'lazy-highlight                           'nano-face-subtle)
@@ -661,4 +663,6 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--markdown)
   (nano-theme--ivy)
   (nano-theme--hl-line))
+
+
 (provide 'nano-theme)
