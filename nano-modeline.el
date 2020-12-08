@@ -63,11 +63,31 @@
 		;; 'mouse-face 'nano-face-header-highlight
 		)))
 
+(defun nano-modeline-default-actions ()
+  (let* ((window    (get-buffer-window (current-buffer)))
+         (dedicated (window-dedicated-p window)))
+    (cond (dedicated '(("•" . nano-modeline-action-unset-dedicated)))
+          (t         '(("<" . nano-modeline-action-prev-buffer)
+	               (">" . nano-modeline-action-next-buffer))))))
+
+(defun nano-modeline-action-prev-buffer ()
+  (interactive)
+  (previous-buffer))
+
+(defun nano-modeline-action-next-buffer ()
+  (interactive)
+  (next-buffer))
+
+(defun nano-modeline-action-unset-dedicated ()
+  (interactive)
+  (set-window-dedicated-p (get-buffer-window (current-buffer)) nil))
+
+
 (defun nano-modeline-compose (status name primary secondary &optional actions)
   "Compose a string with provided information"
   (let* ((char-width    (window-font-width nil 'header-line))
-	 (actions       (or actions '( ("<" . previous-buffer)
-				       (">" . next-buffer))))
+         (window        (get-buffer-window (current-buffer)))
+	 (actions       (or actions (nano-modeline-default-actions)))
 	 (actions-length (apply '+ (mapcar 'length (mapcar 'car actions))))
 	 (filler        (make-string
 			 (max 0 (- char-width 2 (length actions))) ?\ ))
@@ -316,7 +336,7 @@
 (defun nano-modeline-message-mode-p ()
   (derived-mode-p 'message-mode))
 
-(defun nano-modeline-mssage-mode ()
+(defun nano-modeline-message-mode ()
   (nano-modeline-compose (nano-modeline-status)
                          "Message" "(draft)" ""
 			 '(( "SEND" . message-send))))
