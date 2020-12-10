@@ -20,7 +20,11 @@
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 
 ;; M-n for new frame (M-n is unbound in vanilla emacs)
-(global-set-key (kbd "M-n") 'make-frame-command)
+(defun new-frame ()
+  (interactive)
+  (select-frame (make-frame))
+  (switch-to-buffer "*scratch*"))
+(global-set-key (kbd "M-n") 'new-frame)
 
 ;; M-return for frame maximization toggle
 (global-set-key (kbd "<M-return>") 'toggle-frame-maximized)
