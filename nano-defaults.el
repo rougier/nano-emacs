@@ -78,7 +78,11 @@
 ;; gnu.org/software/emacs/manual/html_node/emacs/Completion-Styles.html
 (setq completion-styles '(basic substring))
 
-
+;; Mouse active in terminal
+(unless (display-graphic-p)
+  (xterm-mouse-mode 1)
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
 ;; No scroll bars
 (scroll-bar-mode 0)
