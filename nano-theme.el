@@ -187,6 +187,7 @@
                          :background nano-color-highlight)))
 
 
+
 (defun nano-theme--buttons ()
   "Derive button faces from nano faces."
   ;; Buttons
@@ -225,6 +226,18 @@
     (set-face 'info-title-2                           'nano-face-strong)
     (set-face 'info-title-3                           'nano-face-strong)
     (set-face 'info-title-4                           'nano-face-strong)))
+
+
+(defun nano-theme--speedbar ()
+  "Derive speedbar faces from nano faces "
+  (with-eval-after-load 'speedbar
+    (set-face 'speedbar-button-face                    'nano-face-faded)
+    (set-face 'speedbar-directory-face                'nano-face-strong)
+    (set-face 'speedbar-file-face                    'nano-face-default)
+    (set-face 'speedbar-highlight-face             'nano-face-highlight)
+    (set-face 'speedbar-selected-face                 'nano-face-subtle)
+    (set-face 'speedbar-separator-face                 'nano-face-faded)
+    (set-face 'speedbar-tag-face                       'nano-face-faded)))
 
 
 (defun nano-theme--bookmark ()
@@ -646,6 +659,7 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--buttons)
   (nano-theme--info)
   (nano-theme--bookmark)
+  (nano-theme--speedbar)
   (nano-theme--message)
   (nano-theme--outline)
   (nano-theme--customize)
