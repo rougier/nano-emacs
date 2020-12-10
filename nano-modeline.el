@@ -65,8 +65,10 @@
 
 (defun nano-modeline-default-actions ()
   (let* ((window    (get-buffer-window (current-buffer)))
+         (term-mode (not (display-graphic-p)))
          (dedicated (window-dedicated-p window)))
-    (cond (dedicated '(("•" . nano-modeline-action-unset-dedicated)))
+    (cond ;;(term-mode '())
+          (dedicated '(("•" . nano-modeline-action-unset-dedicated)))
           (t         '(("<" . nano-modeline-action-prev-buffer)
 	               (">" . nano-modeline-action-next-buffer))))))
 
