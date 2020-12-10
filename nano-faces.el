@@ -205,8 +205,7 @@ background color that is barely perceptible."
   (set-face-attribute 'nano-face-header-strong nil
                       :foreground nano-color-strong
                       :background nano-color-subtle
-                      :family "Roboto Mono"
-                      :weight 'medium
+                      :inherit 'nano-face-strong
                       :box `(:line-width 1
                                          :color ,nano-color-background
                                          :style nil))
