@@ -82,13 +82,15 @@ modules.
 
 <img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
 
-- **[nano-modeline.el](./nano-modeline.el)** This module definse a
+- **[nano-modeline.el](./nano-modeline.el)** This module defines a
   header line that is mode dependent and takes care of hiding the
   modeline when necessary.
 
 <img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
 
-- **[nano-layout.el](./nano-layout.el)** This module define the overall layout of an emacs frame, defining default font, fringes, margins, etc.
+- **[nano-layout.el](./nano-layout.el)** This module defines the
+  overall layout of an emacs frame, defining default font, fringes,
+  margins, etc.
 
 <img align="right" alt="optional" src="https://img.shields.io/badge/-optional-blue?style=flat-square">
 
