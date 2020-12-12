@@ -68,7 +68,7 @@
 
 ;; Nano counsel configuration (optional)
 ;; Needs "counsel" package to be installed (M-x: package-install)
-(require 'nano-counsel)
+;; (require 'nano-counsel)
 
 ;; Welcome message (optional)
 (let ((inhibit-message t))
