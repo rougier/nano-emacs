@@ -16,17 +16,20 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
 (require 'nano-base-colors)
-
-;; Colors from Material design at https://material.io/
-(setq frame-background-mode    'light)
-(setq nano-color-foreground "#37474F") ;; Blue Grey / L800
-(setq nano-color-background "#FFFFFF") ;; White
-(setq nano-color-highlight  "#FAFAFA") ;; Very Light Grey
-(setq nano-color-critical   "#FF6F00") ;; Amber / L900
-(setq nano-color-salient    "#673AB7") ;; Deep Purple / L500
-(setq nano-color-strong     "#000000") ;; Black
-(setq nano-color-popout     "#FFAB91") ;; Deep Orange / L200
-(setq nano-color-subtle     "#ECEFF1") ;; Blue Grey / L50
-(setq nano-color-faded      "#B0BEC5") ;; Blue Grey / L200
+(defun nano-theme-set-light ()
+  "Apply light Nano theme base."
+  ;; Colors from Material design at https://material.io/
+  (setq frame-background-mode    'light)
+  (setq nano-color-foreground "#37474F") ;; Blue Grey / L800
+  (setq nano-color-background "#FFFFFF") ;; White
+  (setq nano-color-highlight  "#FAFAFA") ;; Very Light Grey
+  (setq nano-color-critical   "#FF6F00") ;; Amber / L900
+  (setq nano-color-salient    "#673AB7") ;; Deep Purple / L500
+  (setq nano-color-strong     "#000000") ;; Black
+  (setq nano-color-popout     "#FFAB91") ;; Deep Orange / L200
+  (setq nano-color-subtle     "#ECEFF1") ;; Blue Grey / L50
+  (setq nano-color-faded      "#B0BEC5") ;; Blue Grey / L200
+  )
+(nano-theme-set-light)
 
 (provide 'nano-theme-light)
