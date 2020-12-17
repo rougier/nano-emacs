@@ -330,7 +330,7 @@
 
 (defun nano-modeline-nano-help-mode ()
   (nano-modeline-compose (nano-modeline-status)
-                         "N Λ N O"
+                         "GNU Emacs / N Λ N O"
                          "(help)"
                          ""))
 
