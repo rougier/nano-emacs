@@ -57,6 +57,7 @@
                       "#FF922B" "#FD7E14" "#F76707" "#E8590C" "#D9480F" ))))
 
 (defun open-color (color)
+  (interactive)
   (let ((hue   (substring color 0 -2))
         (level (string-to-number (substring color -1))))
     (nth (+ 1 level) (cdr (assoc hue open-colors)))))
@@ -105,6 +106,7 @@
                            "#607D8B" "#546E7A" "#455A64" "#37474F" "#263238"))))
 
 (defun material-color (color)
+  (interactive)
   (let ((hue   (substring color 0 -2))
         (level (string-to-number (substring color -1))))
     (nth (+ 1 level) (cdr (assoc hue material-colors)))))
@@ -123,6 +125,7 @@
 			    "#D08770" "#EBCB8B" "#A3BE8C" "#B48EAD"))))
 
 (defun nord-color (color)
+  (interactive)
   (let ((hue   (substring color 0 -2))
         (level (string-to-number (substring color -1))))
     (nth (+ 1 level) (cdr (assoc hue nord-colors)))))
