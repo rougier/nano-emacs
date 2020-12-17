@@ -74,10 +74,10 @@
   (set-face-attribute 'window-divider nil
                       :foreground (face-background 'nano-face-default))
   (set-face-attribute 'window-divider-first-pixel nil
-                      :foreground nano-color-highlight)
+                      :foreground nano-color-background)
   ;;                  :foreground (face-background 'nano-face-subtle))
   (set-face-attribute 'window-divider-last-pixel nil
-                      :foreground nano-color-highlight)
+                      :foreground nano-color-background)
   ;;                  :foreground (face-background 'nano-face-subtle)))
 
   ;; Semantic
@@ -124,20 +124,20 @@
 (defun nano-theme--mode-line ()
   "Derive mode-line and header-line faces from nano-faces."
   (set-face-attribute 'mode-line nil
-                       :height 0.75
-                       :foreground (face-foreground 'nano-face-faded)
-                       :background (face-background 'nano-face-default)
-                       :overline nil
-                       :underline nil
-                       :box nil)
+                      :height 1.0
+                      :foreground (face-foreground 'nano-face-faded)
+                      :background (face-background 'nano-face-default)
+                      :overline nil
+                      :underline nil
+                      :box nil)
   (set-face-attribute 'mode-line-inactive nil
-                       :height 0.75
-                       :foreground (face-foreground 'nano-face-faded)
-                       :background (face-background 'nano-face-default)
-                       :overline nil
-                       :underline nil
-                       :inherit nil
-                       :box nil)
+                      :height 1.0
+                      :foreground (face-foreground 'nano-face-faded)
+                      :background (face-background 'nano-face-default)
+                      :overline nil
+                      :underline nil
+                      :inherit nil
+                      :box nil)
   ;;(when (display-graphic-p)
   (set-face-attribute 'header-line nil
                        :weight 'light
