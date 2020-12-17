@@ -528,7 +528,7 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'mu4e-system-face                        'nano-face-faded)
     (set-face 'mu4e-title-face                        'nano-face-strong)
     (set-face 'mu4e-trashed-face                       'nano-face-faded)
-    (set-face 'mu4e-unread-face                       'nano-face-strong)
+    (set-face 'mu4e-unread-face                      'nano-face-salient)
     (set-face 'mu4e-url-number-face                    'nano-face-faded)
     (set-face 'mu4e-view-body-face                   'nano-face-default)
     (set-face 'mu4e-warning-face                      'nano-face-popout)))
