@@ -496,7 +496,7 @@
 	      (eq (window-in-direction 'below) (minibuffer-window))
 	      (not (window-in-direction 'below)))
 	      (with-current-buffer (window-buffer window)
-	        (setq mode-line-format "%-"))
+	        (setq mode-line-format (list "%-")))
 	    (with-current-buffer (window-buffer window)
  	      (setq mode-line-format nil)))
 ;;      (if (window-in-direction 'above)
@@ -506,7 +506,7 @@
 (add-hook 'window-configuration-change-hook 'nano-modeline-update-windows)
 
 (setq eshell-status-in-modeline nil)
-(setq-default mode-line-format "%-")
+(setq-default mode-line-format (list "%-"))
 (nano-modeline)
 
 (provide 'nano-modeline)
