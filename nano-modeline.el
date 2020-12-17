@@ -280,6 +280,22 @@
                          (shorten-directory default-directory 32)))
 
 ;; ---------------------------------------------------------------------
+(defun nano-modeline-vterm-mode-p ()
+  (derived-mode-p 'vterm-mode))
+
+(defun nano-modeline-get-ssh-host (str)
+  (let ((split-defdir (split-string default-directory)))
+    (if (equal (length split-defdir) 1)
+        (car (split-string (shell-command-to-string "hostname") "\n"))
+      (cadr split-defdir))))
+
+(defun nano-modeline-vterm-mode ()
+  (nano-modeline-compose " >_ "
+                         "vterm"
+                         (concat "(" (nano-modeline-get-ssh-host default-directory) ")")
+                         (shorten-directory (car (last (split-string default-directory ":"))) 32)))
+
+;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-main-mode-p ()
   (derived-mode-p 'mu4e-main-mode))
 
@@ -475,6 +491,7 @@
            ((nano-modeline-org-agenda-mode-p)      (nano-modeline-org-agenda-mode))
            ((nano-modeline-org-clock-mode-p)       (nano-modeline-org-clock-mode))
            ((nano-modeline-term-mode-p)            (nano-modeline-term-mode))
+           ((nano-modeline-vterm-mode-p)           (nano-modeline-vterm-mode))
            ((nano-modeline-mu4e-dashboard-mode-p)  (nano-modeline-mu4e-dashboard-mode))
            ((nano-modeline-mu4e-main-mode-p)       (nano-modeline-mu4e-main-mode))
            ((nano-modeline-mu4e-headers-mode-p)    (nano-modeline-mu4e-headers-mode))
