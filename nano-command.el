@@ -24,12 +24,13 @@
 ;; this window. I took care of setting the text and cursor color to
 ;; white such that they are mostly invisible.
 ;; ---------------------------------------------------------------------
+
 (define-minor-mode nano-command-mode
   "Nano command mode"
   :keymap  (make-sparse-keymap))
 
 (defface nano-face-command nil
-  "Face for header line command"
+  "Face for the whole header line command"
   :group 'nano)
 
 (defface nano-face-command-prompt nil
@@ -39,8 +40,6 @@
 (defface nano-face-command-cursor nil
   "Face for header line command cursor"
   :group 'nano)
-
-
 
 (set-face-attribute 'nano-face-command nil
                     :foreground nano-color-foreground
@@ -62,118 +61,159 @@
                     :foreground nano-color-background
                     :background nano-color-foreground)
 
-(defun nano-command-update ()
-  (interactive)
-  (if (window-live-p (get-buffer-window "*nano-command*"))
-      (with-current-buffer "*nano-command*"
-        (let ((eol (save-excursion (goto-char (point-min)) (point-at-eol))))
-          (if (> (point) eol) (goto-char eol)))))
+
+(defvar nano-command--slave nil
+  "Slave buffer displaying the command.")
+
+(defvar nano-command--master " *nano-command*"
+  "Master buffer (quasi invisible) recording keystrokes.")
+
+(defvar nano-command--cookie nil
+  "Cookie returned by face-remap-add-relative.")
+
+
+(defun nano-command--update ()
+  "This function makes sure the content of the master buffer is copied
+to the slave buffer header line."
+
   (force-mode-line-update t))
 
-(defun nano-command-cancel (master slave cookie)
-  ;; Close master
-  (with-selected-window (get-buffer-window master)
-    (delete-window))
+(defun nano-command--check-focus (&rest args)
+  "This function check if the maste buffer has focus.
+If not, it closes nano command."
+
+  (if (not (eq (selected-window)
+               (get-buffer-window nano-command--master)))
+      (nano-command--close)))
+  
+(defun nano-command--close ()
+  "Close nano command"
+
+  (interactive)
+
+  ;; Remove advice
+  (advice-remove #'select-window #'nano-command--check-focus)
+  
+  ;; Close master window
+  (when (window-live-p (get-buffer-window nano-command--master))
+    (delete-window (get-buffer-window nano-command--master)))
+
+  ;; Kill master buffer
+  (when (get-buffer nano-command--master)
+    (kill-buffer nano-command--master))
 
   ;; Restore slave to normal state
-  (with-selected-window (get-buffer-window slave)
+  (with-selected-window (get-buffer-window nano-command--slave)
     (kill-local-variable 'header-line-format)
-    (face-remap-remove-relative cookie))
+    (face-remap-remove-relative nano-command--cookie))
   
-  ;; Update
+  ;; Update mode lines
   (force-mode-line-update t))
 
 
 (defun nano-command (prompt &optional content information)
 
-  (setq nano-command-cookie
-        (face-remap-add-relative 'header-line 'nano-face-command))
-  (setq nano-command-master
-        "*nano-command*")
-  (setq nano-command-slave
-        (current-buffer))
-  (setq nano-command-information
-        information)
+  ;; Cannot open nano command while in minibuffer
+  (when (minibufferp)
+    (error "Cannot open nano command while in minibuffer"))
 
+  ;; Cannot open nano command while in nano command
+  (when (eq (current-buffer) (get-buffer nano-command--master))
+    (error "Cannot open nano command while in mini command"))
+  
+  ;; Kill the master buffer & window if openened (not strictly necessary)
+  (when (window-live-p (get-buffer-window nano-command--master))
+    (delete-window (get-buffer-window nano-command--master))
+    (kill-buffer nano-command--master))
+
+  ;; Save the slave buffer
+  (setq nano-command--slave (current-buffer))
+
+  ;; Install nano face command in the slave buffer
+  (setq nano-command--cookie
+        (face-remap-add-relative 'header-line 'nano-face-command))
+
+
+  ;; Create master buffer by splitting slave buffer
   (let ((window-min-height 1)
         (window-safe-min-height 1)
         (window-resize-pixelwise t)
         (split-window-keep-point t)
         (split-window-keep-point t))
     (with-selected-window (split-window-vertically -2)
-      (switch-to-buffer (get-buffer-create nano-command-master))
+      (switch-to-buffer (get-buffer-create nano-command--master))
       (erase-buffer)
       (org-mode)
       (nano-command-mode)
       (if content (insert content))
       (insert "\n")
       (insert "-")
-      (goto-char (point-min))
 
+      ;; This tries to hide most of the master window
+      (goto-char (point-min))
       (overlay-put (make-overlay (point-at-bol) (+ (point-at-eol) 1))
                    'face '(:height 10))
-
-      (goto-char (point-min))
+      (setq cursor-type nil)
+      
       (setq header-line-format nil)
       (setq mode-line-format nil)
+      
       (face-remap-add-relative 'default `(:foreground ,nano-color-background))
       (face-remap-add-relative 'region  `(:background ,nano-color-background))
-      (setq cursor-type nil)
       (fit-window-to-buffer)
       (setq window-size-fixed t)))
 
+  ;; Install header line in master buffer
   (setq header-line-format
-      (list
-       (propertize " "  'face 'nano-face-command-prompt
-		        'display `(raise -0.20))
-       (propertize prompt 'face 'nano-face-command-prompt)
-       (propertize " "  'face 'nano-face-command-prompt
-		        'display `(raise +0.15))
-       (propertize " " )
-       `(:eval
-         (let* ((master "*nano-command*")                
-                (content (with-current-buffer master
-                           (save-excursion
-                             (goto-char (point-min))
-                             (buffer-substring (point-at-bol) (point-at-eol)))))
-                (content (if (> (length content) 0)
-                             content
-                           (propertize ,information
-                                       'face 'nano-face-faded)))
-                (content (concat content " "))
-                (point  (with-current-buffer master (point)))
-                (region (with-current-buffer master (region-active-p))))
-           ;; Cursor 
-           (put-text-property (- point 1) point
-                              'face 'nano-face-command-cursor content)
-           ;; Region
-           (if region
-               (let ((beg (with-current-buffer master (region-beginning)))
-                     (end (with-current-buffer master (region-end))))
-                 (put-text-property (- beg 1) (- end 1)
-                                    'face 'region content)))
-           content))))
+        (list
 
-  (with-current-buffer nano-command-master
-    (add-hook 'post-command-hook 'nano-command-update nil t)
-    (if (display-graphic-p)
-        (define-key nano-command-mode-map (kbd "ESC")
-                (lambda () (interactive) (nano-command-cancel
-                                nano-command-master
-                                nano-command-slave
-                                nano-command-cookie))))
-    (define-key nano-command-mode-map (kbd "C-g")
-      (lambda () (interactive) (nano-command-cancel
-                                nano-command-master
-                                nano-command-slave
-                                nano-command-cookie)))
-    (define-key nano-command-mode-map (kbd "RET")
-      (lambda () (interactive) (nano-command-cancel
-                                nano-command-master
-                                nano-command-slave
-                                nano-command-cookie))))
-  (nano-command-update)
-  (select-window (get-buffer-window nano-command-master)))
+         ;; Prompt
+         (propertize " "  'face 'nano-face-command-prompt
+		          'display `(raise -0.20))
+         (propertize prompt 'face 'nano-face-command-prompt)
+         (propertize " "  'face 'nano-face-command-prompt
+	  	          'display `(raise +0.15))
+         (propertize " " )
+
+         ;; Input (copied from master)
+         `(:eval
+           (let* ((content (with-current-buffer nano-command--master
+                             (save-excursion
+                               (goto-char (point-min))
+                               (buffer-substring (point-at-bol) (point-at-eol)))))
+                  (content (if (> (length content) 0)
+                               content
+                             (propertize ,information
+                                         'face 'nano-face-faded)))
+                  (content (concat content " "))
+                  (point  (with-current-buffer nano-command--master (point)))
+                  (region (with-current-buffer nano-command--master (region-active-p))))
+
+             ;; Cursor 
+             (put-text-property (- point 1) point
+                                'face 'nano-face-command-cursor content)
+             ;; Region
+             (if region
+                 (let ((beg (with-current-buffer nano-command--master (region-beginning)))
+                       (end (with-current-buffer nano-command--master (region-end))))
+                   (put-text-property (- beg 1) (- end 1)
+                                      'face 'region content)))
+             content))))
+
+  ;; Install key bindings
+  (with-current-buffer nano-command--master
+    (add-hook 'post-command-hook 'nano-command--update nil t)
+    (define-key nano-command-mode-map (kbd "C-g") #'nano-command--close)
+    (define-key nano-command-mode-map (kbd "RET") #'nano-command--close))
+
+  ;; Update mode lines and swicch to master buffer
+  (nano-command--update)
+  (select-window (get-buffer-window nano-command--master) t)
+  (redisplay)
+  
+  ;; Advice after select window to check for focus
+  (advice-add #'select-window :after #'nano-command--check-focus))
+
 
 
 ;; ---------------------------------------------------------------------
@@ -207,4 +247,5 @@
 (define-key global-map (kbd "C-c t") #'nano-command-capture-todo)
 (define-key global-map (kbd "C-c m") #'nano-command-capture-meeting)
 (define-key global-map (kbd "C-c r") #'nano-command-mail-reply)
+(define-key global-map (kbd "C-c R") #'nano-command-mail-reply-all)
 
