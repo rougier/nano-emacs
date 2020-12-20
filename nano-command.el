@@ -21,8 +21,8 @@
 ;; for one line org-captures (TODO or meeting) or short mail
 ;; answers. The command prompt is displayed using the header line and
 ;; the content is copied from a tiny one line window at the bottom of
-;; this window. I took care of setting the text and cursor color to
-;; white such that they are mostly invisible.
+;; this window. It takes care of setting the text to white and hiding
+;; the cursor such that it is mostly invisible.
 ;; ---------------------------------------------------------------------
 
 (define-minor-mode nano-command-mode
@@ -61,21 +61,24 @@
                     :foreground nano-color-background
                     :background nano-color-foreground)
 
-
 (defvar nano-command--slave nil
   "Slave buffer displaying the command.")
 
 (defvar nano-command--master "*nano-command*"
-  "Master buffer (quasi invisible) recording keystrokes.")
+  "Master buffer recording keystrokes.")
 
 (defvar nano-command--cookie nil
   "Cookie returned by face-remap-add-relative.")
 
-
 (defun nano-command--update ()
   "This function makes sure the content of the master buffer is copied
-to the slave buffer header line."
+to the slave buffer header line and cursor stays on first line."
 
+  ;; Makes sure cursor stays on first line
+  (with-current-buffer nano-command--master
+    (let ((eol (save-excursion (goto-char (point-min)) (point-at-eol))))
+      (if (> (point) eol) (goto-char eol))))
+  
   (force-mode-line-update t))
 
 (defun nano-command--check-focus (&rest args)
@@ -90,7 +93,7 @@ If not, it closes nano command."
   "Close nano command"
 
   (interactive)
-
+  
   ;; Remove advice
   (advice-remove #'select-window #'nano-command--check-focus)
   
@@ -111,7 +114,7 @@ If not, it closes nano command."
   (force-mode-line-update t))
 
 
-(defun nano-command (prompt &optional content information)
+(defun nano-command (&optional prompt callback content information)
 
   ;; Cannot open nano command while in minibuffer
   (when (minibufferp)
@@ -132,7 +135,6 @@ If not, it closes nano command."
   ;; Install nano face command in the slave buffer
   (setq nano-command--cookie
         (face-remap-add-relative 'header-line 'nano-face-command))
-
 
   ;; Create master buffer by splitting slave buffer
   (let ((window-min-height 1)
@@ -169,7 +171,7 @@ If not, it closes nano command."
          ;; Prompt + one space
          (propertize " "  'face 'nano-face-command-prompt
 		          'display `(raise -0.20))
-         (propertize prompt 'face 'nano-face-command-prompt)
+         (propertize (or prompt "M-x") 'face 'nano-face-command-prompt)
          (propertize " "  'face 'nano-face-command-prompt
 	  	          'display `(raise +0.15))
          (propertize " " )
@@ -179,8 +181,7 @@ If not, it closes nano command."
          ;; of the line.
          `(:eval
            (let* ((content (with-current-buffer nano-command--master
-                             (save-excursion
-                               (goto-char (point-min))
+                             (save-excursion (goto-char (point-min))
                                (buffer-substring (point-at-bol) (point-at-eol)))))
                   (content (cond ((> (length content) 0)
                                   (concat content " "))
@@ -206,7 +207,15 @@ If not, it closes nano command."
   (with-current-buffer nano-command--master
     (add-hook 'post-command-hook 'nano-command--update nil t)
     (define-key nano-command-mode-map (kbd "C-g") #'nano-command--close)
-    (define-key nano-command-mode-map (kbd "RET") #'nano-command--close))
+    (define-key nano-command-mode-map (kbd "RET")
+      `(lambda ()
+        (interactive)
+        (let ((content (with-current-buffer nano-command--master
+                         (save-excursion (goto-char (point-min))
+                           (buffer-substring (point-at-bol) (point-at-eol))))))
+          (if ,callback (,callback content)
+            (message content)))
+        (nano-command--close))))
 
   ;; Update mode lines and swicch to master buffer
   (nano-command--update)
@@ -221,28 +230,27 @@ If not, it closes nano command."
 ;; ---------------------------------------------------------------------
 (defun nano-command-x ()
   (interactive)
-  (nano-command "M-x" "" "Enter command"))
+  (nano-command "M-x" nil "" "Enter command"))
 
 (defun nano-command-shell ()
   (interactive)
-  (nano-command ">_" "" "Enter shell command"))
+  (nano-command ">_" nil "" "Enter shell command"))
 
 (defun nano-command-capture-todo ()
   (interactive)
-  (nano-command "TODO" "" "Enter TODO item"))
+  (nano-command "TODO" nil "" "Enter TODO item"))
 
 (defun nano-command-capture-meeting ()
   (interactive)
-  (nano-command "ORG" "" "New meeting"))
+  (nano-command "ORG" nil "" "New meeting"))
 
 (defun nano-command-mail-reply ()
   (interactive)
-  (nano-command "MAIL" "" "Reply to sender"))
+  (nano-command "MAIL" nil "" "Reply to sender"))
 
 (defun nano-command-mail-reply-all ()
   (interactive)
-  (nano-command "MAIL" "" "Reply to all"))
-
+  (nano-command "MAIL" nil "" "Reply to all"))
 
 (define-key global-map (kbd "C-c x") #'nano-command-x)
 (define-key global-map (kbd "C-c s") #'nano-command-shell)
