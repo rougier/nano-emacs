@@ -65,7 +65,7 @@
 (defvar nano-command--slave nil
   "Slave buffer displaying the command.")
 
-(defvar nano-command--master " *nano-command*"
+(defvar nano-command--master "*nano-command*"
   "Master buffer (quasi invisible) recording keystrokes.")
 
 (defvar nano-command--cookie nil
@@ -157,7 +157,6 @@ If not, it closes nano command."
       
       (setq header-line-format nil)
       (setq mode-line-format nil)
-      
       (face-remap-add-relative 'default `(:foreground ,nano-color-background))
       (face-remap-add-relative 'region  `(:background ,nano-color-background))
       (fit-window-to-buffer)
@@ -167,7 +166,7 @@ If not, it closes nano command."
   (setq header-line-format
         (list
 
-         ;; Prompt
+         ;; Prompt + one space
          (propertize " "  'face 'nano-face-command-prompt
 		          'display `(raise -0.20))
          (propertize prompt 'face 'nano-face-command-prompt)
@@ -175,17 +174,19 @@ If not, it closes nano command."
 	  	          'display `(raise +0.15))
          (propertize " " )
 
-         ;; Input (copied from master)
+         ;; Input (copied from master). we need to add a space at end
+         ;; of content to be able to show cursor when it is at the end
+         ;; of the line.
          `(:eval
            (let* ((content (with-current-buffer nano-command--master
                              (save-excursion
                                (goto-char (point-min))
                                (buffer-substring (point-at-bol) (point-at-eol)))))
-                  (content (if (> (length content) 0)
-                               content
-                             (propertize ,information
-                                         'face 'nano-face-faded)))
-                  (content (concat content " "))
+                  (content (cond ((> (length content) 0)
+                                  (concat content " "))
+                                 ((> (length ,information) 0) 
+                                  (propertize ,information 'face 'nano-face-faded))
+                                 (t " ")))
                   (point  (with-current-buffer nano-command--master (point)))
                   (region (with-current-buffer nano-command--master (region-active-p))))
 
@@ -197,7 +198,8 @@ If not, it closes nano command."
                  (let ((beg (with-current-buffer nano-command--master (region-beginning)))
                        (end (with-current-buffer nano-command--master (region-end))))
                    (put-text-property (- beg 1) (- end 1)
-                                      'face 'region content)))
+                                      'face `(:foreground ,nano-color-background
+                                              :background ,nano-color-faded) content)))
              content))))
 
   ;; Install key bindings
