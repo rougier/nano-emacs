@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t -*-
+;;; -*- lexical-binding: t -*-
 ;; ---------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
 ;; Copyright (C) 2020 - N Λ N O developers
@@ -208,14 +208,14 @@ If not, it closes nano command."
     (add-hook 'post-command-hook 'nano-command--update nil t)
     (define-key nano-command-mode-map (kbd "C-g") #'nano-command--close)
     (define-key nano-command-mode-map (kbd "RET")
-      `(lambda ()
+      (lambda ()
         (interactive)
-        (let ((content (with-current-buffer nano-command--master
-                         (save-excursion (goto-char (point-min))
-                           (buffer-substring (point-at-bol) (point-at-eol))))))
-          (if ,callback (,callback content)
-            (message content)))
-        (nano-command--close))))
+        (let* ((content (with-current-buffer nano-command--master
+                          (save-excursion (goto-char (point-min))
+                          (buffer-substring (point-at-bol) (point-at-eol))))))
+          (nano-command--close)
+          (if callback (funcall callback content)
+            (message content))))))
 
   ;; Update mode lines and swicch to master buffer
   (nano-command--update)
@@ -225,37 +225,77 @@ If not, it closes nano command."
   ;; Advice after select window to check for focus
   (advice-add #'select-window :after #'nano-command--check-focus))
 
-
-
 ;; ---------------------------------------------------------------------
-(defun nano-command-x ()
-  (interactive)
-  (nano-command "M-x" nil "" "Enter command"))
+(defun nano-capture-refile (file &optional headline)
+  "Move current headline to a specified location"
+  (let* ((headline (or headline ""))
+         (org-complex-heading-regexp-format org-heading-regexp)
+         (pos (with-current-buffer (find-file file)
+                (org-find-exact-headline-in-buffer headline))))
+    (org-refile nil nil (list "" file nil pos))))
 
-(defun nano-command-shell ()
-  (interactive)
-  (nano-command ">_" nil "" "Enter shell command"))
 
-(defun nano-command-capture-todo ()
+(defun nano-capture-todo ()
   (interactive)
-  (nano-command "TODO" nil "" "Enter TODO item"))
+  (nano-command "TODO" #'nano-capture-todo-finalize ""
+                "Enter a TODO item to be refiled in inbox"))
 
-(defun nano-command-capture-meeting ()
+(defun nano-capture-todo-finalize (content)
   (interactive)
-  (nano-command "ORG" nil "" "New meeting"))
+  (let ((inhibit-message t)
+        (buffer (current-buffer)))
+    (with-temp-buffer 
+      (insert (format "* TODO %s :@TODO:" content))
+      (goto-char (point-min))
+      (org-mark-ring-push)
+      (nano-capture-refile "~/Documents/org/inbox.org")
+      (org-mark-ring-goto))
+    (switch-to-buffer buffer)))
 
-(defun nano-command-mail-reply ()
+
+(defun nano-capture-meeting ()
   (interactive)
-  (nano-command "MAIL" nil "" "Reply to sender"))
+  (let* ((content (format-time-string
+                   " <%+4Y-%m-%d %a %%02d:00-%%02d:00>"))
+         (now (string-to-number (format-time-string "%H")))
+         (content (format content now (+ now 1))))
+    (nano-command "MEETING" #'nano-capture-meeting-finalize content)))
 
-(defun nano-command-mail-reply-all ()
+(defun nano-capture-meeting-finalize (content)
   (interactive)
-  (nano-command "MAIL" nil "" "Reply to all"))
+  (let ((inhibit-message t)
+        (buffer (current-buffer)))
+    (with-temp-buffer 
+      (insert (format "* %s :@MEETING:" content))
+      (goto-char (point-min))
+      (org-mark-ring-push)
+      (nano-capture-refile "~/Documents/org/agenda.org" "Future")
+      (org-mark-ring-goto))
+    (switch-to-buffer buffer)))
 
-(define-key global-map (kbd "C-c x") #'nano-command-x)
-(define-key global-map (kbd "C-c s") #'nano-command-shell)
-(define-key global-map (kbd "C-c t") #'nano-command-capture-todo)
-(define-key global-map (kbd "C-c m") #'nano-command-capture-meeting)
-(define-key global-map (kbd "C-c r") #'nano-command-mail-reply)
-(define-key global-map (kbd "C-c R") #'nano-command-mail-reply-all)
+
+(define-key global-map (kbd "C-c t") #'nano-capture-todo)
+(define-key global-map (kbd "C-c m") #'nano-capture-meeting)
+
+
+;; (defun nano-command-x ()
+;;   (interactive)
+;;   (nano-command "M-x" nil "" "Enter command"))
+
+;; (defun nano-command-shell ()
+;;   (interactive)
+;;   (nano-command ">_" nil "" "Enter shell command"))
+
+;; (defun nano-command-mail-reply ()
+;;   (interactive)
+;;   (nano-command "MAIL" nil "" "Reply to sender"))
+
+;; (defun nano-command-mail-reply-all ()
+;;   (interactive)
+;;   (nano-command "MAIL" nil "" "Reply to all"))
+
+;; (define-key global-map (kbd "C-c x") #'nano-command-x)
+;; (define-key global-map (kbd "C-c s") #'nano-command-shell)
+;; (define-key global-map (kbd "C-c r") #'nano-command-mail-reply)
+;; (define-key global-map (kbd "C-c R") #'nano-command-mail-reply-all)
 
