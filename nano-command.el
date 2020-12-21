@@ -79,7 +79,10 @@ to the slave buffer header line and cursor stays on first line."
     (let ((eol (save-excursion (goto-char (point-min)) (point-at-eol))))
       (if (> (point) eol) (goto-char eol))))
   
-  (force-mode-line-update t))
+  ;; Update slave header line
+  (with-current-buffer nano-command--slave
+    (force-mode-line-update nil)))
+
 
 (defun nano-command--check-focus (&rest args)
   "This function check if the maste buffer has focus.
@@ -140,7 +143,6 @@ If not, it closes nano command."
   (let ((window-min-height 1)
         (window-safe-min-height 1)
         (window-resize-pixelwise t)
-        (split-window-keep-point t)
         (split-window-keep-point t))
     (with-selected-window (split-window-vertically -2)
       (switch-to-buffer (get-buffer-create nano-command--master))
