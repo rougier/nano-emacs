@@ -45,8 +45,6 @@ repository and then call for the different modules. The only mandatory
 module is `nano-faces` that defines 6 faces that are used in other
 modules.
 
-
-
 ### Modules
 
 - **[nano.el](./nano.el)** (optional)
@@ -133,3 +131,11 @@ modules.
      [material colors](https://material.io/),
      [nord colors](https://www.nordtheme.com/))
     with functions for easily accessing them.
+
+#### Experimental
+
+- **[nano-command.el](./nano-command.el)**
+
+  > This package provised an experimental command line prompt in the
+  > header line. It has not history nor completion but can be used for
+  > one line input such as org-capture.
