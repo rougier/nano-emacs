@@ -225,6 +225,8 @@ If not, it closes nano command."
   ;; Advice after select window to check for focus
   (advice-add #'select-window :after #'nano-command--check-focus))
 
+
+
 ;; ---------------------------------------------------------------------
 (defun nano-capture-refile (file &optional headline)
   "Move current headline to a specified location"
@@ -252,7 +254,6 @@ If not, it closes nano command."
       (org-mark-ring-goto))
     (switch-to-buffer buffer)))
 
-
 (defun nano-capture-meeting ()
   (interactive)
   (let* ((content (format-time-string
@@ -273,14 +274,46 @@ If not, it closes nano command."
       (org-mark-ring-goto))
     (switch-to-buffer buffer)))
 
+(defun nano-capture-link ()
+  (interactive)
+  (let ((inhibit-message t))
+    (setq org-link-file-path-type 'absolute)
+    (call-interactively 'org-store-link)
+    (nano-command "LINK"
+                  #'nano-capture-link-finalize
+                  (nth 1 (car org-stored-links))
+                  "Name link under cursor")))
 
+(defun nano-capture-link-finalize (content)
+  (interactive)
+  (let ((inhibit-message t)
+        (buffer (current-buffer)))
+    (with-temp-buffer 
+      (insert "* ")
+      (org-insert-link nil (car (pop org-stored-links)) content)
+      (insert " :@LINK:")
+      (org-mark-ring-push)
+      (nano-capture-refile "~/Documents/org/inbox.org" "")
+      (org-mark-ring-goto))
+    (switch-to-buffer buffer)))
+
+
+(defun nano-command-x ()
+   (interactive)
+   (nano-command "M-x" #'nano-command-x-finalize "" "Enter command"))
+
+(defun nano-command-x-finalize (command)
+  (interactive)
+  (command-execute (intern command)))
+
+
+(setq mac-right-command-modifier 'alt)
+(setq mac-left-command-modifier 'meta)
+(define-key global-map (kbd "A-x") #'nano-command-x)
+
+(define-key global-map (kbd "C-c k") #'nano-capture-link)
 (define-key global-map (kbd "C-c t") #'nano-capture-todo)
 (define-key global-map (kbd "C-c m") #'nano-capture-meeting)
-
-
-;; (defun nano-command-x ()
-;;   (interactive)
-;;   (nano-command "M-x" nil "" "Enter command"))
 
 ;; (defun nano-command-shell ()
 ;;   (interactive)
@@ -299,3 +332,5 @@ If not, it closes nano command."
 ;; (define-key global-map (kbd "C-c r") #'nano-command-mail-reply)
 ;; (define-key global-map (kbd "C-c R") #'nano-command-mail-reply-all)
 
+
+(provide 'nano-command)
