@@ -136,6 +136,13 @@
 ;; Tab.space equivalence
 (setq tab-width 4)
 
+;; Size of temporary buffers
+(temp-buffer-resize-mode)
+(setq temp-buffer-max-height 8)
+
+;; Minimum window height
+(setq window-min-height 1)
+
 ;; Buffer encoding
 (prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
