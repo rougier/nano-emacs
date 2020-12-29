@@ -1,0 +1,42 @@
+
+
++NΛNO Writer Mode+
+/Nicolas P. Rougier — December 2020/
+
+*Abstract |* NΛNO writer mode is an emacs minor mode based on org-mode
+           whose goal is to offer a nice writing environment such that
+           it is not necessary to transform the document to read it,
+           GNU Emacs being the main reader.
+
+
+* Introduction   
+
+Following up my article on the design of text editors /[1]/, this is an
+experiment at designing a template for scientific article that can be
+read and interacted with directly from within GNU Emacs based on the
+all-mighty org-mode.
+
+** Alternative indentation   
+
+
+By tweaking =org-indent--compute-prefixes=, it is possible to align text
+on the left and have the leading stars in the margin.
+
+** Typography   
+
+Body font is [[https://fonts.google.com/specimen/Roboto+Mono][Roboto Mono Light]], title font is [[https://fonts.google.com/specimen/Roboto+Slab][Roboto Slab]], headers font
+is [[https://fonts.google.com/specimen/Roboto][Roboto]] and theme is [[https://github.com/rougier/nano-emacs][NΛNO light theme]] /[2]/. Line spacing is 1.
+
+** Section numbering
+
+Automatic section numbering is done using org-num-mode with a special
+format function.
+
+
+* References   
+:PROPERTIES:
+:UNNUMBERED: nil
+:END:
+
+*[1]* Rougier, N.P. 2020. *On the design of text editors*, [[https://arxiv.org/abs/2008.06030][arXiv]].
+*[2]* Rougier, N.P. 2020. *GNU Emacs / N Λ N O*, [[https://github.com/rougier/nano-emacs][GitHub]]. 
