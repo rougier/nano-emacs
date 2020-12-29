@@ -19,7 +19,7 @@
 ;; We have a local copy of smex (that has not changed since 2014)
 (require 'smex)
 
-(setq ivy-height 8)
+(setq ivy-height 4)
 (setq ivy-count-format "")
 (setq ivy-initial-inputs-alist: '((counsel-minor .            "^+")
                                   (counsel-package .          "^+")
