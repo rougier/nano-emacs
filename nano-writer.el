@@ -84,6 +84,14 @@ etc.
                            :family "Roboto" :height 160)
   (face-remap-add-relative 'org-level-3
                            :family "Roboto" :height 150)
+  (face-remap-add-relative 'org-document-info
+                           :family "Roboto Slab")
+  (face-remap-add-relative 'org-document-title
+                           :family "Roboto Slab" 
+                           :height 200 
+                           :weight 'bold)
+  ;; hide title / author ... keywords
+  (setq-local org-hidden-keywords '(title author date startup))
 
   ;; Header line
   (setq header-line-format nil)
