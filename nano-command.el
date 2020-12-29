@@ -43,7 +43,7 @@
 
 (set-face-attribute 'nano-face-command nil
                     :foreground nano-color-foreground
-                    :background nano-color-subtle
+                    :background nano-color-background
                     :box `(:line-width 1
                            :color ,nano-color-foreground
                            :style nil)
@@ -76,8 +76,8 @@ to the slave buffer header line and cursor stays on first line."
 
   ;; Makes sure cursor stays on first line
   (with-current-buffer nano-command--master
-    (let ((eol (save-excursion (goto-char (point-min)) (point-at-eol))))
-      (if (> (point) eol) (goto-char eol))))
+   (let ((eol (save-excursion (goto-char (point-min)) (point-at-eol))))
+    (if (> (point) eol) (goto-char eol))))
   
   ;; Update slave header line
   (with-current-buffer nano-command--slave
@@ -157,14 +157,21 @@ If not, it closes nano command."
       (goto-char (point-min))
       (overlay-put (make-overlay (point-at-bol) (+ (point-at-eol) 1))
                    'face '(:height 10))
-      (setq cursor-type nil)
+     (setq cursor-type nil)
       
       (setq header-line-format nil)
       (setq mode-line-format nil)
       (face-remap-add-relative 'default `(:foreground ,nano-color-background))
       (face-remap-add-relative 'region  `(:background ,nano-color-background))
       (fit-window-to-buffer)
-      (setq window-size-fixed t)))
+      (setq window-size-fixed t)
+
+      ;; History
+      ;; (goto-char (point-max))
+      ;; (insert "history-item-1 history-item-2 history-item-3")  
+      ;; (goto-char (point-min))
+      ))
+
 
   ;; Install header line in master buffer
   (setq header-line-format
@@ -209,7 +216,10 @@ If not, it closes nano command."
   (with-current-buffer nano-command--master
     (add-hook 'post-command-hook 'nano-command--update nil t)
     (define-key nano-command-mode-map (kbd "C-g") #'nano-command--close)
-    (define-key nano-command-mode-map (kbd "RET")
+    (define-key nano-command-mode-map (kbd "<tab>")
+      #'(lambda() (interactive) (dabbrev-expand nil)))
+      
+    (define-key nano-command-mode-map (kbd "<return>")
       (lambda ()
         (interactive)
         (let* ((content (with-current-buffer nano-command--master
@@ -301,17 +311,29 @@ If not, it closes nano command."
 
 
 (defun nano-command-x ()
-   (interactive)
-   (nano-command "M-x" #'nano-command-x-finalize "" "Enter command"))
+  (interactive)
+  (nano-command "M-x"  #'nano-command-x-finalize "" "Enter command"))
 
 (defun nano-command-x-finalize (command)
   (interactive)
   (command-execute (intern command)))
 
 
+(defun nano-command-shell ()
+  (interactive)
+  (nano-command ">_"  #'nano-command-shell-finalize
+                "" "Enter shell command"))
+
+(defun nano-command-shell-finalize (command)
+  (interactive)
+  (shell-command command)
+  (switch-to-buffer "*Shell Command Output*"))
+
+
 (setq mac-right-command-modifier 'alt)
 (setq mac-left-command-modifier 'meta)
 (define-key global-map (kbd "A-x") #'nano-command-x)
+(define-key global-map (kbd "A-s") #'nano-command-shell)
 
 (define-key global-map (kbd "C-c k") #'nano-capture-link)
 (define-key global-map (kbd "C-c t") #'nano-capture-todo)
@@ -336,3 +358,4 @@ If not, it closes nano command."
 
 
 (provide 'nano-command)
+
