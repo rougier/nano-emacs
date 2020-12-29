@@ -54,8 +54,11 @@
 (global-set-key (kbd "M-h") 'nano-help)
 
 (defun nano-splash-help-message ()
-  (message (concat "Type M-p for quick help, M-h for help."
-                   " M stands for Alt, Command or (Esc)ape.")))
+  (message
+   (propertize 
+   (concat "Type M-p for quick help, M-h for help."
+           " M stands for Alt, Command or (Esc)ape.")
+   'face 'nano-face-faded)))
 
 (provide 'nano-help)
 
