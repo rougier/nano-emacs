@@ -32,10 +32,10 @@
 	counsel-M-x-history       
 	file-name-history         
         counsel-minibuffer-history))
-(setq history-length 100)
+(setq history-length 250)
 (setq kill-ring-max 25)
 (put 'minibuffer-history         'history-length 50)
-(put 'file-name-history          'history-length 25)
+(put 'file-name-history          'history-length 50)
 (put 'set-variable-value-history 'history-length 25)
 (put 'custom-variable-history    'history-length 25)
 (put 'query-replace-history      'history-length 25)
