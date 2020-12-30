@@ -116,14 +116,4 @@ etc.
   (org-num-mode)
   (setq org-num-format-function 'writer-mode--num-format)
 
-  ;; Markup
-  (make-variable-buffer-local 'org-emphasis-alist)
-  (setq org-emphasis-alist '(("*" bold)
-                             ("/" italic)
-                             ("_" underline)
-                             ("=" org-verbatim verbatim)
-                             ("~" org-code verbatim)
-                             ("+" (:family "Roboto Slab"
-                                   :weight 'bold :height 200)))))
-
 (provide 'nano-writer)
