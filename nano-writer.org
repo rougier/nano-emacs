@@ -1,7 +1,6 @@
-
-
-+NΛNO Writer Mode+
-/Nicolas P. Rougier — December 2020/
+#+title:NΛNO Writer mode
+#+author:Nicolas P. Rougier
+#+date:December 2020
 
 *Abstract |* NΛNO writer mode is an emacs minor mode based on org-mode
            whose goal is to offer a nice writing environment such that

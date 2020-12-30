@@ -84,6 +84,14 @@ etc.
                            :family "Roboto" :height 160)
   (face-remap-add-relative 'org-level-3
                            :family "Roboto" :height 150)
+  (face-remap-add-relative 'org-document-info
+                           :family "Roboto Slab")
+  (face-remap-add-relative 'org-document-title
+                           :family "Roboto Slab" 
+                           :height 200 
+                           :weight 'bold)
+  ;; hide title / author ... keywords
+  (setq-local org-hidden-keywords '(title author date startup))
 
   ;; Header line
   (setq header-line-format nil)
@@ -107,15 +115,5 @@ etc.
   (setq org-num-face nil)
   (org-num-mode)
   (setq org-num-format-function 'writer-mode--num-format)
-
-  ;; Markup
-  (make-variable-buffer-local 'org-emphasis-alist)
-  (setq org-emphasis-alist '(("*" bold)
-                             ("/" italic)
-                             ("_" underline)
-                             ("=" org-verbatim verbatim)
-                             ("~" org-code verbatim)
-                             ("+" (:family "Roboto Slab"
-                                   :weight 'bold :height 200)))))
 
 (provide 'nano-writer)
