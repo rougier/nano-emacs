@@ -433,14 +433,13 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'org-archived                            'nano-face-faded)
 
     (set-face 'org-block                                       'hl-line)
-    (set-face-attribute 'org-block nil                        :extend t)
-
     (set-face 'org-block-begin-line                    'nano-face-faded)
-    (set-face-attribute 'org-block-begin-line nil             :extend t)
-
     (set-face 'org-block-end-line                      'nano-face-faded)
-    (set-face-attribute 'org-block-end-line nil               :extend t)
-    
+    (unless (version< emacs-version "27.0")
+      (set-face-attribute 'org-block nil                      :extend t)
+      (set-face-attribute 'org-block-begin-line nil           :extend t)
+      (set-face-attribute 'org-block-end-line nil             :extend t))
+
     (set-face 'org-checkbox                            'nano-face-faded)
     (set-face 'org-checkbox-statistics-done            'nano-face-faded)
     (set-face 'org-checkbox-statistics-todo            'nano-face-faded)
