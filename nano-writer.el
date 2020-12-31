@@ -15,7 +15,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
+
 (require 'org)
+(require 'nano-base-colors)
+(require 'nano-faces)
 
 (defun writer-mode--num-format (numbering)
   "Alternative numbering format for org-num.
@@ -85,11 +88,12 @@ etc.
   (face-remap-add-relative 'org-level-3
                            :family "Roboto" :height 150)
   (face-remap-add-relative 'org-document-info
-                           :family "Roboto Slab")
+                           :inherit 'nano-face-faded)
   (face-remap-add-relative 'org-document-title
+                           :foreground nano-color-foreground
                            :family "Roboto Slab" 
-                           :height 200 
-                           :weight 'bold)
+                           :height 200
+                           :weight 'medium)
   ;; hide title / author ... keywords
   (setq-local org-hidden-keywords '(title author date startup))
 
@@ -114,6 +118,6 @@ etc.
   (setq org-num-max-level 2)
   (setq org-num-face nil)
   (org-num-mode)
-  (setq org-num-format-function 'writer-mode--num-format)
+  (setq org-num-format-function 'writer-mode--num-format))
 
 (provide 'nano-writer)
