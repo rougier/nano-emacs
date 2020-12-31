@@ -380,12 +380,7 @@
 (with-eval-after-load 'deft
   (defun deft-print-header ()
     (force-mode-line-update)
-    (widget-insert "\n"))
-
-  (defun deft-current-window-width ()
-    (let* ((window (get-buffer-window deft-buffer)))
-      (when window
-        (- (window-text-width window) 2)))))
+    (widget-insert "\n")))
 
 (defun nano-modeline-deft-mode-p ()
   (derived-mode-p 'deft-mode))
