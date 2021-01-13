@@ -682,6 +682,18 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'helm-grep-lineno                                  'nano-face-faded)
     (set-face 'helm-grep-finish                                'nano-face-default)))
 
+(defun nane-theme--company ()
+  "Derive company tooltip window from nano faces."
+  (with-eval-after-load 'company
+    (set-face 'company-tooltip-selection                   '(nano-face-strong nano-face-subtle))
+    (set-face 'company-tooltip                                               'nano-face-default)
+    (set-face 'company-scrollbar-fg                                            'nano-face-faded)
+    (set-face 'company-scrollbar-bg                                          'nano-face-default)
+    (set-face 'company-tooltip-common                                        'nano-face-default)
+    (set-face 'company-tooltip-common-selection            '(nano-face-strong nano-face-subtle))
+    (set-face 'company-tooltip-annotation                                    'nano-face-default)
+    (set-face 'company-tooltip-annotation-selection        '(nano-face-strong nano-face-subtle))))
+
 (defun nano-theme ()
   "Derive many, many faces from the core nano faces."
   (nano-theme--basics)
@@ -710,6 +722,7 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--markdown)
   (nano-theme--ivy)
   (nano-theme--helm)
-  (nano-theme--hl-line))
+  (nano-theme--hl-line)
+  (nano-theme--company))
 
 (provide 'nano-theme)
