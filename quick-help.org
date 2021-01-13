@@ -37,8 +37,8 @@
 
  [[elisp:(package-install 'magit)][ magit ]]................................. A Git porcelain inside Emacs
  [[elisp:(package-install 'projectile)][ projectile ]] ........... Manage and navigate projects in Emacs easily
- [[elisp:(package install 'helm)][ helm ]].................. An Emacs incremental and narrowing framework
- [[elisp:(package install 'flycheck)][ flycheck ]]................................ On-the-fly syntax checking
+ [[elisp:(package-install 'helm)][ helm ]].................. An Emacs incremental and narrowing framework
+ [[elisp:(package-install 'flycheck)][ flycheck ]]................................ On-the-fly syntax checking
  [[elisp:(package-install 'company)][ company ]] ......................... Modular text completion framework
  [[elisp:(package-install 'markdown-mode)][ markdown-mode ]] .............. Major mode for Markdown-formatted text
  [[elisp:(package-install 'popup)][ popup ]].................................. Visual popup user interface
