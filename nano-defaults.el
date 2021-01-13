@@ -32,7 +32,7 @@
 ;; No frame title
 (setq frame-title-format nil)
 
-;; No file fialog
+;; No file dialog
 (setq use-file-dialog nil)
 
 ;; No dialog box
@@ -62,10 +62,10 @@
 ;; Moderate font lock
 (setq font-lock-maximum-decoration nil)
 
-;; No limite on font lock
+;; No limit on font lock
 (setq font-lock-maximum-size nil)
 
-;; No line breat space points
+;; No line break space points
 (setq auto-fill-mode nil)
 
 ;; Fill column at 80
