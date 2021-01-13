@@ -237,6 +237,9 @@
 (defun nano-modeline-term-mode-p ()
   (derived-mode-p 'term-mode))
 
+(defun nano-modeline-vterm-mode-p ()
+  (derived-mode-p 'vterm-mode))
+
 (defun nano-modeline-term-mode ()
   (nano-modeline-compose " >_ "
                          "Terminal"
@@ -467,6 +470,7 @@
            ((nano-modeline-org-agenda-mode-p)      (nano-modeline-org-agenda-mode))
            ((nano-modeline-org-clock-mode-p)       (nano-modeline-org-clock-mode))
            ((nano-modeline-term-mode-p)            (nano-modeline-term-mode))
+           ((nano-modeline-vterm-mode-p)           (nano-modeline-term-mode))
            ((nano-modeline-mu4e-dashboard-mode-p)  (nano-modeline-mu4e-dashboard-mode))
            ((nano-modeline-mu4e-main-mode-p)       (nano-modeline-mu4e-main-mode))
            ((nano-modeline-mu4e-headers-mode-p)    (nano-modeline-mu4e-headers-mode))
