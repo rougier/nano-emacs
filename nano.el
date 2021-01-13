@@ -17,17 +17,22 @@
 ;; ---------------------------------------------------------------------
 (package-initialize)
 
+
 ;; Path to nano emacs modules (mandatory)
 (add-to-list 'load-path "/Users/rougier/Documents/GitHub/nano-emacs")
 (add-to-list 'load-path ".")
 
-;; Window layout (optional)
+;; Default layout (optional)
 (require 'nano-layout)
 
 ;; Theming Command line options (this will cancel warning messages)
 (add-to-list 'command-switch-alist '("-dark"   . (lambda (args))))
 (add-to-list 'command-switch-alist '("-light"  . (lambda (args))))
 (add-to-list 'command-switch-alist '("-default"  . (lambda (args))))
+(add-to-list 'command-switch-alist '("-no-splash" . (lambda (args))))
+(add-to-list 'command-switch-alist '("-no-help" . (lambda (args))))
+(add-to-list 'command-switch-alist '("-compact" . (lambda (args))))
+
 
 (cond
  ((member "-default" command-line-args) t)
@@ -66,6 +71,10 @@
 ;; Nano key bindings modification (optional)
 (require 'nano-bindings)
 
+;; Compact layout (need to be loaded after nano-modeline)
+(when (member "-compact" command-line-args)
+  (require 'nano-compact))
+  
 ;; Nano counsel configuration (optional)
 ;; Needs "counsel" package to be installed (M-x: package-install)
 ;; (require 'nano-counsel)
@@ -76,12 +85,10 @@
   (message (format "Initialization time: %s" (emacs-init-time))))
 
 ;; Splash (optional)
-(add-to-list 'command-switch-alist '("-no-splash" . (lambda (args))))
 (unless (member "-no-splash" command-line-args)
   (require 'nano-splash))
 
 ;; Help (optional)
-(add-to-list 'command-switch-alist '("-no-help" . (lambda (args))))
 (unless (member "-no-help" command-line-args)
   (require 'nano-help))
 
