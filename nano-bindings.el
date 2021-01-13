@@ -25,11 +25,13 @@
   (select-frame (make-frame))
   (switch-to-buffer "*scratch*"))
 (global-set-key (kbd "M-n") 'new-frame)
+(global-set-key (kbd "M-`") 'other-frame)
 
 ;; M-return for frame maximization toggle
 (global-set-key (kbd "<M-return>") 'toggle-frame-maximized)
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "<M-return>") 'toggle-frame-maximized))
+
 
 
 ;; Close frame if not the last, kill emacs else
