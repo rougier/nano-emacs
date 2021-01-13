@@ -15,10 +15,26 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
-
 (require 'org)
 (require 'nano-base-colors)
 (require 'nano-faces)
+
+;; 
+;;             prefix  
+;;           |<------>|
+
+;; border -> |<------>| * Headline level 1  # Unnumbered
+;;           |<------>| 1 Headline level 1  # Numbered
+;;
+;;           |<----->| ** Headline level 2  # Unnumbered
+;;           |<---->| 1.1 Headline level 2  # Numbered
+;;
+;;           |<---->| *** Headline level 3  # Unumbered
+;;           |<-->| 1.1.1 Headline level 3  # Numbered
+;; etc.
+;;
+;; This works if the number of sections at a given level is < 10.
+
 
 (defun writer-mode--num-format (numbering)
   "Alternative numbering format for org-num.
