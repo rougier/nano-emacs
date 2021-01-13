@@ -86,12 +86,28 @@
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-dashboard-mode-p ()
   (bound-and-true-p mu4e-dashboard-mode))
-  
+
 (defun nano-modeline-mu4e-dashboard-mode ()
   (nano-modeline-compose (nano-modeline-status)
                          "Mail"
                          (nano-modeline-mu4e-context)
                          ""))
+
+;; ---------------------------------------------------------------------
+
+;; since the EIN library itself is constantly re-rendering the notebook, and thus
+;; re-setting the header-line-format, we cannot use the nano-modeline function to set
+;; the header format in a notebook buffer.  Fortunately, EIN exposes the
+;; ein:header-line-format variable for just this purpose.
+
+(with-eval-after-load 'ein
+  (defun nano-modeline-ein-notebook-mode ()
+    (let ((buffer-name (format-mode-line "%b")))
+      (nano-modeline-compose (if (ein:notebook-modified-p) "**" "RW")
+                             buffer-name
+                             ""
+                             (ein:header-line))))
+  (setq ein:header-line-format '((:eval (nano-modeline-ein-notebook-mode)))))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-elfeed-search-mode-p ()
