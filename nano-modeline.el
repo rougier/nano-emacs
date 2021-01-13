@@ -268,8 +268,11 @@
 
 (add-hook 'mu4e-view-mode-hook
           (lambda () (setq header-line-format "%-")
-                     (face-remap-add-relative 'header-line
-                                              '(:background "#ffffff" :height 1.0))))
+            (face-remap-add-relative 'header-line
+                                     '(:background "#ffffff"
+                                       :underline nil
+                                       :box nil
+                                       :height 1.0))))
 
 
 ;; ---------------------------------------------------------------------
