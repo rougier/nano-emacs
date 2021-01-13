@@ -683,7 +683,7 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'helm-grep-lineno                                  'nano-face-faded)
     (set-face 'helm-grep-finish                                'nano-face-default)))
 
-(defun nane-theme--company ()
+(defun nano-theme--company ()
   "Derive company tooltip window from nano faces."
   (with-eval-after-load 'company
     (set-face 'company-tooltip-selection                   '(nano-face-strong nano-face-subtle))
