@@ -124,19 +124,28 @@
   "Derive mode-line and header-line faces from nano-faces."
   (set-face-attribute 'mode-line nil
                       :height 0.1
-                      :foreground (face-background 'nano-face-default)
+                      :foreground (if (display-graphic-p)
+                                      (face-background 'nano-face-default)
+                                    (face-foreground 'nano-face-default))
                       :background (face-background 'nano-face-default)
-                      :underline (face-background 'nano-face-subtle)
+                      :underline  (if (display-graphic-p)
+                                      (face-background 'nano-face-subtle)
+                                    t)
                       :overline nil
                       :box nil)
   (set-face-attribute 'mode-line-inactive nil
                       :height 0.1
-                      :foreground (face-background 'nano-face-default)
+                      :foreground (if (display-graphic-p)
+                                      (face-background 'nano-face-default)
+                                    (face-foreground 'nano-face-default))
                       :background (face-background 'nano-face-default)
-                      :underline (face-background 'nano-face-subtle)
+                      :underline (if (display-graphic-p)
+                                     (face-background 'nano-face-subtle)
+                                   t)
                       :overline nil
                       :inherit nil
                       :box nil)
+  
   ;;(when (display-graphic-p)
   (set-face-attribute 'header-line nil
                        :weight 'light
@@ -486,12 +495,12 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'org-sexp-date                           'nano-face-faded)
     (set-face 'org-special-keyword                     'nano-face-faded)
     (set-face 'org-table                               'nano-face-faded)
-    (set-face 'org-tag                                 'nano-face-faded)
+    (set-face 'org-tag                                'nano-face-popout)
     (set-face 'org-tag-group                           'nano-face-faded)
     (set-face 'org-target                              'nano-face-faded)
     (set-face 'org-time-grid                           'nano-face-faded)
     (set-face 'org-todo                              'nano-face-salient)
-    (set-face 'org-upcoming-deadline                   'nano-face-faded)
+    (set-face 'org-upcoming-deadline                 'nano-face-default)
     (set-face 'org-verbatim                           'nano-face-popout)
     (set-face 'org-verse                               'nano-face-faded)
     (set-face 'org-warning                            'nano-face-popout)))
@@ -515,7 +524,7 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'mu4e-draft-face                         'nano-face-faded)
     (set-face 'mu4e-flagged-face                      'nano-face-popout)
     (set-face 'mu4e-footer-face                        'nano-face-faded)
-    (set-face 'mu4e-forwarded-face                     'nano-face-faded)
+    (set-face 'mu4e-forwarded-face                   'nano-face-default)
     (set-face 'mu4e-header-face                      'nano-face-default)
     (set-face 'mu4e-header-highlight-face                      'hl-line)
     (set-face 'mu4e-header-key-face                   'nano-face-strong)
@@ -533,7 +542,7 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'mu4e-system-face                        'nano-face-faded)
     (set-face 'mu4e-title-face                        'nano-face-strong)
     (set-face 'mu4e-trashed-face                       'nano-face-faded)
-    (set-face 'mu4e-unread-face                       'nano-face-strong)
+    (set-face 'mu4e-unread-face                      '(nano-face-strong))
     (set-face 'mu4e-url-number-face                    'nano-face-faded)
     (set-face 'mu4e-view-body-face                   'nano-face-default)
     (set-face 'mu4e-warning-face                      'nano-face-popout)))
