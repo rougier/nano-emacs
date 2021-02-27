@@ -409,7 +409,7 @@
 
 (defun nano-modeline-deft-mode ()
   (let ((prefix " DEFT ")
-        (primary "Search")
+        (primary "Notes")
         (filter  (if deft-filter-regexp
                      (deft-whole-filter-regexp) "<filter>"))
         (matches (if deft-filter-regexp
