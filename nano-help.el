@@ -57,12 +57,12 @@
 
 (defun nano-splash-help-message ()
   (message
-   (concat 
-    (propertize "\n " 'face '(:height 0.4))
+   (concat
+    (if (display-graphic-p) (propertize "\n " 'face '(:height 0.4)))
     (propertize (concat
                  "Type M-p for quick help, M-h for help."
                  " M stands for Alt, Command or (Esc)ape.")
                 'face 'nano-face-faded)
-    (propertize "\n " 'face '(:height 0.5)))))
+    (if (display-graphic-p) (propertize "\n " 'face '(:height 0.5))))))
 
 (provide 'nano-help)
