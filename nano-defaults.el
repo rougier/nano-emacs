@@ -108,12 +108,13 @@
 (pixel-scroll-mode t)
 
 ;; Mac specific
-(setq ns-use-native-fullscreen t
-      mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier nil
-      mac-use-title-bar nil)
+(when (eq system-type 'darwin)
+  (setq ns-use-native-fullscreen t
+        mac-option-key-is-meta nil
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta
+        mac-option-modifier nil
+        mac-use-title-bar nil))
 
 ;; Make sure clipboard works properly in tty mode on OSX
 (defun copy-from-osx ()
@@ -123,9 +124,10 @@
     (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
       (process-send-string proc text)
       (process-send-eof proc))))
-(if (not (display-graphic-p))
-    (progn (setq interprogram-cut-function 'paste-to-osx)
-           (setq interprogram-paste-function 'copy-from-osx)))
+(when (and (not (display-graphic-p))
+           (eq system-type 'darwin))
+    (setq interprogram-cut-function 'paste-to-osx)
+    (setq interprogram-paste-function 'copy-from-osx))
 
 ;; y/n for  answering yes/no questions
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -134,7 +136,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Tab.space equivalence
-(setq tab-width 4)
+(setq-default tab-width 4)
 
 ;; Size of temporary buffers
 (temp-buffer-resize-mode)
@@ -158,8 +160,9 @@
       uniquify-ignore-buffers-re "^\\*")
 
 ;; Default shell in term
-(setq-default shell-file-name "/bin/zsh")
-(setq explicit-shell-file-name "/bin/zsh")
+(unless (eq system-type 'windows-nt)
+  (setq-default shell-file-name "/bin/zsh")
+  (setq explicit-shell-file-name "/bin/zsh"))
 
 ;; Kill term buffer when exiting
 (defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
