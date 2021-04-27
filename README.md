@@ -19,6 +19,10 @@ configuration.
 <img src="./images/nano-emacs-dark.png"  width=47.5%>
 </div>
 
+Nano Emacs is quite close to my other project [Elegant
+Emacs](https://github.com/rougier/elegant-emacs) which might be
+considered to be an early prototype.
+
 ### Requirements
 
 You need a recent version of
