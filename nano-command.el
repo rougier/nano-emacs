@@ -43,7 +43,7 @@
 
 (set-face-attribute 'nano-face-command nil
                     :foreground nano-color-foreground
-                    :background nano-color-background
+                    :background nano-color-subtle
                     :box `(:line-width 1
                            :color ,nano-color-foreground
                            :style nil)
@@ -329,32 +329,30 @@ If not, it closes nano command."
   (shell-command command)
   (switch-to-buffer "*Shell Command Output*"))
 
+(defun nano-command-mail-reply ()
+  (interactive)
+  (remove-hook 'mu4e-view-mode-hook #'nano-modeline-mu4e-view-hook)
+  (nano-command "MAIL" nil "" "Reply to sender"))
+
+(defun nano-command-mail-reply-all ()
+  (interactive)
+  (remove-hook 'mu4e-view-mode-hook #'nano-modeline-mu4e-view-hook)
+  (nano-command "MAIL" nil "" "Reply to all"))
 
 (setq mac-right-command-modifier 'alt)
 (setq mac-left-command-modifier 'meta)
 (define-key global-map (kbd "A-x") #'nano-command-x)
 (define-key global-map (kbd "A-s") #'nano-command-shell)
 
-(define-key global-map (kbd "C-c k") #'nano-capture-link)
-(define-key global-map (kbd "C-c t") #'nano-capture-todo)
-(define-key global-map (kbd "C-c m") #'nano-capture-meeting)
+;; (define-key global-map (kbd "C-c k") #'nano-capture-link)
+;; (define-key global-map (kbd "C-c t") #'nano-capture-todo)
+;; (define-key global-map (kbd "C-c m") #'nano-capture-meeting)
+;; (define-key global-map (kbd "C-c r") #'nano-command-mail-reply)
+;; (define-key global-map (kbd "C-c R") #'nano-command-mail-reply-all)
 
-;; (defun nano-command-shell ()
-;;   (interactive)
-;;   (nano-command ">_" nil "" "Enter shell command"))
-
-;; (defun nano-command-mail-reply ()
-;;   (interactive)
-;;   (nano-command "MAIL" nil "" "Reply to sender"))
-
-;; (defun nano-command-mail-reply-all ()
-;;   (interactive)
-;;   (nano-command "MAIL" nil "" "Reply to all"))
 
 ;; (define-key global-map (kbd "C-c x") #'nano-command-x)
 ;; (define-key global-map (kbd "C-c s") #'nano-command-shell)
-;; (define-key global-map (kbd "C-c r") #'nano-command-mail-reply)
-;; (define-key global-map (kbd "C-c R") #'nano-command-mail-reply-all)
 
 
 (provide 'nano-command)
