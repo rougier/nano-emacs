@@ -134,8 +134,12 @@ modules.
 
 #### Experimental
 
+- **[nano-mu4e.el](./nano-mu4e.el)
+
+  > This package setup the look and feel of mu4e.
+
 - **[nano-command.el](./nano-command.el)**
 
-  > This package provised an experimental command line prompt in the
+  > This package provides an experimental command line prompt in the
   > header line. It has not history nor completion but can be used for
   > one line input such as org-capture.
