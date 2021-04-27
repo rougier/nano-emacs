@@ -302,7 +302,7 @@
     (set-face 'custom-changed                        'nano-face-salient)
     (set-face 'custom-modified                       'nano-face-salient)
     (set-face 'custom-face-tag                        'nano-face-strong)
-    (set-face 'custom-variable-tag                   'nano-face-default)
+    (set-face 'custom-variable-tag                    'nano-face-strong)
     (set-face 'custom-invalid                         'nano-face-popout)
     (set-face 'custom-visibility                     'nano-face-salient)
     (set-face 'custom-state                          'nano-face-salient)
@@ -542,7 +542,8 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'mu4e-system-face                        'nano-face-faded)
     (set-face 'mu4e-title-face                        'nano-face-strong)
     (set-face 'mu4e-trashed-face                       'nano-face-faded)
-    (set-face 'mu4e-unread-face                      '(nano-face-strong))
+    (set-face 'mu4e-unread-face                       'nano-face-strong)
+    ;;(set-face-attribute 'mu4e-unread-face nil :weight 'regular)
     (set-face 'mu4e-url-number-face                    'nano-face-faded)
     (set-face 'mu4e-view-body-face                   'nano-face-default)
     (set-face 'mu4e-warning-face                      'nano-face-popout)))
@@ -696,11 +697,20 @@ function is a convenience wrapper used by `describe-package-1'."
   "Derive company tooltip window from nano faces."
   (with-eval-after-load 'company
     (set-face 'company-tooltip-selection                   '(nano-face-strong nano-face-subtle))
-    (set-face 'company-tooltip                                               'nano-face-default)
-    (set-face 'company-scrollbar-fg                                            'nano-face-faded)
+    (set-face-attribute 'company-tooltip-selection nil :background nano-color-popout)
+    
+    (set-face 'company-tooltip                                               'nano-face-subtle)
+
+    (set-face 'company-scrollbar-fg                                          'nano-face-faded)
+    (set-face-attribute 'company-scrollbar-fg nil :background nano-color-foreground)
+    
     (set-face 'company-scrollbar-bg                                          'nano-face-default)
-    (set-face 'company-tooltip-common                                        'nano-face-default)
+    (set-face-attribute 'company-scrollbar-bg nil :background nano-color-faded)
+
+    (set-face 'company-tooltip-common                                        'nano-face-faded)
     (set-face 'company-tooltip-common-selection            '(nano-face-strong nano-face-subtle))
+    (set-face-attribute 'company-tooltip-common-selection nil :background nano-color-popout)
+    
     (set-face 'company-tooltip-annotation                                    'nano-face-default)
     (set-face 'company-tooltip-annotation-selection        '(nano-face-strong nano-face-subtle))))
 
