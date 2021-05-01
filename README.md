@@ -151,3 +151,10 @@ modules.
   > one line input such as org-capture.
 
   ![](./images/nano-command.png)
+
+### Related works
+
+- [Bespoke theme](https://github.com/mclear-tools/bespoke-themes)
+  Custom medium contrast light and dark themes inspired by nano emacs,
+  elegant emacs, Nord and Solarized themes.
+  
