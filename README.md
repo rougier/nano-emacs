@@ -144,6 +144,16 @@ modules.
   
   ![](./images/nano-mu4e.png)
 
+- **[nano-minibuffer.el](./nano-minibufrer.el)**
+
+  > Minibuffer using [mini-frame](https://github.com/muffinmad/emacs-mini-frame)
+  
+  <div>
+  <img src="./images/nano-minibuffer-light.png" width=47.5%>
+  <img src="./images/nano-minibuffer-dark.png"  width=47.5%>
+  </div>
+
+
 - **[nano-command.el](./nano-command.el)**
 
   > This package provides an experimental command line prompt in the
