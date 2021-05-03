@@ -758,6 +758,10 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--markdown)
   (nano-theme--ivy)
   (nano-theme--helm)
+  (nano-theme--helm-swoop)
+  (nano-theme--helm-occur)
+  (nano-theme--helm-ff)
+  (nano-theme--helm-grep)
   (nano-theme--hl-line)
   (nano-theme--company))
 
