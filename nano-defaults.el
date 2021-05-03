@@ -78,6 +78,9 @@
 ;; gnu.org/software/emacs/manual/html_node/emacs/Completion-Styles.html
 (setq completion-styles '(basic substring))
 
+;; Use RET to open org-mode links, including those in quick-help.org
+(setq org-return-follows-link t)
+
 ;; Mouse active in terminal
 (unless (display-graphic-p)
   (xterm-mouse-mode 1)
