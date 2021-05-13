@@ -162,6 +162,15 @@ modules.
 
   ![](./images/nano-command.png)
 
+
+- **[nano-agenda.el](./nano-agenda.el)**
+
+  > An experimental interactive mini agenda that displays side by
+  > side a mini calendar on the left and timestamped org entries on
+  > the right.
+  
+  ![](./images/nano-agenda.png)
+
 ### Related works
 
 - [Bespoke theme](https://github.com/mclear-tools/bespoke-themes)
