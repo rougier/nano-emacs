@@ -26,7 +26,7 @@
 ;; No message in scratch buffer
 (setq initial-scratch-message nil)
 
-;; Initial buffer 
+;; Initial buffer
 (setq initial-buffer-choice nil)
 
 ;; No frame title
@@ -46,7 +46,7 @@
 
 ;; User mail address
 (setq user-mail-address "Nicolas.Rougier@inria.fr")
-      
+
 ;; No empty line indicators
 (setq indicate-empty-lines nil)
 
@@ -88,10 +88,10 @@
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
 ;; No scroll bars
-(scroll-bar-mode 0)
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode nil))
 
 ;; No toolbar
-(tool-bar-mode 0)
+(if (fboundp 'tool-bar-mode) (tool-bar-mode nil))
 
 ;; No menu bar
 (if (display-graphic-p)
