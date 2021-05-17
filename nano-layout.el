@@ -56,7 +56,7 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message t
       initial-scratch-message nil)
-(tool-bar-mode 0)
+(if (fboundp 'tool-bar-mode) (tool-bar-mode nil))
 (tooltip-mode 0)
 (menu-bar-mode 0)
 ;; (global-hl-line-mode 1)
