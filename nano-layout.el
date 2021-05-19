@@ -16,6 +16,8 @@
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
 
+(require 'disp-table)
+
 (setq default-frame-alist
       (append (list
 	       '(font . "Roboto Mono:style=Light:size=14")
