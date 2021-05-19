@@ -680,14 +680,30 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'helm-selection                '(nano-face-strong nano-face-subtle))
     (set-face 'helm-match                                       'nano-face-strong)
     (set-face 'helm-source-header                              'nano-face-salient)
-    (set-face 'helm-swoop-target-line-face   '(nano-face-strong nano-face-subtle))
-    (set-face 'helm-visible-mark                                'nano-face-strong)
-    (set-face 'helm-moccur-buffer                               'nano-face-strong)
+    (set-face 'helm-visible-mark                                'nano-face-strong)))
+
+(defun nano-theme--helm-swoop ()
+  "Derive helm faces from nano faces."
+  (with-eval-after-load 'helm-swoop
+    (set-face 'helm-swoop-target-line-face   '(nano-face-strong nano-face-subtle))))
+
+(defun nano-theme--helm-occur ()
+  "Derive helm faces from nano faces."
+  (with-eval-after-load 'helm-occur
+    (set-face 'helm-moccur-buffer                               'nano-face-strong)))
+
+(defun nano-theme--helm-ff ()
+  "Derive helm faces from nano faces."
+  (with-eval-after-load 'helm-ff
     (set-face 'helm-ff-file                                      'nano-face-faded)
     (set-face 'helm-ff-prefix                                   'nano-face-strong)
     (set-face 'helm-ff-dotted-directory                          'nano-face-faded)
     (set-face 'helm-ff-directory                                'nano-face-strong)
-    (set-face 'helm-ff-executable                               'nano-face-popout)
+    (set-face 'helm-ff-executable                               'nano-face-popout)))
+
+(defun nano-theme--helm-grep ()
+  "Derive helm faces from nano faces."
+  (with-eval-after-load 'helm-grep
     (set-face 'helm-grep-match                                  'nano-face-strong)
     (set-face 'helm-grep-file                                    'nano-face-faded)
     (set-face 'helm-grep-lineno                                  'nano-face-faded)
@@ -742,6 +758,10 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--markdown)
   (nano-theme--ivy)
   (nano-theme--helm)
+  (nano-theme--helm-swoop)
+  (nano-theme--helm-occur)
+  (nano-theme--helm-ff)
+  (nano-theme--helm-grep)
   (nano-theme--hl-line)
   (nano-theme--company))
 
