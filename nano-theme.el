@@ -59,6 +59,7 @@
     (set-face-attribute 'bold nil :weight 'bold))
 
   ;; Structural
+  (set-face 'default                                 'nano-face-default)
   (set-face 'bold                                     'nano-face-strong)
   (set-face 'italic                                    'nano-face-faded)
   (set-face 'bold-italic                              'nano-face-strong)
@@ -66,7 +67,9 @@
   (set-face 'highlight                                'nano-face-subtle)
   ;;(set-face 'fixed-pitch                                     'default)
   (set-face 'fixed-pitch-serif                       'nano-face-default)
-  (set-face 'variable-pitch                          'nano-face-default)
+  (if 'nano-face-family-variable-pitch
+      (set-face 'variable-pitch       'nano-face-variable-pitch)
+      (set-face 'variable-pitch                     'nano-face-default))
   (set-face 'cursor                                  'nano-face-default)
 
   (set-face-attribute 'cursor nil
