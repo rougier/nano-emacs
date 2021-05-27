@@ -52,14 +52,15 @@
   ;; XXX the following seems to be a no-op, should it be removed?
   (set-face-attribute 'default nil
                       :foreground (face-foreground 'default)
-                      :background (face-background 'default))
+                      :background (face-background 'default)
+                      :family     (face-attribute 'nano-face-default :family)
+                      :height     (face-attribute 'nano-face-default :height))
 
   (if (display-graphic-p)
       (set-face-attribute 'bold nil :weight 'regular)
     (set-face-attribute 'bold nil :weight 'bold))
 
   ;; Structural
-  (set-face 'default                                 'nano-face-default)
   (set-face 'bold                                     'nano-face-strong)
   (set-face 'italic                                    'nano-face-faded)
   (set-face 'bold-italic                              'nano-face-strong)
