@@ -194,12 +194,12 @@ background color that is barely perceptible."
   (set-face-attribute 'nano-face-popout nil
                       :foreground nano-color-popout)
 
-  (if (display-graphic-p)
-      (set-face-attribute 'nano-face-variable-pitch nil
+  (set-face-attribute 'nano-face-variable-pitch nil
                           :foreground (face-foreground 'nano-face-default)
                           :background (face-background 'nano-face-default)
                           :family nano-family-variable-pitch
                           :height (* nano-font-size 10))
+  (if (display-graphic-p)
       (set-face-attribute 'nano-face-strong nil
                           :foreground (face-foreground 'nano-face-default)
                           :weight 'medium)
