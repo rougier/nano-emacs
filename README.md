@@ -144,7 +144,7 @@ modules.
   
   ![](./images/nano-mu4e.png)
 
-- **[nano-minibuffer.el](./nano-minibufrer.el)**
+- **[nano-minibuffer.el](./nano-minibuffer.el)**
 
   > Minibuffer using [mini-frame](https://github.com/muffinmad/emacs-mini-frame)
   
