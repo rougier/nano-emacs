@@ -86,7 +86,9 @@
 	    left
 	    (propertize (make-string available-width ?\ )
                         'face 'header-line)
-	    (propertize right 'face (list `(:foreground ,nano-color-faded) 'header-line)))))
+	    (propertize right 'face (list `(:foreground ,nano-color-faded)
+                                          `(:weight 'light)
+                                          'header-line)))))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-dashboard-mode-p ()

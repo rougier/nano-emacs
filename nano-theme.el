@@ -149,7 +149,7 @@
   ;;(when (display-graphic-p)
   (set-face-attribute 'header-line nil
                        :weight 'unspecified
-                       :foreground 'unspecified ;(face-foreground 'nano-face-default)
+                       :foreground (face-foreground 'nano-face-default)
                        :background (face-background 'nano-face-subtle)
                        :overline nil
                        :underline nil
@@ -733,14 +733,15 @@ function is a convenience wrapper used by `describe-package-1'."
   "Define faces compatible with 'solaire-mode'."
   (with-eval-after-load 'solaire-mode
     (set-face-attribute 'solaire-default-face nil
-        :background (color-darken-name nano-color-background 2 )
+        :background (color-darken-name nano-color-background 3 )
         :foreground (color-darken-name nano-color-foreground 10))
     (set-face-attribute 'solaire-hl-line-face nil
         :background (color-darken-name nano-color-highlight 3))
     (set-face-attribute 'solaire-line-number-face nil
-        :background (color-darken-name nano-color-background 2 ))
+        :background (color-darken-name nano-color-background 3 ))
     (set-face-attribute 'solaire-header-line-face nil
-        :background (color-darken-name nano-color-subtle 6))))
+        :background (color-darken-name nano-color-subtle 6)
+        :foreground nano-color-subtle)))
 
 (defun nano-theme ()
   "Derive many, many faces from the core nano faces."
