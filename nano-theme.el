@@ -148,10 +148,9 @@
   
   ;;(when (display-graphic-p)
   (set-face-attribute 'header-line nil
-                       :weight 'light
-                       :foreground (face-foreground 'nano-face-default)
-                       :background (face-background 'nano-face-default)
-
+                       :weight 'unspecified
+                       :foreground 'unspecified ;(face-foreground 'nano-face-default)
+                       :background (face-background 'nano-face-subtle)
                        :overline nil
                        :underline nil
                        :box nil
