@@ -29,6 +29,8 @@
   (setq nano-color-popout     "#FFAB91") ;; Deep Orange / L200
   (setq nano-color-subtle     "#ECEFF1") ;; Blue Grey / L50
   (setq nano-color-faded      "#B0BEC5") ;; Blue Grey / L200
+  ;; to allow for toggling of the themes.
+  (setq nano-theme-var "light")
   )
 (nano-theme-set-light)
 

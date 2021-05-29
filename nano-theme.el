@@ -765,4 +765,34 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--hl-line)
   (nano-theme--company))
 
+(defun nano-refresh-theme ()
+  "Convenience function which refreshes the nano-theme.
+Calls \(nano-faces\) and \(nano-theme\) sequentially."
+  (interactive)
+  (progn
+    (nano-faces)
+    (nano-theme)))
+
+(defcustom nano-theme-var nil
+  "Variable which sets the default startup theme as light or dark.
+Also allows for toggling of the themes. Is set to 'light' by
+'nano-theme-light' and 'dark' by 'nano-theme-dark'.
+Defaults to nil."
+  :group 'nano
+  :type 'string)
+
+(defun nano-toggle-theme ()
+  "Function to interactively toggle between light and dark nano themes.
+Requires both to be loaded in order to work."
+  (interactive)
+  (cond ((string= nano-theme-var "light")
+         (progn (nano-theme-set-dark)
+                (nano-refresh-theme)
+                (setq nano-theme-var "dark")))
+         ((string= nano-theme-var "dark")
+         (progn (nano-theme-set-light)
+                (nano-refresh-theme)
+                (setq nano-theme-var "light")))
+         (t nil)))
+
 (provide 'nano-theme)
