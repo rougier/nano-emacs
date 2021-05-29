@@ -76,7 +76,7 @@
                 (propertize name 'face (list (list :weight (face-attribute 'nano-face-strong :weight)) 'header-line))
                 (propertize " "  'face 'header-line
 			    'display `(raise ,space-down))
-                (propertize primary 'face (list (list :weight 'light) 'header-line))))
+                (propertize primary 'face 'header-line)))
          (right (concat secondary " "))
          (available-width (- (window-total-width) 
 			     (length prefix) (length left) (length right)
@@ -87,7 +87,6 @@
 	    (propertize (make-string available-width ?\ )
                         'face 'header-line)
 	    (propertize right 'face (list `(:foreground ,nano-color-faded)
-                                          `(:weight 'light)
                                           'header-line)))))
 
 ;; ---------------------------------------------------------------------
