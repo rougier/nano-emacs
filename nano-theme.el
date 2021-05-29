@@ -69,7 +69,7 @@
   ;;(set-face 'fixed-pitch                                     'default)
   (set-face 'fixed-pitch-serif                       'nano-face-default)
   (set-face 'cursor                                  'nano-face-default)
-  (if 'nano-face-family-variable-pitch
+  (if 'nano-font-family-proportional
       (set-face-attribute 'variable-pitch nil ;; to work with mixed-pitch
                 :foreground (face-foreground 'default)
                 :background (face-background 'default)
