@@ -32,6 +32,14 @@
 
 (require 'nano-faces)
 
+(defcustom nano-theme-var nil
+  "Variable which sets the default startup theme as light or dark.
+Also allows for toggling of the themes. Is set to 'light' by
+'nano-theme-light' and 'dark' by 'nano-theme-dark'.
+Defaults to nil."
+  :group 'nano
+  :type 'string)
+
 ;; When we set a face, we take care of removing any previous settings
 (defun set-face (face style)
   "Reset FACE and make it inherit STYLE."
@@ -773,13 +781,6 @@ Calls \(nano-faces\) and \(nano-theme\) sequentially."
     (nano-faces)
     (nano-theme)))
 
-(defcustom nano-theme-var nil
-  "Variable which sets the default startup theme as light or dark.
-Also allows for toggling of the themes. Is set to 'light' by
-'nano-theme-light' and 'dark' by 'nano-theme-dark'.
-Defaults to nil."
-  :group 'nano
-  :type 'string)
 
 (defun nano-toggle-theme ()
   "Function to interactively toggle between light and dark nano themes.
