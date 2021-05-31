@@ -31,8 +31,9 @@
   ;; Miniframe at the bottom for a nicer display
   (setq mini-frame-show-parameters
         `((left . 0.5)
-          (top . 1.0) (width . 1.0)
-          (height . 8)
+          (top . 1.0)
+          (width . 1.0)
+          (height . 5)
           (left-fringe . 12)
           (right-fringe .12)
           (child-frame-border-width . 0)
@@ -40,27 +41,29 @@
           (foreground-color . ,nano-color-foreground)
           (background-color . ,nano-color-subtle)))
 
-  (setq ivy-height 7)
-  (set-face 'ivy-current-match 'nano-face-strong)
-  ;; See https://github.com/abo-abo/swiper/issues/2383
-  (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line)
-  (setq mini-frame-ignore-commands
-        '("edebug-eval-expression" debugger-eval-expression))
-  (set-face-attribute 'ivy-current-match nil
-                      :extend t
-                      :foreground nano-color-background
-                      :background nano-color-faded)
+   (with-eval-after-load 'ivy
+     (setq ivy-height 4)
+     (set-face 'ivy-current-match 'nano-face-strong)
+     ;; See https://github.com/abo-abo/swiper/issues/2383
+     (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line)
+     (set-face-attribute 'ivy-current-match nil
+                         :extend t
+                         :foreground nano-color-background
+                         :background nano-color-faded))
+   (setq mini-frame-ignore-commands
+         '("edebug-eval-expression" debugger-eval-expression))
     
-  (setq mini-frame-internal-border-color (material-color "blue-grey-2"))
-  ;; (setq mini-frame-resize 'grow-only) ;; -> buggy as of 01/05/2021
-  (setq mini-frame-resize 'not-set)
-  (add-hook 'minibuffer-setup-hook
-            (lambda ()
-              (overlay-put (make-overlay (point-min) (+ (point-min) 1))
-                           'before-string
-                           (propertize "\n" 'face `(:extend t
-                                                    :height .5)))))
-  )
+   (setq mini-frame-internal-border-color (material-color "blue-grey-2"))
+   ;; (setq mini-frame-resize 'grow-only) ;; -> buggy as of 01/05/2021
+   (setq mini-frame-resize 'not-set)
+   ;; (setq mini-frame-resize nil)
+   (add-hook 'minibuffer-setup-hook
+             (lambda ()
+               (overlay-put (make-overlay (point-min) (+ (point-min) 1))
+                            'before-string
+                            (propertize "\n" 'face `(:extend t
+                                                             :height .5)))))
+   )
   
 (mini-frame-mode 1)
 (provide 'nano-minibuffer)
