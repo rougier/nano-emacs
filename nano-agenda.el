@@ -91,6 +91,7 @@
 
 ;; --- Global variable -------------------------------------------------
 (setq nano-agenda-selected (ts-now))
+(setq nano-agenda-file "~/Documents/org/agenda.org")
 
 
 ;; --- Useful functions ------------------------------------------------
@@ -339,7 +340,7 @@
       (end-of-line)
       (let* ((org-agenda-hide-tags-regexp ".")
              (date nano-agenda-selected)
-             (file "~/Documents/org/agenda.org")
+             (file nano-agenda-file)
              (date (list (ts-month date) (ts-day date) (ts-year date)))
              (entries (cl-sort (org-agenda-get-day-entries file date :timestamp) 'string-lessp)))
 
