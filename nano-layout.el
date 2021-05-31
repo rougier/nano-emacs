@@ -16,9 +16,12 @@
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
 
+(require 'disp-table)
+
 (setq default-frame-alist
       (append (list
-	       '(font . "Roboto Mono:style=Light:size=14")
+               ;; Font size and family is set by nano-face-default
+	       ;;'(font . "Roboto Mono:style=Light:size=14")
 	       ;; '(font . "Roboto Mono Emacs Regular:size=14")
 	       '(min-height . 1)  '(height     . 45)
 	       '(min-width  . 1) '(width      . 81)
@@ -56,7 +59,7 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message t
       initial-scratch-message nil)
-(tool-bar-mode 0)
+(if (fboundp 'tool-bar-mode) (tool-bar-mode nil))
 (tooltip-mode 0)
 (menu-bar-mode 0)
 ;; (global-hl-line-mode 1)

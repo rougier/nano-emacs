@@ -42,12 +42,28 @@ $ emacs -q -l nano.el
 
 ### Installation
 
-If you like the result, you can merge the content of [nano.el](nano.el) into
-your emacs configuration file. To do so,
-you'll need to modify the `load-path` to include the nano emacs
-repository and then call for the different modules. The only mandatory
-module is `nano-faces` that defines 6 faces that are used in other
-modules.
+If you like the result, you can either manually merge the contents of
+[nano.el](nano.el) into your emacs configuration file, or install nano
+through the [straight.el](https://github.com/raxod502/straight.el) package
+manager.
+
+#### Manual Installation
+To merge the [nano.el](nano.el) contents with your emacs configuration,
+you'll need to modify the `load-path` to include the nano emacs repository
+and then call for the different modules. The only mandatory module is
+`nano-faces` that defines 6 faces that are used in other modules.
+
+#### Installation through straight.el
+To install nano through [straight.el](https://github.com/raxod502/straight.el),
+install straight.el, and then add the following snippet into your emacs
+configuration:
+```
+(straight-use-package
+  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
+```
+from here, you may either `(require 'nano)` to pull in the default nano
+configuration, or call for the different modules. The only mandatory module
+is `nano-faces` that defines 6 faces that are used in other modules.
 
 ### Modules
 
@@ -144,7 +160,7 @@ modules.
   
   ![](./images/nano-mu4e.png)
 
-- **[nano-minibuffer.el](./nano-minibufrer.el)**
+- **[nano-minibuffer.el](./nano-minibuffer.el)**
 
   > Minibuffer using [mini-frame](https://github.com/muffinmad/emacs-mini-frame)
   

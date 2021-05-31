@@ -34,6 +34,9 @@
         (concat "#" (substring-no-properties vc-mode
                                  (+ (if (eq backend 'Hg) 2 3) 2))))  nil))
 
+(defun nano-mode-name ()
+  (if (listp mode-name) (car mode-name) mode-name))
+
 
 ;; From https://amitp.blogspot.com/2011/08/emacs-custom-mode-line.html
 ;; ---------------------------------------------------------------------
@@ -330,7 +333,7 @@
 
 (defun nano-modeline-org-clock-mode ()
     (let ((buffer-name (format-mode-line "%b"))
-          (mode-name   (format-mode-line "%m"))
+          (mode-name   (nano-mode-name))
           (branch      (vc-branch))
           (position    (format-mode-line "%l:%c")))
       (nano-modeline-compose (nano-modeline-status)
@@ -347,7 +350,7 @@
 
 (defun nano-modeline-docview-mode ()
   (let ((buffer-name (format-mode-line "%b"))
-	(mode-name   (format-mode-line "%m"))
+	(mode-name   (nano-mode-name))
 	(branch      (vc-branch))
 	(page-number (concat
 		      (number-to-string (doc-view-current-page)) "/"
@@ -369,7 +372,7 @@
 
 (defun nano-modeline-pdf-view-mode ()
   (let ((buffer-name (format-mode-line "%b"))
-	(mode-name   (format-mode-line "%m"))
+	(mode-name   (nano-mode-name))
 	(branch      (vc-branch))
 	(page-number (concat
 		      (number-to-string (pdf-view-current-page)) "/"
@@ -398,7 +401,7 @@
 
 (defun nano-modeline-completion-list-mode ()
     (let ((buffer-name (format-mode-line "%b"))
-          (mode-name   (format-mode-line "%m"))
+          (mode-name   (nano-mode-name))
           (position    (format-mode-line "%l:%c")))
 
       (nano-modeline-compose (nano-modeline-status)
@@ -433,7 +436,7 @@
 
 (defun nano-modeline-default-mode ()
     (let ((buffer-name (format-mode-line "%b"))
-          (mode-name   (format-mode-line "%m"))
+          (mode-name   (nano-mode-name))
           (branch      (vc-branch))
           (position    (format-mode-line "%l:%c")))
       (nano-modeline-compose (nano-modeline-status)
