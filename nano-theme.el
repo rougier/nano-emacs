@@ -52,7 +52,9 @@
   ;; XXX the following seems to be a no-op, should it be removed?
   (set-face-attribute 'default nil
                       :foreground (face-foreground 'default)
-                      :background (face-background 'default))
+                      :background (face-background 'default)
+                      :family     (face-attribute 'nano-face-default :family)
+                      :height     (face-attribute 'nano-face-default :height))
 
   (if (display-graphic-p)
       (set-face-attribute 'bold nil :weight 'regular)
@@ -66,8 +68,14 @@
   (set-face 'highlight                                'nano-face-subtle)
   ;;(set-face 'fixed-pitch                                     'default)
   (set-face 'fixed-pitch-serif                       'nano-face-default)
-  (set-face 'variable-pitch                          'nano-face-default)
   (set-face 'cursor                                  'nano-face-default)
+  (if 'nano-font-family-proportional
+      (set-face-attribute 'variable-pitch nil ;; to work with mixed-pitch
+                :foreground (face-foreground 'default)
+                :background (face-background 'default)
+                :family     (face-attribute 'nano-face-variable-pitch :family)
+                :height     (face-attribute 'nano-face-variable-pitch :height))
+      (set-face 'variable-pitch                     'nano-face-default))
 
   (set-face-attribute 'cursor nil
                       :background (face-foreground 'nano-face-default))
