@@ -54,7 +54,7 @@
                                     'face `(:inherit bold
                                             :foreground ,nano-color-foreground)))
                        (t
-                        (propertize "[-] "
+                        (propertize ""
                                     'face `(
                                             :foreground ,nano-color-foreground)))))
          (name (propertize name 'face `(:inherit bold)))
@@ -68,7 +68,8 @@
          (right (concat (propertize secondary
                                     'face `(:foreground ,nano-color-faded))
                         (propertize " " 'face nil)))
-         (available-width (- (window-total-width nil 'floor) 1
+         (available-width (- (window-total-width nil 'floor)
+                             (if (display-graphic-p) 1 0)
                              (length left) (length right)))
 	 (available-width (max 1 available-width)))
     (concat left (make-string available-width ?\ ) right)))
