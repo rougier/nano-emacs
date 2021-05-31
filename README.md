@@ -79,7 +79,7 @@ This sets the default monospaced font. Defaults to Roboto Mono. Note that if you
 (setq nano-font-family-proportional nil)
 ```
 
-Set this to the name of your favorite variable-width font to enable `variable-width-mode` and `mixed-pitch-mode`. If you have already set this somewhere else, you can use `(setq nano-font-family-proportional (face-attribute 'variable-width :family))` to use the same one.
+Set this to the name (as a string) of your favorite variable-width font to enable `variable-width-mode` and `mixed-pitch-mode`. If you have already set this somewhere else, you can use `(setq nano-font-family-proportional (face-attribute 'variable-width :family))` to use the same one.
 
 ```emacs-lisp
 (setq nano-font-size 14)
@@ -89,7 +89,7 @@ This sets the font-size of most faces in nano-emacs.
 
 #### Note about load-order
 
-Because of the way nano-emacs is set up, you need to set these variables /before/ you call `(nano-faces)` and `(nano-theme)`. If you change one of these variables after load/calling `(nano-faces)` and `(nano-theme)`, you will need to call them again for these changes to take effect.
+Because of the way nano-emacs is set up, you need to set these variables *before* you call `(nano-faces)` and `(nano-theme)`. If you change one of these variables after load/calling `(nano-faces)` and `(nano-theme)`, you will need to call them again for these changes to take effect.
 
 
 
