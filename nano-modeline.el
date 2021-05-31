@@ -235,7 +235,7 @@
   (nano-modeline-compose (nano-modeline-status)
                          "Agenda"
                          ""
-                         (format-time-string "%H:%M")))
+                         (format-time-string "%A %-e %B %Y")))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-term-mode-p ()
@@ -492,22 +492,18 @@
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-update-windows ()
-  "Modify the mode line depending on the presence of a window below."
-  
+  "Modify the mode line depending on the presence of a window
+below or a buffer local variable 'no-mode-line'."
   (dolist (window (window-list))
     (with-selected-window window
-      (if (or (one-window-p t)
-	      (eq (window-in-direction 'below) (minibuffer-window))
-	      (not (window-in-direction 'below)))
 	  (with-current-buffer (window-buffer window)
-	    (setq mode-line-format (list "")))
-                ;; (setq mode-line-format (list "")))
-	(with-current-buffer (window-buffer window)
- 	  (setq mode-line-format nil)))
-;;      (if (window-in-direction 'above)
-;;	      (face-remap-add-relative 'header-line '(:overline "#777777"))
-;;	    (face-remap-add-relative 'header-line '(:overline nil)))
-          )))
+        (if (or (not (boundp 'no-mode-line)) (not no-mode-line))
+            (setq mode-line-format 
+                  (cond ((one-window-p t) (list ""))
+                        ((eq (window-in-direction 'below) (minibuffer-window)) (list ""))
+                        ((not (window-in-direction 'below)) (list ""))
+                        (t nil))))))))
+
 (add-hook 'window-configuration-change-hook 'nano-modeline-update-windows)
 
 (setq eshell-status-in-modeline nil)
@@ -516,3 +512,6 @@
 (nano-modeline)
 
 (provide 'nano-modeline)
+
+
+
