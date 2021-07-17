@@ -19,8 +19,12 @@
 
 
 ;; Path to nano emacs modules (mandatory)
-(add-to-list 'load-path "/Users/rougier/Documents/GitHub/nano-emacs")
+(add-to-list 'load-path "/home/ieremies/bin/nano-emacs/")
 (add-to-list 'load-path ".")
+
+
+; necessary for proper appearance of nano
+(setq doom-theme 'nil)
 
 ;; Default layout (optional)
 (require 'nano-layout)
@@ -34,10 +38,7 @@
 (add-to-list 'command-switch-alist '("-compact" . (lambda (args))))
 
 
-(cond
- ((member "-default" command-line-args) t)
- ((member "-dark" command-line-args) (require 'nano-theme-dark))
- (t (require 'nano-theme-light)))
+(require 'nano-theme-light)
 
 ;; Customize support for 'emacs -q' (Optional)
 ;; You can enable customizations by creating the nano-custom.el file
@@ -60,36 +61,44 @@
 (nano-theme)
 
 ;; Nano default settings (optional)
-(require 'nano-defaults)
+;;(require 'nano-defaults)
 
 ;; Nano session saving (optional)
-(require 'nano-session)
+;;(require 'nano-session)
 
 ;; Nano header & mode lines (optional)
 (require 'nano-modeline)
 
 ;; Nano key bindings modification (optional)
-(require 'nano-bindings)
+;;(require 'nano-bindings)
 
 ;; Compact layout (need to be loaded after nano-modeline)
 (when (member "-compact" command-line-args)
   (require 'nano-compact))
-  
+
 ;; Nano counsel configuration (optional)
 ;; Needs "counsel" package to be installed (M-x: package-install)
 ;; (require 'nano-counsel)
 
-;; Welcome message (optional)
-(let ((inhibit-message t))
-  (message "Welcome to GNU Emacs / N Λ N O edition")
-  (message (format "Initialization time: %s" (emacs-init-time))))
+;; ;; Welcome message (optional)
+;; (let ((inhibit-message t))
+;;   (message "Welcome to GNU Emacs / N Λ N O edition")
+;;   (message (format "Initialization time: %s" (emacs-init-time))))
 
-;; Splash (optional)
-(unless (member "-no-splash" command-line-args)
-  (require 'nano-splash))
+;; ;; Splash (optional)
+;; (unless (member "-no-splash" command-line-args)
+;;   (require 'nano-splash))
 
-;; Help (optional)
-(unless (member "-no-help" command-line-args)
-  (require 'nano-help))
+;; ;; Help (optional)
+;; (unless (member "-no-help" command-line-args)
+;;   (require 'nano-help))
+
+(setq display-line-numbers-type nil
+      evil-default-cursor t
+      custom-blue "#718591"
+      custom-yellow "#BDA441")
+
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
 
 (provide 'nano)
