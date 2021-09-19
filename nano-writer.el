@@ -129,11 +129,12 @@ etc.
               #'writer-mode--compute-prefixes)
 
   ;; Numbering
-  (setq org-num-skip-unnumbered t)
-  (setq org-num-skip-footnotes t)
-  (setq org-num-max-level 2)
-  (setq org-num-face nil)
-  (org-num-mode)
-  (setq org-num-format-function 'writer-mode--num-format))
+  (when (require 'org-num nil t)
+    (setq org-num-skip-unnumbered t)
+    (setq org-num-skip-footnotes t)
+    (setq org-num-max-level 2)
+    (setq org-num-face nil)
+    (org-num-mode)
+    (setq org-num-format-function 'writer-mode--num-format)))
 
 (provide 'nano-writer)
