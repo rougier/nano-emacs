@@ -94,7 +94,7 @@ etc.
             (make-string indent ?\s)))))
 
 
-
+;;;###autoload
 (define-derived-mode writer-mode org-mode "NΛNO writer"
 
   ;; Faces
