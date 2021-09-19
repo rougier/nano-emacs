@@ -73,23 +73,23 @@ etc.
         (make-vector org-indent--deepest-level nil))
   (setq org-indent--text-line-prefixes
         (make-vector org-indent--deepest-level nil))
-        
+
   (let* ((min-indent 5)
          (indent (+ 1 (seq-max 
-                  (org-element-map
-                      (org-element-parse-buffer) 'headline
-                    #'(lambda (item)
-                        (org-element-property :level item))))))
+                       (org-element-map
+                           (org-element-parse-buffer) 'headline
+                         #'(lambda (item)
+                             (org-element-property :level item))))))
          (indent (max indent min-indent)))
     
-  (dotimes (n org-indent--deepest-level)
-    (aset org-indent--heading-line-prefixes n
-          (make-string
-           (min indent (max 0 (- indent 1 n))) ?\s))
-    (aset org-indent--inlinetask-line-prefixes n
-          (make-string indent ?\s))
-    (aset org-indent--text-line-prefixes n
-          (make-string indent ?\s)))))
+    (dotimes (n org-indent--deepest-level)
+      (aset org-indent--heading-line-prefixes n
+            (make-string
+             (min indent (max 0 (- indent 1 n))) ?\s))
+      (aset org-indent--inlinetask-line-prefixes n
+            (make-string indent ?\s))
+      (aset org-indent--text-line-prefixes n
+            (make-string indent ?\s)))))
 
 
 
@@ -107,7 +107,7 @@ etc.
                            :inherit 'nano-face-faded)
   (face-remap-add-relative 'org-document-title
                            :foreground nano-color-foreground
-                           :family "Roboto Slab" 
+                           :family "Roboto Slab"
                            :height 200
                            :weight 'medium)
   ;; hide title / author ... keywords
@@ -115,13 +115,13 @@ etc.
 
   ;; Header line
   (setq header-line-format nil)
-  
+
   ;; Layout
   (setq fill-column 72)
   (setq-default line-spacing 1)
 
   ;; Indentation
-  (setq org-startup-folded nil)  
+  (setq org-startup-folded nil)
   (org-indent-mode)
   (setq org-level-color-stars-only nil)
   (setq org-hide-leading-stars nil)
