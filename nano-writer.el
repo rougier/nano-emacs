@@ -16,6 +16,8 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
 (require 'org)
+(require 'org-indent)
+(require 'org-element)
 (require 'nano-base-colors)
 (require 'nano-faces)
 
