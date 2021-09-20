@@ -108,7 +108,7 @@
 ;;   #'company-indent-or-complete-common)
 
 ;; Pixel scroll (as opposed to char scrool)
-(pixel-scroll-mode t)
+;; (pixel-scroll-mode t)
 
 ;; Mac specific
 (when (eq system-type 'darwin)

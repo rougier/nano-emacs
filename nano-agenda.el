@@ -36,40 +36,40 @@
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-selected
-  `((t :foreground ,nano-color-background
-       :background ,nano-color-foreground ))
+  `((t :foreground ,nano-light-background
+       :background ,nano-light-foreground ))
   "Face for the selected day"
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-today
-  `((t :foreground ,nano-color-popout
+  `((t :foreground ,nano-light-popout
        :inherit 'bold ))
   "Today face when not selected."
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-selected-today
-  `((t :foreground ,nano-color-background
-       :background ,nano-color-popout ))
+  `((t :foreground ,nano-light-background
+       :background ,nano-light-popout ))
   "Today face when selected."
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-weekend
-  `((t :foreground ,nano-color-faded ))
+  `((t :foreground ,nano-light-faded ))
   "Weekend face"
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-holidays
-  `((t :foreground ,nano-color-faded ))
+  `((t :foreground ,nano-light-faded ))
   "Holidays face"
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-outday
-  `((t :foreground ,nano-color-subtle ))
+  `((t :foreground ,nano-light-subtle ))
   "Out day face"
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-day-name
-  `((t :foreground ,nano-color-faded ))
+  `((t :foreground ,nano-light-faded ))
   "Day name face (on second line)"
   :group 'nano-agenda-faces)
 
@@ -84,7 +84,7 @@
   :group 'nano-agenda-faces)
 
 (defface nano-agenda-face-button
-  `((t :foreground ,nano-color-faded ))
+  `((t :foreground ,nano-light-faded ))
   "Header button (left and right)"
   :group 'nano-agenda-faces)
 
@@ -299,8 +299,8 @@
       (set-window-margins nil 2)
       (face-remap-add-relative 'header-line
                                `(:family "Roboto Mono"
-                                 :foreground ,nano-color-background
-                                 :background ,nano-color-faded
+                                 :foreground ,nano-light-background
+                                 :background ,nano-light-faded
                                  :weight regular
                                  :box (:line-width 2 :color "#ffffff" :style nil)))
 

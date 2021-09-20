@@ -15,32 +15,31 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
-(require 'nano-colors)
+;;(require 'nano-colors)
 
 (setq default-frame-alist
       (append (list
-	       ;;'(font . "Roboto Mono:style=Light:size=14")
-	       '(font . "Roboto Mono Emacs Regular:size=14")
+           '(font . "Roboto Mono:style=Light:size=14")
 	       '(min-height . 1) '(height    . 45)
 	       '(min-width  . 1) '(width      . 81)
-               '(vertical-scroll-bars . nil)
-               '(internal-border-width . 1)
-               '(left-fringe    . 24)
-               '(right-fringe   . 24)
-               '(tool-bar-lines . 0)
-               '(menu-bar-lines . 0))))
+           '(vertical-scroll-bars . nil)
+           '(internal-border-width . 1)
+           '(left-fringe    . 24)
+           '(right-fringe   . 24)
+           '(tool-bar-lines . 0)
+           '(menu-bar-lines . 0))))
 
 
 (set-face-attribute 'header-line nil
-                    :foreground nano-color-foreground
-                    :background nano-color-subtle
+                    :foreground nano-light-foreground
+                    :background nano-light-subtle
                     :underline nil
                     :box `(:line-width 4
-                           :color ,nano-color-background
+                           :color ,nano-light-background
                            :style nil))
 
-(set-face-attribute 'internal-border nil :background nano-color-foreground)
-(set-face-foreground 'vertical-border nano-color-subtle)
+(set-face-attribute 'internal-border nil :background nano-light-foreground)
+(set-face-foreground 'vertical-border nano-light-subtle)
 (window-divider-mode 0)
 
 (defun nano-modeline-compose (status name primary secondary)
@@ -48,15 +47,15 @@
   (let* ((prefix (cond ((string= status "**")
                         (propertize "[M] "
                                     'face `(:inherit bold
-                                            :foreground ,nano-color-foreground)))
+                                            :foreground ,nano-light-foreground)))
                        ((string= status "RO")
                         (propertize "[R] "
                                     'face `(:inherit bold
-                                            :foreground ,nano-color-foreground)))
+                                            :foreground ,nano-light-foreground)))
                        (t
                         (propertize ""
                                     'face `(
-                                            :foreground ,nano-color-foreground)))))
+                                            :foreground ,nano-light-foreground)))))
          (name (propertize name 'face `(:inherit bold)))
          (left (concat
                 (propertize " " 'face nil 'display '(raise -0.30))
@@ -66,7 +65,7 @@
                 ;; " "
                 primary))
          (right (concat (propertize secondary
-                                    'face `(:foreground ,nano-color-faded))
+                                    'face `(:foreground ,nano-light-faded))
                         (propertize " " 'face nil)))
          (available-width (- (window-total-width nil 'floor)
                              (if (display-graphic-p) 1 0)
