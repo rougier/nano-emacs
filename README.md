@@ -57,13 +57,41 @@ and then call for the different modules. The only mandatory module is
 To install nano through [straight.el](https://github.com/raxod502/straight.el),
 install straight.el, and then add the following snippet into your emacs
 configuration:
-```
+``` emacs-lisp
 (straight-use-package
   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
 ```
 from here, you may either `(require 'nano)` to pull in the default nano
 configuration, or call for the different modules. The only mandatory module
 is `nano-faces` that defines 6 faces that are used in other modules.
+
+### Customization
+
+You can customize the default font, the proportional font and the font-size.
+
+```emacs-lisp
+(setq nano-font-family-monospaced "Roboto Mono")
+```
+
+This sets the default monospaced font. Defaults to Roboto Mono. Note that if you set this to a font without proper light or bold weights you will lose many of the key design features of nano-emacs.
+
+```emacs-lisp
+(setq nano-font-family-proportional nil)
+```
+
+Set this to the name (as a string) of your favorite variable-width font to enable `variable-width-mode` and `mixed-pitch-mode`. If you have already set this somewhere else, you can use `(setq nano-font-family-proportional (face-attribute 'variable-width :family))` to use the same one.
+
+```emacs-lisp
+(setq nano-font-size 14)
+```
+
+This sets the font-size of most faces in nano-emacs.
+
+#### Note about load-order
+
+Because of the way nano-emacs is set up, you need to set these variables *before* you call `(nano-faces)` and `(nano-theme)`. If you change one of these variables after load/calling `(nano-faces)` and `(nano-theme)`, you will need to call them again for these changes to take effect.
+
+
 
 ### Modules
 

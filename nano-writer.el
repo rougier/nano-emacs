@@ -16,6 +16,8 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;; ---------------------------------------------------------------------
 (require 'org)
+(require 'org-indent)
+(require 'org-element)
 (require 'nano-base-colors)
 (require 'nano-faces)
 
@@ -73,26 +75,26 @@ etc.
         (make-vector org-indent--deepest-level nil))
   (setq org-indent--text-line-prefixes
         (make-vector org-indent--deepest-level nil))
-        
+
   (let* ((min-indent 5)
          (indent (+ 1 (seq-max 
-                  (org-element-map
-                      (org-element-parse-buffer) 'headline
-                    #'(lambda (item)
-                        (org-element-property :level item))))))
+                       (org-element-map
+                           (org-element-parse-buffer) 'headline
+                         #'(lambda (item)
+                             (org-element-property :level item))))))
          (indent (max indent min-indent)))
     
-  (dotimes (n org-indent--deepest-level)
-    (aset org-indent--heading-line-prefixes n
-          (make-string
-           (min indent (max 0 (- indent 1 n))) ?\s))
-    (aset org-indent--inlinetask-line-prefixes n
-          (make-string indent ?\s))
-    (aset org-indent--text-line-prefixes n
-          (make-string indent ?\s)))))
+    (dotimes (n org-indent--deepest-level)
+      (aset org-indent--heading-line-prefixes n
+            (make-string
+             (min indent (max 0 (- indent 1 n))) ?\s))
+      (aset org-indent--inlinetask-line-prefixes n
+            (make-string indent ?\s))
+      (aset org-indent--text-line-prefixes n
+            (make-string indent ?\s)))))
 
 
-
+;;;###autoload
 (define-derived-mode writer-mode org-mode "NΛNO writer"
 
   ;; Faces
@@ -107,7 +109,7 @@ etc.
                            :inherit 'nano-face-faded)
   (face-remap-add-relative 'org-document-title
                            :foreground nano-color-foreground
-                           :family "Roboto Slab" 
+                           :family "Roboto Slab"
                            :height 200
                            :weight 'medium)
   ;; hide title / author ... keywords
@@ -115,13 +117,13 @@ etc.
 
   ;; Header line
   (setq header-line-format nil)
-  
+
   ;; Layout
   (setq fill-column 72)
   (setq-default line-spacing 1)
 
   ;; Indentation
-  (setq org-startup-folded nil)  
+  (setq org-startup-folded nil)
   (org-indent-mode)
   (setq org-level-color-stars-only nil)
   (setq org-hide-leading-stars nil)
@@ -129,11 +131,12 @@ etc.
               #'writer-mode--compute-prefixes)
 
   ;; Numbering
-  (setq org-num-skip-unnumbered t)
-  (setq org-num-skip-footnotes t)
-  (setq org-num-max-level 2)
-  (setq org-num-face nil)
-  (org-num-mode)
-  (setq org-num-format-function 'writer-mode--num-format))
+  (when (require 'org-num nil t)
+    (setq org-num-skip-unnumbered t)
+    (setq org-num-skip-footnotes t)
+    (setq org-num-max-level 2)
+    (setq org-num-face nil)
+    (org-num-mode)
+    (setq org-num-format-function 'writer-mode--num-format)))
 
 (provide 'nano-writer)
