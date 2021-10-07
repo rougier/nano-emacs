@@ -41,12 +41,6 @@
 ;; No popup windows
 (setq pop-up-windows nil)
 
-;; User name
-(setq user-full-name "Nicolas P. Rougier")
-
-;; User mail address
-(setq user-mail-address "Nicolas.Rougier@inria.fr")
-
 ;; No empty line indicators
 (setq indicate-empty-lines nil)
 
