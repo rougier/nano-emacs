@@ -501,11 +501,12 @@ below or a buffer local variable 'no-mode-line'."
     (with-selected-window window
 	  (with-current-buffer (window-buffer window)
         (if (or (not (boundp 'no-mode-line)) (not no-mode-line))
-            (setq mode-line-format 
-                  (cond ((one-window-p t) (list ""))
-                        ((eq (window-in-direction 'below) (minibuffer-window)) (list ""))
-                        ((not (window-in-direction 'below)) (list ""))
-                        (t nil))))))))
+            (set-window-parameter window 'mode-line-format
+                                  (cond ((not mode-line-format) 'none)
+                                        ((one-window-p t 'visible) (list ""))
+                                        ((eq (window-in-direction 'below) (minibuffer-window)) (list ""))
+                                        ((not (window-in-direction 'below)) (list ""))
+                                        (t 'none))))))))
 
 (add-hook 'window-configuration-change-hook 'nano-modeline-update-windows)
 
