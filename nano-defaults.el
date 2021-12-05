@@ -82,10 +82,10 @@
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
 ;; No scroll bars
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode nil))
+(if (fboundp 'scroll-bar-mode) (set-scroll-bar-mode nil))
 
 ;; No toolbar
-(if (fboundp 'tool-bar-mode) (tool-bar-mode nil))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 ;; No menu bar
 (if (display-graphic-p)
