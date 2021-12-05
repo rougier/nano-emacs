@@ -30,7 +30,7 @@
 (setq initial-buffer-choice nil)
 
 ;; No frame title
-(setq frame-title-format nil)
+(setq frame-title-format " ")
 
 ;; No file dialog
 (setq use-file-dialog nil)
