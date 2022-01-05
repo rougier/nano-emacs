@@ -43,9 +43,8 @@
 
 ;; Help screen
 
-;; FIX for quick-help.org not being found when using straight
-(setq pathfix (concat user-emacs-directory "straight/repos/nano-emacs"))
-(add-to-list 'load-path pathfix)
+;; Fix for quick-help.org not being found when using straight
+(add-to-list 'load-path (concat user-emacs-directory "straight/repos/nano-emacs"))
 
 (define-derived-mode nano-help-mode org-mode "Nano help mode")
 (define-key nano-help-mode-map (kbd "q") #'kill-current-buffer)
