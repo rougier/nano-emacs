@@ -58,9 +58,9 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message t
       initial-scratch-message nil)
-(if (fboundp 'tool-bar-mode) (tool-bar-mode nil))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode nil))
 (tooltip-mode 0)
-(scroll-bar-mode nil)
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode nil))
 (menu-bar-mode 0)
 ;; (global-hl-line-mode 1)
 (setq x-underline-at-descent-line t)
