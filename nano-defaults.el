@@ -157,7 +157,9 @@
       uniquify-ignore-buffers-re "^\\*")
 
 ;; Default shell in term
-(unless (eq system-type 'windows-nt)
+(unless
+    (or (eq system-type 'windows-nt)
+        (not (file-exists-p "/bin/zsh")))
   (setq-default shell-file-name "/bin/zsh")
   (setq explicit-shell-file-name "/bin/zsh"))
 
