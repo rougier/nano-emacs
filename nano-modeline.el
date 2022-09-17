@@ -54,7 +54,7 @@
     output))
 
 ;; -------------------------------------------------------------------
-(defun nano-modeline-compose (status name primary secondary)
+(defun nano-modeline-compose (status name primary secondary &optional es)
   "Compose a string with provided information"
   (let* ((char-width    (window-font-width nil 'header-line))
          (window        (get-buffer-window (current-buffer)))
@@ -72,7 +72,11 @@
                    (t (propertize status 'face 'nano-face-header-popout))))
          (left (concat
                 (propertize " "  'face 'nano-face-header-default
-			    'display `(raise ,space-up))
+			                'display `(raise ,space-up))
+                (propertize "● "  'face (if (eq es 'insert)
+					     '(:inherit nano-face-header-strong :foreground "#A3BE8C" )
+					     'nano-face-header-strong) ;; [JR-CHANGE]
+			    )
                 (propertize name 'face 'nano-face-header-strong)
                 (propertize " "  'face 'nano-face-header-default
 			    'display `(raise ,space-down))
@@ -445,7 +449,8 @@
                                      (if branch (concat ", "
                                             (propertize branch 'face 'italic)))
                                      ")" )
-                             position)))
+                             position
+                             evil-state)))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-status ()
@@ -514,6 +519,10 @@ below or a buffer local variable 'no-mode-line'."
 ;; (setq-default mode-line-format (list "%-"))
 (setq-default mode-line-format "")
 (nano-modeline)
+
+;; [JR-CHANGE]
+(add-hook 'evil-insert-state-entry-hook (lambda () (nano-modeline)))
+(add-hook 'evil-insert-state-exit-hook (lambda () (nano-modeline)))
 
 (provide 'nano-modeline)
 
