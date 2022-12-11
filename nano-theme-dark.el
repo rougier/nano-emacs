@@ -34,6 +34,4 @@
   (setq nano-theme-var "dark")
   )
 
-(nano-theme-set-dark)
-
 (provide 'nano-theme-dark)

@@ -32,6 +32,5 @@
   ;; to allow for toggling of the themes.
   (setq nano-theme-var "light")
   )
-(nano-theme-set-light)
 
 (provide 'nano-theme-light)

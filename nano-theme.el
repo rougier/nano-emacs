@@ -796,13 +796,10 @@ Calls \(nano-faces\) and \(nano-theme\) sequentially."
 Requires both to be loaded in order to work."
   (interactive)
   (cond ((string= nano-theme-var "light")
-         (progn (nano-theme-set-dark)
-                (nano-refresh-theme)
-                (setq nano-theme-var "dark")))
+         (nano-theme-set-dark))
          ((string= nano-theme-var "dark")
-         (progn (nano-theme-set-light)
-                (nano-refresh-theme)
-                (setq nano-theme-var "light")))
-         (t nil)))
+          (nano-theme-set-light))
+         (t nil))
+  (nano-refresh-theme))
 
 (provide 'nano-theme)
