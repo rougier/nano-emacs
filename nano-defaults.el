@@ -93,7 +93,7 @@
   (menu-bar-mode -1))
 
 ;; Navigate windows using shift+direction
-(windmove-default-keybindings)
+;; (windmove-default-keybindings)
 
 ;; Tab behavior
 ;; (setq tab-always-indent 'complete)
