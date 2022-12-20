@@ -34,11 +34,6 @@
 (add-to-list 'command-switch-alist '("-compact" . (lambda (args))))
 
 
-(cond
- ((member "-default" command-line-args) t)
- ((member "-dark" command-line-args) (require 'nano-theme-dark))
- (t (require 'nano-theme-light)))
-
 ;; Customize support for 'emacs -q' (Optional)
 ;; You can enable customizations by creating the nano-custom.el file
 ;; with e.g. `touch nano-custom.el` in the folder containing this file.
@@ -54,10 +49,15 @@
 
 ;; Theme
 (require 'nano-faces)
-(nano-faces)
-
 (require 'nano-theme)
-(nano-theme)
+(require 'nano-theme-dark)
+(require 'nano-theme-light)
+
+(cond
+ ((member "-default" command-line-args) t)
+ ((member "-dark" command-line-args) (nano-theme-set-dark))
+ (t (nano-theme-set-light)))
+(call-interactively 'nano-refresh-theme)
 
 ;; Nano default settings (optional)
 (require 'nano-defaults)
