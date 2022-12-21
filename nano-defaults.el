@@ -92,9 +92,6 @@
     (menu-bar-mode t) ;; When nil, focus problem on OSX
   (menu-bar-mode -1))
 
-;; Navigate windows using shift+direction
-(windmove-default-keybindings)
-
 ;; Tab behavior
 ;; (setq tab-always-indent 'complete)
 ;; (global-company-mode)
