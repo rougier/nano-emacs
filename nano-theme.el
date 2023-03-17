@@ -508,7 +508,8 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'org-quote                               'nano-face-faded)
     (set-face 'org-scheduled                           'nano-face-faded)
     (set-face 'org-scheduled-previously                'nano-face-faded)
-    (set-face 'org-scheduled-today                     'nano-face-faded)
+    (set-face 'org-scheduled-today                   '(nano-face-salient
++                                                      nano-face-strong))
     (set-face 'org-sexp-date                           'nano-face-faded)
     (set-face 'org-special-keyword                     'nano-face-faded)
     (set-face 'org-table                               'nano-face-faded)
