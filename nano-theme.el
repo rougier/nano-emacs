@@ -43,12 +43,16 @@ Defaults to nil."
 ;; When we set a face, we take care of removing any previous settings
 (defun set-face (face style)
   "Reset FACE and make it inherit STYLE."
-  (set-face-attribute face nil
-                      :foreground 'unspecified :background 'unspecified
-                      :family     'unspecified :slant      'unspecified
-                      :weight     'unspecified :height     'unspecified
-                      :underline  'unspecified :overline   'unspecified
-                      :box        'unspecified :inherit    style))
+  (if (facep face)
+      (set-face-attribute face nil
+                          :foreground 'unspecified :background 'unspecified
+                          :family     'unspecified :slant      'unspecified
+                          :weight     'unspecified :height     'unspecified
+                          :underline  'unspecified :overline   'unspecified
+                          :box        'unspecified :inherit    style)
+    (message "NANO Warning: Face %s could not be set. It may not be defined."
+             face)))
+  
 
 
 (defun nano-theme--basics ()
