@@ -203,10 +203,10 @@ background color that is barely perceptible."
                           :height (* nano-font-size 10))
   (if (display-graphic-p)
       (set-face-attribute 'nano-face-strong nil
-                          :foreground (face-foreground 'nano-face-default)
+                          :foreground nano-color-strong
                           :weight 'medium)
     (set-face-attribute 'nano-face-strong nil
-                        :foreground (face-foreground 'nano-face-default)
+                        :foreground nano-color-strong
                         :weight 'bold))
 
   (set-face-attribute 'nano-face-salient nil
