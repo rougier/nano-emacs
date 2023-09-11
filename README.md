@@ -59,7 +59,7 @@ install straight.el, and then add the following snippet into your emacs
 configuration:
 ``` emacs-lisp
 (straight-use-package
-  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
+  '(nano :type git :host github :repo "rougier/nano-emacs"))
 ```
 from here, you may either `(require 'nano)` to pull in the default nano
 configuration, or call for the different modules. The only mandatory module
