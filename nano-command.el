@@ -42,24 +42,24 @@
   :group 'nano)
 
 (set-face-attribute 'nano-face-command nil
-                    :foreground nano-light-foreground
-                    :background nano-light-subtle
+                    :foreground nano-color-foreground
+                    :background nano-color-subtle
                     :box `(:line-width 1
-                           :color ,nano-light-foreground
+                           :color ,nano-color-foreground
                            :style nil)
                    :inherit nil)
 
 (set-face-attribute 'nano-face-command-prompt nil
                     :inherit 'nano-face-strong
-                    :foreground nano-light-background
-                    :background nano-light-foreground
+                    :foreground nano-color-background
+                    :background nano-color-foreground
                     :box `(:line-width 1
-                           :color ,nano-light-foreground
+                           :color ,nano-color-foreground
                            :style nil))
 
 (set-face-attribute 'nano-face-command-cursor nil
-                    :foreground nano-light-background
-                    :background nano-light-foreground)
+                    :foreground nano-color-background
+                    :background nano-color-foreground)
 
 (defvar nano-command--slave nil
   "Slave buffer displaying the command.")
@@ -161,8 +161,8 @@ If not, it closes nano command."
       
       (setq header-line-format nil)
       (setq mode-line-format nil)
-      (face-remap-add-relative 'default `(:foreground ,nano-light-background))
-      (face-remap-add-relative 'region  `(:background ,nano-light-background))
+      (face-remap-add-relative 'default `(:foreground ,nano-color-background))
+      (face-remap-add-relative 'region  `(:background ,nano-color-background))
       (fit-window-to-buffer)
       (setq window-size-fixed t)
 
