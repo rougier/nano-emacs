@@ -101,14 +101,15 @@
 ;; Pixel scroll (as opposed to char scrool)
 ;; (pixel-scroll-mode t)
 
+;; [JR-CHANGE: commented out so meta will work]
 ;; Mac specific
-(when (eq system-type 'darwin)
-  (setq ns-use-native-fullscreen t
-        mac-option-key-is-meta nil
-        mac-command-key-is-meta t
-        mac-command-modifier 'meta
-        mac-option-modifier nil
-        mac-use-title-bar nil))
+;; (when (eq system-type 'darwin)
+;;   (setq ns-use-native-fullscreen t
+;;         mac-option-key-is-meta nil
+;;         mac-command-key-is-meta t
+;;         mac-command-modifier 'meta
+;;         mac-option-modifier nil
+;;         mac-use-title-bar nil))
 
 ;; Make sure clipboard works properly in tty mode on OSX
 (defun copy-from-osx ()
