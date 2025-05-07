@@ -56,7 +56,7 @@
 (cond
  ((member "-default" command-line-args) t)
  ((member "-dark" command-line-args) (nano-theme-set-dark))
- (t (nano-theme-set-light)))
+ (t (nano-theme-set-dark))) ;; [JR-CHANGE]
 (call-interactively 'nano-refresh-theme)
 
 ;; Nano default settings (optional)
