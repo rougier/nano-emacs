@@ -33,7 +33,7 @@
 
 
 
-(defcustom nano-font-family-monospaced "Roboto Mono"
+(defcustom nano-font-family-monospaced "Fira Code" ;; [JR-CHANGE]
   "Name of the font-family to use for nano.
 Defaults to Roboto Mono. Customizing this might lead to conflicts
 if the family does not have sufficient bold/light etc faces."
