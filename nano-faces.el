@@ -202,10 +202,10 @@ background color that is barely perceptible."
                           :family nano-font-family-proportional
                           :height (* nano-font-size 10))
   (if (display-graphic-p)
-      (set-face-attribute 'nano-face-default nil
+      (set-face-attribute 'nano-face-default nil ;; [JR-CHANGE] remove bold
                           :foreground nano-color-strong
                           :weight 'medium)
-    (set-face-attribute 'nano-face-default nil
+    (set-face-attribute 'nano-face-default nil ;; [JR-CHANGE] remove bold
                         :foreground nano-color-strong
                         :weight 'bold))
 
