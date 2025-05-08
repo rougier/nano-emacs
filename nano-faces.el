@@ -33,7 +33,7 @@
 
 
 
-(defcustom nano-font-family-monospaced "Roboto Mono"
+(defcustom nano-font-family-monospaced "Fira Code" ;; [JR-CHANGE]
   "Name of the font-family to use for nano.
 Defaults to Roboto Mono. Customizing this might lead to conflicts
 if the family does not have sufficient bold/light etc faces."
@@ -202,10 +202,10 @@ background color that is barely perceptible."
                           :family nano-font-family-proportional
                           :height (* nano-font-size 10))
   (if (display-graphic-p)
-      (set-face-attribute 'nano-face-strong nil
+      (set-face-attribute 'nano-face-default nil ;; [JR-CHANGE] remove bold
                           :foreground nano-color-strong
                           :weight 'medium)
-    (set-face-attribute 'nano-face-strong nil
+    (set-face-attribute 'nano-face-default nil ;; [JR-CHANGE] remove bold
                         :foreground nano-color-strong
                         :weight 'bold))
 
