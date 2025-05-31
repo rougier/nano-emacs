@@ -17,11 +17,6 @@
 ;; ---------------------------------------------------------------------
 (package-initialize)
 
-
-;; Path to nano emacs modules (mandatory)
-(add-to-list 'load-path "/Users/rougier/Documents/GitHub/nano-emacs")
-(add-to-list 'load-path ".")
-
 ;; Default layout (optional)
 (require 'nano-layout)
 
@@ -74,7 +69,7 @@
 ;; Compact layout (need to be loaded after nano-modeline)
 (when (member "-compact" command-line-args)
   (require 'nano-compact))
-  
+
 ;; Nano counsel configuration (optional)
 ;; Needs "counsel" package to be installed (M-x: package-install)
 ;; (require 'nano-counsel)
