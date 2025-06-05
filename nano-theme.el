@@ -171,8 +171,7 @@ Defaults to nil."
   (set-face-attribute 'header-line nil
                        :weight 'light
                        :foreground (face-foreground 'nano-face-default)
-                       :background (face-background 'nano-face-default)
-
+                       :background (face-background 'nano-face-subtle)
                        :overline nil
                        :underline nil
                        :box nil
@@ -186,7 +185,7 @@ Defaults to nil."
   ;;                    :weight 'light
   ;;                       :foreground (face-foreground 'nano-face-default)
   ;;                       :background (face-background 'nano-face-subtle)
-  ;;                       :inverse-video t
+  ;;                       :inverse-video
   ;;                       :overline nil
   ;;                       :underline nil
   ;;                       :box nil
@@ -752,6 +751,20 @@ function is a convenience wrapper used by `describe-package-1'."
     (set-face 'company-tooltip-annotation                                    'nano-face-default)
     (set-face 'company-tooltip-annotation-selection        '(nano-face-strong nano-face-subtle))))
 
+(defun nano-theme--solaire ()
+  "Define faces compatible with 'solaire-mode'."
+  (with-eval-after-load 'solaire-mode
+    (set-face-attribute 'solaire-default-face nil
+        :background (color-darken-name nano-color-background 3 )
+        :foreground (color-darken-name nano-color-foreground 10))
+    (set-face-attribute 'solaire-hl-line-face nil
+        :background (color-darken-name nano-color-highlight 3))
+    (set-face-attribute 'solaire-line-number-face nil
+        :background (color-darken-name nano-color-background 3 ))
+    (set-face-attribute 'solaire-header-line-face nil
+        :background (color-darken-name nano-color-subtle 6)
+        :foreground (color-darken-name nano-color-foreground 10))))
+
 (defun nano-theme ()
   "Derive many, many faces from the core nano faces."
   (nano-theme--basics)
@@ -785,7 +798,8 @@ function is a convenience wrapper used by `describe-package-1'."
   (nano-theme--helm-ff)
   (nano-theme--helm-grep)
   (nano-theme--hl-line)
-  (nano-theme--company))
+  (nano-theme--company)
+  (nano-theme--solaire))
 
 (defun nano-refresh-theme ()
   "Convenience function which refreshes the nano-theme.

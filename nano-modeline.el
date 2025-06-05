@@ -71,12 +71,12 @@
                                 'face 'nano-face-header-faded))
                    (t (propertize status 'face 'nano-face-header-popout))))
          (left (concat
-                (propertize " "  'face 'nano-face-header-default
+                (propertize " "  'face 'header-line
 			    'display `(raise ,space-up))
-                (propertize name 'face 'nano-face-header-strong)
-                (propertize " "  'face 'nano-face-header-default
+                (propertize name 'face (list (list :weight (face-attribute 'nano-face-strong :weight)) 'header-line))
+                (propertize " "  'face 'header-line
 			    'display `(raise ,space-down))
-		(propertize primary 'face 'nano-face-header-default)))
+                (propertize primary 'face 'header-line)))
          (right (concat secondary " "))
          (available-width (- (window-total-width) 
 			     (length prefix) (length left) (length right)
@@ -85,9 +85,9 @@
     (concat prefix
 	    left
 	    (propertize (make-string available-width ?\ )
-                        'face 'nano-face-header-default)
-	    (propertize right 'face `(:inherit nano-face-header-default
-                                      :foreground ,nano-color-faded)))))
+                        'face 'header-line)
+	    (propertize right 'face (list `(:foreground ,nano-color-faded)
+                                          'header-line)))))
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-dashboard-mode-p ()
