@@ -51,7 +51,7 @@ Defaults to nil."
 (defcustom nano-font-size 14
   "Default value for the font size of nano-theme in pt units.
 Note: to change this after startup, call
-\(nano-faces\) and \(nano-themes\)."
+\(nano-faces\) and \(nano-theme\)."
   :group 'nano
   :type 'integer)
 
