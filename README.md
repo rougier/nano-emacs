@@ -121,7 +121,7 @@ Because of the way nano-emacs is set up, you need to set these variables *before
 - **[nano-theme-light.el](./nano-theme-light.el)** &
   **[nano-theme-dark.el](./nano-theme-dark.el)**
 
-  > Theses modules define light and dark themes respectively by
+  > These modules define light and dark themes respectively by
     overriding the base colors. If your Emacs is not themed, you are
     encouraged to try one of these.
 
@@ -185,13 +185,13 @@ Because of the way nano-emacs is set up, you need to set these variables *before
 - **[nano-mu4e.el](./nano-mu4e.el)**
 
   > This package setup the look and feel of mu4e.
-  
+
   ![](./images/nano-mu4e.png)
 
 - **[nano-minibuffer.el](./nano-minibuffer.el)**
 
   > Minibuffer using [mini-frame](https://github.com/muffinmad/emacs-mini-frame)
-  
+
   <div>
   <img src="./images/nano-minibuffer-light.png" width=47.5%>
   <img src="./images/nano-minibuffer-dark.png"  width=47.5%>
@@ -212,7 +212,7 @@ Because of the way nano-emacs is set up, you need to set these variables *before
   > An experimental interactive mini agenda that displays side by
   > side a mini calendar on the left and timestamped org entries on
   > the right.
-  
+
   ![](./images/nano-agenda.png)
 
 ### Related works
@@ -220,4 +220,3 @@ Because of the way nano-emacs is set up, you need to set these variables *before
 - [Bespoke theme](https://github.com/mclear-tools/bespoke-themes)
   Custom medium contrast light and dark themes inspired by nano emacs,
   elegant emacs, Nord and Solarized themes.
-  

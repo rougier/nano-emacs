@@ -67,7 +67,7 @@ Note: to change this after startup, call
 
 (defface nano-face-critical nil
   "Critical face is for information that requires immediate action.
-It should be of high constrast when compared to other faces. This
+It should be of high contrast when compared to other faces. This
 can be realized (for example) by setting an intense background
 color, typically a shade of red. It must be used scarcely."
   :group 'nano)
@@ -110,19 +110,19 @@ background color that is barely perceptible."
   :group 'nano)
 
 (defface nano-face-header-default nil
-  "Default face for ther header line."
+  "Default face for the header line."
   :group 'nano)
 
 (defface nano-face-header-critical nil
-  "Critical face for ther header line."
+  "Critical face for the header line."
   :group 'nano)
 
 (defface nano-face-header-popout nil
-  "Popout face for ther header line."
+  "Popout face for the header line."
   :group 'nano)
 
 (defface nano-face-header-strong nil
-  "Strong face for ther header line."
+  "Strong face for the header line."
   :group 'nano)
 
 (defface nano-face-header-salient nil
@@ -130,15 +130,15 @@ background color that is barely perceptible."
   :group 'nano)
 
 (defface nano-face-header-faded nil
-  "Faded face for ther header line."
+  "Faded face for the header line."
   :group 'nano)
 
 (defface nano-face-header-subtle nil
-  "Subtle face for ther header line."
+  "Subtle face for the header line."
   :group 'nano)
 
 (defface nano-face-header-highlight nil
-  "Highlight face for ther header line."
+  "Highlight face for the header line."
   :group 'nano)
 
 (defface nano-face-header-separator nil

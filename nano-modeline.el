@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 ;; -------------------------------------------------------------------
 ;; GNU Emacs / N Λ N O - Emacs made simple
-;; Copyright (C) 2020 - N Λ N O developers 
+;; Copyright (C) 2020 - N Λ N O developers
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -78,7 +78,7 @@
 			    'display `(raise ,space-down))
 		(propertize primary 'face 'nano-face-header-default)))
          (right (concat secondary " "))
-         (available-width (- (window-total-width) 
+         (available-width (- (window-total-width)
 			     (length prefix) (length left) (length right)
 			     (/ (window-right-divider-width) char-width)))
 	 (available-width (max 1 available-width)))
@@ -337,7 +337,7 @@
           (branch      (vc-branch))
           (position    (format-mode-line "%l:%c")))
       (nano-modeline-compose (nano-modeline-status)
-                             buffer-name 
+                             buffer-name
                              (concat "(" mode-name
                                      (if branch (concat ", "
                                              (propertize branch 'face 'italic)))
@@ -425,7 +425,7 @@
                    (format "%d notes" (length deft-all-files)))))
     (nano-modeline-compose " DEFT "
                            primary filter matches)))
-    
+
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-prog-mode-p ()
@@ -450,11 +450,11 @@
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-status ()
   "Return buffer status: read-only (RO), modified (**) or read-write (RW)"
-  
+
   (let ((read-only   buffer-read-only)
         (modified    (and buffer-file-name (buffer-modified-p))))
     (cond (modified  "**") (read-only "RO") (t "RW"))))
-  
+
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-context ()
   "Return the current mu4e context as a non propertized string."
@@ -466,7 +466,7 @@
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline ()
-  "Install a header line whose content is dependend on the major mode"
+  "Install a header line whose content is dependent on the major mode"
   (interactive)
   (setq-default header-line-format
   '((:eval
@@ -516,6 +516,3 @@ below or a buffer local variable 'no-mode-line'."
 (nano-modeline)
 
 (provide 'nano-modeline)
-
-
-
