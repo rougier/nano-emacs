@@ -42,11 +42,12 @@
     (sit-for 30)))
 
 ;; Help screen
+
 (define-derived-mode nano-help-mode org-mode "Nano help mode")
 (define-key nano-help-mode-map (kbd "q") #'kill-current-buffer)
 (defun nano-help ()
   (interactive)
-  (find-file-read-only (locate-file "quick-help.org" load-path))
+  (find-file-read-only (concat user-emacs-directory "straight/repos/nano-emacs/quick-help.org"))
   (nano-help-mode)
   (setq-local org-confirm-elisp-link-function nil))
 
